@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil — CareerPath</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #0d1b2e;
+  --navy-mid:   #162844;
+  --navy-light: #1e3a5f;
+  --teal:       #0fbcad;
+  --teal-dim:   #0d9e91;
+  --teal-pale:  #e6faf8;
+  --gold:       #f5c842;
+  --gold-pale:  #fef9e7;
+  --cream:      #faf8f3;
+  --white:      #ffffff;
+  --text-muted: #8a9ab0;
+  --border:     #eaecf0;
+  --sidebar-w:  260px;
+}
+
+html, body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--navy);
+}
+
+/* ── SIDEBAR (same as dashboard) ── */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(15,188,173,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,188,173,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.sidebar-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 0 20px;
+}
+
+.sb-brand {
+  padding: 28px 24px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 10px;
+}
+
+.sb-brand-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--teal), var(--teal-dim));
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 20px; flex-shrink: 0;
+}
+
+.sb-brand-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 19px; color: white; white-space: nowrap;
+}
+
+.sb-section { padding: 14px 16px 4px; }
+
+.sb-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 1.2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  padding: 0 8px; margin-bottom: 6px;
+}
+
+.sb-nav { display: flex; flex-direction: column; gap: 2px; }
+
+.sb-link {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px; border-radius: 10px;
+  text-decoration: none; color: rgba(255,255,255,0.55);
+  font-size: 14px; font-weight: 400; transition: all 0.2s; white-space: nowrap;
+}
+
+.sb-link i { font-size: 18px; flex-shrink: 0; }
+.sb-link:hover { background: rgba(255,255,255,0.07); color: white; }
+
+.sb-link.active {
+  background: rgba(15,188,173,0.15);
+  color: var(--teal); font-weight: 500;
+  border: 1px solid rgba(15,188,173,0.2);
+}
+
+.sb-footer {
+  margin-top: auto; padding: 0 16px;
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px;
+}
+
+.sb-logout {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px; border-radius: 10px;
+  color: rgba(255,255,255,0.4); font-size: 14px;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+
+.sb-logout:hover { background: rgba(255,80,80,0.1); color: #ff6b6b; }
+.sb-logout i { font-size: 18px; }
+
+/* ── MAIN ── */
+.main {
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+  padding: 36px 40px 60px;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  animation: fadeDown 0.6s ease both;
+}
+
+.topbar-left h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 30px; color: var(--navy);
+  line-height: 1.1; margin-bottom: 6px;
+}
+
+.topbar-left h1 em { font-style: italic; color: var(--teal-dim); }
+.topbar-left p { font-size: 14px; color: var(--text-muted); }
+
+.topbar-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+
+.avatar-wrap {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--navy-light));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 16px; font-weight: 600;
+  border: 2px solid white;
+  box-shadow: 0 2px 12px rgba(13,27,46,0.12);
+}
+
+/* ── PROFILE HERO ── */
+.profile-hero {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.ph-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--navy-light));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 26px; font-weight: 600;
+  flex-shrink: 0; border: 3px solid white;
+  box-shadow: 0 4px 16px rgba(13,27,46,0.12);
+}
+
+.ph-info { flex: 1; }
+
+.ph-info h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; color: var(--navy); margin-bottom: 4px;
+}
+
+.ph-info p { font-size: 14px; color: var(--text-muted); }
+
+.ph-badges { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+
+.ph-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--teal-pale); color: var(--teal-dim);
+  border: 1px solid rgba(15,188,173,0.2);
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 12px; font-weight: 500;
+}
+
+.ph-badge.gold { background: var(--gold-pale); color: #9a7600; border-color: rgba(245,200,66,0.3); }
+
+.ph-actions { display: flex; gap: 10px; flex-shrink: 0; }
+
+/* ── TABS ── */
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 6px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.15s ease both;
+}
+
+.tab-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer; border: none; background: none;
+  transition: all 0.2s; white-space: nowrap;
+}
+
+.tab-btn i { font-size: 16px; }
+.tab-btn:hover { background: var(--cream); color: var(--navy); }
+
+.tab-btn.active {
+  background: var(--navy);
+  color: white;
+}
+
+/* ── CONTENT PANEL ── */
+.panel {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  min-height: 420px;
+  animation: fadeUp 0.5s ease both;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-title {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 16px; font-weight: 600; color: var(--navy);
+}
+
+.panel-title .pt-icon {
+  width: 34px; height: 34px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+
+.pt-icon.teal { background: var(--teal-pale); color: var(--teal-dim); }
+.pt-icon.gold { background: var(--gold-pale); color: #9a7600; }
+.pt-icon.navy { background: #e8ecf4; color: var(--navy-light); }
+
+/* ── FORM ELEMENTS ── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-grid .span-2 { grid-column: 1 / -1; }
+
+.field { display: flex; flex-direction: column; gap: 7px; }
+
+.field label {
+  font-size: 13px; font-weight: 500;
+  color: var(--navy); letter-spacing: 0.2px;
+}
+
+.field input,
+.field textarea,
+.field select {
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 11px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; color: var(--navy);
+  background: var(--cream);
+  outline: none;
+  transition: all 0.2s;
+  -webkit-appearance: none;
+}
+
+.field input::placeholder,
+.field textarea::placeholder { color: #b5c0cc; }
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--teal);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(15,188,173,0.1);
+}
+
+.field textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
+
+/* ── LIST ITEMS (Experience etc) ── */
+.list-entry {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 22px 18px;
+  margin-bottom: 14px;
+  background: var(--cream);
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.list-entry:hover { border-color: #d0d7e2; }
+
+.entry-top {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.entry-number {
+  font-size: 11px; font-weight: 600;
+  color: var(--text-muted); letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.remove-btn {
+  display: flex; align-items: center; gap: 5px;
+  padding: 5px 10px; border-radius: 7px;
+  background: none; border: 1px solid var(--border);
+  color: #b0bec8; font-size: 12px;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+
+.remove-btn:hover { border-color: #fca5a5; color: #ef4444; background: #fff5f5; }
+.remove-btn i { font-size: 14px; }
+
+/* ── SKILLS ── */
+.skill-entry {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+  transition: border-color 0.2s;
+}
+
+.skill-entry:hover { border-color: #d0d7e2; }
+
+.skill-name {
+  flex: 1; font-size: 14px; font-weight: 500; color: var(--navy);
+}
+
+.skill-level-dots {
+  display: flex; gap: 5px;
+}
+
+.dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.dot.filled { background: var(--teal); }
+.dot.filled.gold { background: var(--gold); }
+
+.skill-label {
+  font-size: 11px; color: var(--text-muted);
+  width: 64px; text-align: right;
+}
+
+.skill-remove {
+  color: #c5cdd8; cursor: pointer;
+  font-size: 16px; transition: color 0.2s;
+  background: none; border: none; padding: 2px;
+}
+
+.skill-remove:hover { color: #ef4444; }
+
+/* Add skill input row */
+.add-skill-row {
+  display: flex; gap: 10px;
+  margin-top: 14px; align-items: center;
+}
+
+.add-skill-row input {
+  flex: 1; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: 11px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  background: var(--cream); outline: none;
+  transition: all 0.2s;
+}
+
+.add-skill-row input:focus {
+  border-color: var(--teal); background: white;
+  box-shadow: 0 0 0 4px rgba(15,188,173,0.1);
+}
+
+/* ── ASPIRATIONS ── */
+.aspiration-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--teal-pale); color: var(--teal-dim);
+  border: 1px solid rgba(15,188,173,0.2);
+  border-radius: 20px; padding: 7px 14px;
+  font-size: 13px; font-weight: 500;
+  margin: 4px;
+}
+
+.aspiration-tag button {
+  background: none; border: none; cursor: pointer;
+  color: var(--teal-dim); font-size: 14px;
+  padding: 0; line-height: 1;
+  transition: color 0.15s;
+}
+
+.aspiration-tag button:hover { color: #ef4444; }
+
+.aspiration-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 22px;
+  background: var(--navy); color: white;
+  border: none; border-radius: 11px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+  text-decoration: none;
+}
+
+.btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); }
+.btn-primary i { font-size: 16px; }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px;
+  background: white; color: var(--navy);
+  border: 1.5px solid var(--border); border-radius: 11px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+
+.btn-outline:hover { border-color: var(--teal); color: var(--teal-dim); }
+.btn-outline i { font-size: 16px; }
+
+.btn-add {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  background: var(--cream); color: var(--navy);
+  border: 1.5px dashed var(--border); border-radius: 11px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+  width: 100%; justify-content: center; margin-top: 4px;
+}
+
+.btn-add:hover { border-color: var(--teal); color: var(--teal-dim); background: var(--teal-pale); }
+
+.btn-sm {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  background: var(--teal); color: white;
+  border: none; border-radius: 9px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+}
+
+.btn-sm:hover { background: var(--teal-dim); }
+
+/* Empty state */
+.empty-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 52px 20px;
+  color: var(--text-muted); text-align: center;
+}
+
+.empty-state i { font-size: 40px; margin-bottom: 12px; color: var(--border); }
+.empty-state p { font-size: 14px; line-height: 1.6; }
+
+/* Bottom save bar */
+.save-bar {
+  position: fixed; bottom: 0; left: var(--sidebar-w); right: 0;
+  background: rgba(250,248,243,0.92);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+  padding: 16px 40px;
+  display: flex; align-items: center; justify-content: flex-end; gap: 12px;
+  z-index: 50;
+  animation: fadeUp 0.5s 0.3s ease both;
+}
+
+.save-status {
+  font-size: 13px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 6px;
+  margin-right: auto;
+}
+
+.save-status i { color: var(--teal); font-size: 16px; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 80px; right: 28px;
+  background: var(--navy); color: white;
+  padding: 14px 20px; border-radius: 12px; font-size: 14px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 8px 28px rgba(13,27,46,0.25);
+  transform: translateY(80px); opacity: 0;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 999;
+}
+
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast i { color: var(--teal); }
+
+/* Animations */
+@keyframes fadeUp   { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+
+/* Responsive */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 70px; }
+  .sb-brand-name, .sb-label, .sb-link span, .sb-logout span { display: none; }
+  .sb-brand { padding: 24px 15px; justify-content: center; gap: 0; }
+  .sb-section { padding: 10px 8px 4px; }
+  .sb-link { justify-content: center; padding: 12px; gap: 0; }
+  .sb-logout { justify-content: center; padding: 12px; gap: 0; }
+  .main { padding: 28px 24px 80px; }
+  .save-bar { left: var(--sidebar-w); }
+  .form-grid { grid-template-columns: 1fr; }
+  .profile-hero { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 640px) {
+  .topbar { flex-direction: column; gap: 12px; }
+  .ph-actions { flex-direction: column; width: 100%; }
+  .tab-bar { gap: 2px; padding: 4px; }
+  .tab-btn { padding: 9px 12px; font-size: 12px; }
+  .tab-btn span { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div style="display: flex;">
+
+  <!-- ── SIDEBAR ── -->
+  <div class="sidebar">
+    <div class="sidebar-inner">
+      <div class="sb-brand">
+        <div class="sb-brand-icon"><i class="mdi mdi-compass-outline"></i></div>
+        <div class="sb-brand-name">CareerPath</div>
+      </div>
+
+      <div class="sb-section">
+        <div class="sb-label">Menu Utama</div>
+        <nav class="sb-nav">
+          <a href="dashboard.html" class="sb-link"><i class="mdi mdi-view-dashboard-outline"></i><span>Dashboard</span></a>
+          <a href="profile.html" class="sb-link active"><i class="mdi mdi-account-outline"></i><span>Profil Saya</span></a>
+          <a href="career.html" class="sb-link"><i class="mdi mdi-target"></i><span>Rekomendasi Karier</span></a>
+          <a href="learning.html" class="sb-link"><i class="mdi mdi-book-open-outline"></i><span>Rencana Belajar</span></a>
+        </nav>
+      </div>
+
+      <div class="sb-section" style="margin-top: 8px;">
+        <div class="sb-label">Lainnya</div>
+        <nav class="sb-nav">
+          <a href="about.html" class="sb-link"><i class="mdi mdi-information-outline"></i><span>Tentang</span></a>
+          <a href="contact.html" class="sb-link"><i class="mdi mdi-email-outline"></i><span>Kontak</span></a>
+        </nav>
+      </div>
+
+      <div class="sb-footer">
+        <div class="sb-logout" onclick="logout()">
+          <i class="mdi mdi-logout"></i><span>Keluar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <div class="main" style="padding-bottom: 90px;">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <h1>Profil <em>Saya</em></h1>
+        <p>Kelola data pribadi, pengalaman, dan keterampilan Anda</p>
+      </div>
+      <div class="topbar-right">
+        <div class="avatar-wrap" id="avatar">CP</div>
+      </div>
+    </div>
+
+    <!-- PROFILE HERO -->
+    <div class="profile-hero">
+      <div class="ph-avatar" id="heroAvatar">CP</div>
+      <div class="ph-info">
+        <h2 id="heroName">—</h2>
+        <p id="heroEmail" style="margin-bottom: 0;">—</p>
+        <div class="ph-badges">
+          <span class="ph-badge"><i class="mdi mdi-map-marker-outline" style="font-size:13px;"></i><span id="heroLocation">—</span></span>
+          <span class="ph-badge gold"><i class="mdi mdi-lightning-bolt" style="font-size:13px;"></i><span id="heroSkillCount">0 keterampilan</span></span>
+        </div>
+      </div>
+      <div class="ph-actions">
+        <button class="btn-outline" onclick="saveProfile()"><i class="mdi mdi-content-save-outline"></i> Simpan</button>
+      </div>
+    </div>
+
+    <!-- TAB BAR -->
+    <div class="tab-bar" id="tabBar"></div>
+
+    <!-- PANEL -->
+    <div class="panel" id="panel"></div>
+
+  </div>
+</div>
+
+<!-- SAVE BAR -->
+<div class="save-bar">
+  <div class="save-status" id="saveStatus">
+    <i class="mdi mdi-circle-outline"></i> Belum disimpan
+  </div>
+  <button class="btn-outline" onclick="resetChanges()"><i class="mdi mdi-refresh"></i> Reset</button>
+  <button class="btn-primary" onclick="saveProfile()"><i class="mdi mdi-content-save"></i> Simpan Semua Perubahan</button>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <i class="mdi mdi-check-circle-outline"></i>
+  <span id="toastMsg"></span>
+</div>
+
+<script>
+// ── DATA ──
+let profile = {
+  name: '', email: '', phone: '', location: '', bio: '',
+  experiences: [], education: [], certifications: [], skills: [], aspirations: []
+};
+
+let isDirty = false;
+
+function loadProfile() {
+  const saved = localStorage.getItem('userProfile');
+  if (saved) profile = JSON.parse(saved);
+
+  const userEmail = localStorage.getItem('user') || '';
+  if (!profile.email && userEmail) profile.email = userEmail;
+  if (!profile.name && userEmail) profile.name = userEmail.split('@')[0];
+}
+
+function saveProfile() {
+  readPersonalForm();
+  localStorage.setItem('userProfile', JSON.stringify(profile));
+  isDirty = false;
+  updateSaveStatus();
+  showToast('Profil berhasil disimpan!');
+}
+
+function resetChanges() {
+  loadProfile();
+  renderPanel();
+  updateHero();
+  isDirty = false;
+  updateSaveStatus();
+  showToast('Perubahan direset.');
+}
+
+function markDirty() {
+  isDirty = true;
+  updateSaveStatus();
+}
+
+function updateSaveStatus() {
+  const el = document.getElementById('saveStatus');
+  el.innerHTML = isDirty
+    ? '<i class="mdi mdi-circle" style="color:var(--gold);"></i> Ada perubahan yang belum disimpan'
+    : '<i class="mdi mdi-check-circle" style="color:var(--teal);"></i> Tersimpan';
+}
+
+function updateHero() {
+  const name = profile.name || '—';
+  const initials = name.substring(0, 2).toUpperCase();
+  document.getElementById('heroAvatar').textContent = initials;
+  document.getElementById('avatar').textContent = initials;
+  document.getElementById('heroName').textContent = name;
+  document.getElementById('heroEmail').textContent = profile.email || '—';
+  document.getElementById('heroLocation').textContent = profile.location || 'Lokasi belum diisi';
+  document.getElementById('heroSkillCount').textContent = (profile.skills.length) + ' keterampilan';
+}
+
+// ── TABS ──
+const TABS = [
+  { id: 'personal',      label: 'Data Pribadi',     icon: 'mdi-account-outline',    color: 'teal' },
+  { id: 'experience',    label: 'Pengalaman',        icon: 'mdi-briefcase-outline',  color: 'navy' },
+  { id: 'education',     label: 'Pendidikan',        icon: 'mdi-school-outline',     color: 'gold' },
+  { id: 'certifications',label: 'Sertifikasi',       icon: 'mdi-certificate-outline',color: 'teal' },
+  { id: 'skills',        label: 'Keterampilan',      icon: 'mdi-lightning-bolt',     color: 'gold' },
+  { id: 'aspirations',   label: 'Aspirasi',          icon: 'mdi-compass-outline',    color: 'navy' },
+];
+
+let activeTab = 'personal';
+
+function renderTabs() {
+  document.getElementById('tabBar').innerHTML = TABS.map(t => `
+    <button class="tab-btn ${t.id === activeTab ? 'active' : ''}" onclick="switchTab('${t.id}')">
+      <i class="mdi ${t.icon}"></i><span>${t.label}</span>
+    </button>
+  `).join('');
+}
+
+function switchTab(id) {
+  readPersonalForm();
+  activeTab = id;
+  renderTabs();
+  renderPanel();
+}
+
+// ── PERSONAL ──
+function readPersonalForm() {
+  const f = (id) => { const el = document.getElementById(id); return el ? el.value : null; };
+  if (f('pName') !== null) {
+    profile.name     = f('pName');
+    profile.email    = f('pEmail');
+    profile.phone    = f('pPhone');
+    profile.location = f('pLocation');
+    profile.bio      = f('pBio');
+    updateHero();
+  }
+}
+
+function panelPersonal() {
+  return `
+    <div class="panel-header">
+      <div class="panel-title">
+        <div class="pt-icon teal"><i class="mdi mdi-account-outline"></i></div>
+        Data Pribadi
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Nama Lengkap</label>
+        <input type="text" id="pName" value="${esc(profile.name)}" placeholder="Nama Lengkap Anda" oninput="markDirty()">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="pEmail" value="${esc(profile.email)}" placeholder="email@contoh.com" oninput="markDirty()">
+      </div>
+      <div class="field">
+        <label>Nomor Telepon</label>
+        <input type="tel" id="pPhone" value="${esc(profile.phone)}" placeholder="+62 812-3456-7890" oninput="markDirty()">
+      </div>
+      <div class="field">
+        <label>Lokasi</label>
+        <input type="text" id="pLocation" value="${esc(profile.location)}" placeholder="Jakarta, Indonesia" oninput="markDirty()">
+      </div>
+      <div class="field span-2">
+        <label>Bio / Tentang Saya</label>
+        <textarea id="pBio" placeholder="Ceritakan sedikit tentang diri dan tujuan karier Anda..." oninput="markDirty()">${esc(profile.bio)}</textarea>
+      </div>
+    </div>`;
+}
+
+// ── EXPERIENCE ──
+function panelExperience() {
+  let items = profile.experiences.map((e, i) => `
+    <div class="list-entry">
+      <div class="entry-top">
+        <span class="entry-number">Pengalaman ${i + 1}</span>
+        <button class="remove-btn" onclick="removeItem('experiences',${i})">
+          <i class="mdi mdi-delete-outline"></i> Hapus
+        </button>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Jabatan / Posisi</label>
+          <input type="text" value="${esc(e.title)}" placeholder="Software Engineer" onchange="updateItem('experiences',${i},'title',this.value)">
+        </div>
+        <div class="field">
+          <label>Perusahaan</label>
+          <input type="text" value="${esc(e.company)}" placeholder="Nama Perusahaan" onchange="updateItem('experiences',${i},'company',this.value)">
+        </div>
+        <div class="field">
+          <label>Durasi</label>
+          <input type="text" value="${esc(e.duration)}" placeholder="Jan 2022 – Sekarang" onchange="updateItem('experiences',${i},'duration',this.value)">
+        </div>
+        <div class="field">
+          <label>Lokasi</label>
+          <input type="text" value="${esc(e.location||'')}" placeholder="Jakarta, Indonesia" onchange="updateItem('experiences',${i},'location',this.value)">
+        </div>
+        <div class="field span-2">
+          <label>Deskripsi Pekerjaan</label>
+          <textarea placeholder="Deskripsikan tanggung jawab dan pencapaian Anda..." onchange="updateItem('experiences',${i},'description',this.value)">${esc(e.description)}</textarea>
+        </div>
+      </div>
+    </div>`).join('');
+
+  if (!profile.experiences.length) {
+    items = `<div class="empty-state"><i class="mdi mdi-briefcase-outline"></i><p>Belum ada pengalaman kerja.<br>Tambahkan pengalaman pertama Anda.</p></div>`;
+  }
+
+  return `
+    <div class="panel-header">
+      <div class="panel-title">
+        <div class="pt-icon navy"><i class="mdi mdi-briefcase-outline"></i></div>
+        Pengalaman Kerja
+      </div>
+    </div>
+    ${items}
+    <button class="btn-add" onclick="addItem('experiences',{title:'',company:'',duration:'',location:'',description:''})">
+      <i class="mdi mdi-plus"></i> Tambah Pengalaman Kerja
+    </button>`;
+}
+
+// ── EDUCATION ──
+function panelEducation() {
+  let items = profile.education.map((e, i) => `
+    <div class="list-entry">
+      <div class="entry-top">
+        <span class="entry-number">Pendidikan ${i + 1}</span>
+        <button class="remove-btn" onclick="removeItem('education',${i})">
+          <i class="mdi mdi-delete-outline"></i> Hapus
+        </button>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Institusi / Universitas</label>
+          <input type="text" value="${esc(e.institution||'')}" placeholder="Universitas Indonesia" onchange="updateItem('education',${i},'institution',this.value)">
+        </div>
+        <div class="field">
+          <label>Jurusan / Program Studi</label>
+          <input type="text" value="${esc(e.major||'')}" placeholder="Teknik Informatika" onchange="updateItem('education',${i},'major',this.value)">
+        </div>
+        <div class="field">
+          <label>Jenjang</label>
+          <select onchange="updateItem('education',${i},'degree',this.value)">
+            ${['SMA/SMK','D3','S1','S2','S3'].map(d => `<option ${e.degree===d?'selected':''}>${d}</option>`).join('')}
+          </select>
+        </div>
+        <div class="field">
+          <label>Tahun Lulus</label>
+          <input type="text" value="${esc(e.year||'')}" placeholder="2023" onchange="updateItem('education',${i},'year',this.value)">
+        </div>
+      </div>
+    </div>`).join('');
+
+  if (!profile.education.length) {
+    items = `<div class="empty-state"><i class="mdi mdi-school-outline"></i><p>Belum ada data pendidikan.<br>Tambahkan riwayat pendidikan Anda.</p></div>`;
+  }
+
+  return `
+    <div class="panel-header">
+      <div class="panel-title">
+        <div class="pt-icon gold"><i class="mdi mdi-school-outline"></i></div>
+        Pendidikan
+      </div>
+    </div>
+    ${items}
+    <button class="btn-add" onclick="addItem('education',{institution:'',major:'',degree:'S1',year:''})">
+      <i class="mdi mdi-plus"></i> Tambah Pendidikan
+    </button>`;
+}
+
+// ── CERTIFICATIONS ──
+function panelCertifications() {
+  let items = profile.certifications.map((c, i) => `
+    <div class="list-entry">
+      <div class="entry-top">
+        <span class="entry-number">Sertifikasi ${i + 1}</span>
+        <button class="remove-btn" onclick="removeItem('certifications',${i})">
+          <i class="mdi mdi-delete-outline"></i> Hapus
+        </button>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Nama Sertifikasi</label>
+          <input type="text" value="${esc(c.name||'')}" placeholder="Google Data Analytics" onchange="updateItem('certifications',${i},'name',this.value)">
+        </div>
+        <div class="field">
+          <label>Penerbit</label>
+          <input type="text" value="${esc(c.issuer||'')}" placeholder="Google / Coursera" onchange="updateItem('certifications',${i},'issuer',this.value)">
+        </div>
+        <div class="field">
+          <label>Tahun</label>
+          <input type="text" value="${esc(c.year||'')}" placeholder="2024" onchange="updateItem('certifications',${i},'year',this.value)">
+        </div>
+        <div class="field">
+          <label>ID Kredensial (opsional)</label>
+          <input type="text" value="${esc(c.credId||'')}" placeholder="ABC-123456" onchange="updateItem('certifications',${i},'credId',this.value)">
+        </div>
+      </div>
+    </div>`).join('');
+
+  if (!profile.certifications.length) {
+    items = `<div class="empty-state"><i class="mdi mdi-certificate-outline"></i><p>Belum ada sertifikasi.<br>Tambahkan sertifikat yang Anda miliki.</p></div>`;
+  }
+
+  return `
+    <div class="panel-header">
+      <div class="panel-title">
+        <div class="pt-icon teal"><i class="mdi mdi-certificate-outline"></i></div>
+        Sertifikasi
+      </div>
+    </div>
+    ${items}
+    <button class="btn-add" onclick="addItem('certifications',{name:'',issuer:'',year:'',credId:''})">
+      <i class="mdi mdi-plus"></i> Tambah Sertifikasi
+    </button>`;
+}
+
+// ── SKILLS ──
+const LEVEL_LABELS = ['', 'Pemula', 'Dasar', 'Menengah', 'Mahir', 'Ahli'];
+
+function panelSkills() {
+  let items = profile.skills.map((s, i) => {
+    const dots = [1,2,3,4,5].map(n =>
+      `<div class="dot ${n <= s.level ? 'filled' : ''}" onclick="setSkillLevel(${i},${n})" title="${LEVEL_LABELS[n]}"></div>`
+    ).join('');
+    return `
+      <div class="skill-entry">
+        <span class="skill-name">${esc(s.name)}</span>
+        <div class="skill-level-dots">${dots}</div>
+        <span class="skill-label">${LEVEL_LABELS[s.level] || 'Pilih level'}</span>
+        <button class="skill-remove" onclick="removeItem('skills',${i})"><i class="mdi mdi-close"></i></button>
+      </div>`;
+  }).join('');
+
+  if (!profile.skills.length) {
+    items = `<div class="empty-state"><i class="mdi mdi-lightning-bolt"></i><p>Belum ada keterampilan.<br>Tambahkan skill Anda di bawah ini.</p></div>`;
+  }
+
+  return `
+    <div class="panel-header">
+      <div class="panel-title">
+        <div class="pt-icon gold"><i class="mdi mdi-lightning-bolt"></i></div>
+        Keterampilan
+      </div>
+      <span style="font-size:12px; color:var(--text-muted);">Klik titik untuk atur level</span>
+    </div>
+    <div id="skillList">${items}</div>
+    <div class="add-skill-row">
+      <input type="text" id="newSkillInput" placeholder="Tambah keterampilan baru (mis. Python, Figma, Excel...)" onkeydown="if(event.key==='Enter'){addSkill();}">
+      <button class="btn-sm" onclick="addSkill()"><i class="mdi mdi-plus"></i> Tambah</button>
+    </div>`;
+}
+
+function addSkill() {
+  const input = document.getElementById('newSkillInput');
+  const name = input.value.trim();
+  if (!name) return;
+  profile.skills.push({ name, level: 3 });
+  input.value = '';
+  markDirty();
+  renderPanel();
+  document.getElementById('newSkillInput').focus();
+  updateHero();
+}
+
+function setSkillLevel(i, level) {
+  profile.skills[i].level = level;
+  markDirty();
+  renderPanel();
+}
+
+// ── ASPIRATIONS ──
+function panelAspirations() {
+  const tags = profile.aspirations.map((a, i) => `
+    <span class="aspiration-tag">
+      <i class="mdi mdi-compass-outline" style="font-size:13px;"></i> ${esc(a)}
+      <button onclick="removeItem('aspirations',${i})"><i class="mdi mdi-close-circle-outline"></i></button>
+    </span>`).join('');
+
+  return `
+    <div class="panel-header">
+      <div class="panel-title">
+        <div class="pt-icon navy"><i class="mdi mdi-compass-outline"></i></div>
+        Aspirasi Karier
+      </div>
+    </div>
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:18px; line-height:1.6;">
+      Tambahkan bidang atau jalur karier yang ingin Anda capai. Informasi ini membantu AI memberikan rekomendasi yang lebih personal.
+    </p>
+    <div class="aspiration-tags" id="aspirationTags">${tags || '<span style="font-size:13px;color:var(--text-muted);">Belum ada aspirasi ditambahkan.</span>'}</div>
+    <div class="add-skill-row">
+      <input type="text" id="newAspInput" placeholder="Tambah aspirasi (mis. Data Scientist, UX Designer, Product Manager...)" onkeydown="if(event.key==='Enter'){addAspiration();}">
+      <button class="btn-sm" onclick="addAspiration()"><i class="mdi mdi-plus"></i> Tambah</button>
+    </div>
+    <div style="margin-top:20px; padding-top:20px; border-top:1px solid var(--border);">
+      <p style="font-size:13px; font-weight:500; color:var(--navy); margin-bottom:12px;">Saran populer:</p>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        ${['Data Scientist','Software Engineer','UI/UX Designer','Product Manager','Digital Marketer','Business Analyst','ML Engineer','Cybersecurity Analyst'].map(s =>
+          `<button class="btn-outline" style="padding:7px 14px; font-size:12px;" onclick="addAspirationDirect('${s}')">+ ${s}</button>`
+        ).join('')}
+      </div>
+    </div>`;
+}
+
+function addAspiration() {
+  const input = document.getElementById('newAspInput');
+  const val = input.value.trim();
+  if (!val || profile.aspirations.includes(val)) return;
+  profile.aspirations.push(val);
+  input.value = '';
+  markDirty();
+  renderPanel();
+}
+
+function addAspirationDirect(val) {
+  if (profile.aspirations.includes(val)) { showToast('Aspirasi sudah ada.'); return; }
+  profile.aspirations.push(val);
+  markDirty();
+  renderPanel();
+}
+
+// ── SHARED HELPERS ──
+function addItem(key, template) {
+  profile[key].push(Object.assign({}, template));
+  markDirty();
+  renderPanel();
+}
+
+function removeItem(key, i) {
+  profile[key].splice(i, 1);
+  markDirty();
+  renderPanel();
+  updateHero();
+}
+
+function updateItem(key, i, field, value) {
+  profile[key][i][field] = value;
+  markDirty();
+}
+
+function esc(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function renderPanel() {
+  const map = {
+    personal: panelPersonal,
+    experience: panelExperience,
+    education: panelEducation,
+    certifications: panelCertifications,
+    skills: panelSkills,
+    aspirations: panelAspirations,
+  };
+  document.getElementById('panel').innerHTML = (map[activeTab] || panelPersonal)();
+}
+
+// Toast
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function logout() {
+  if (confirm('Yakin ingin keluar?')) {
+    localStorage.removeItem('user');
+    window.location.href = 'index.html';
+  }
+}
+
+// ── INIT ──
+loadProfile();
+updateHero();
+renderTabs();
+renderPanel();
+updateSaveStatus();
+</script>
+
+</body>
+</html>

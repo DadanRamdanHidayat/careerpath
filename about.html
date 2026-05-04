@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tentang — CareerPath</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #0d1b2e;
+  --navy-mid:   #162844;
+  --navy-light: #1e3a5f;
+  --teal:       #0fbcad;
+  --teal-dim:   #0d9e91;
+  --teal-pale:  #e6faf8;
+  --gold:       #f5c842;
+  --gold-pale:  #fef9e7;
+  --cream:      #faf8f3;
+  --white:      #ffffff;
+  --text-muted: #8a9ab0;
+  --border:     #eaecf0;
+  --sidebar-w:  260px;
+}
+
+html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--navy); }
+
+/* ── SIDEBAR ── */
+.sidebar { position: fixed; left: 0; top: 0; width: var(--sidebar-w); height: 100vh; background: var(--navy); display: flex; flex-direction: column; overflow: hidden; z-index: 100; }
+.sidebar::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(15,188,173,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,188,173,0.04) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
+.sidebar-inner { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; padding: 0 0 20px; }
+.sb-brand { padding: 28px 24px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 10px; }
+.sb-brand-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--teal), var(--teal-dim)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; flex-shrink: 0; }
+.sb-brand-name { font-family: 'DM Serif Display', serif; font-size: 19px; color: white; white-space: nowrap; }
+.sb-section { padding: 14px 16px 4px; }
+.sb-label { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 0 8px; margin-bottom: 6px; }
+.sb-nav { display: flex; flex-direction: column; gap: 2px; }
+.sb-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; text-decoration: none; color: rgba(255,255,255,0.55); font-size: 14px; transition: all 0.2s; white-space: nowrap; }
+.sb-link i { font-size: 18px; flex-shrink: 0; }
+.sb-link:hover { background: rgba(255,255,255,0.07); color: white; }
+.sb-link.active { background: rgba(15,188,173,0.15); color: var(--teal); font-weight: 500; border: 1px solid rgba(15,188,173,0.2); }
+.sb-footer { margin-top: auto; padding: 0 16px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; }
+.sb-logout { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; color: rgba(255,255,255,0.4); font-size: 14px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.sb-logout:hover { background: rgba(255,80,80,0.1); color: #ff6b6b; }
+.sb-logout i { font-size: 18px; }
+
+/* ── MAIN ── */
+.main { margin-left: var(--sidebar-w); min-height: 100vh; padding: 36px 40px 60px; }
+
+/* ── TOPBAR ── */
+.topbar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 36px; animation: fadeDown 0.6s ease both; }
+.topbar-left h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--navy); line-height: 1.1; margin-bottom: 6px; }
+.topbar-left h1 em { font-style: italic; color: var(--teal-dim); }
+.topbar-left p { font-size: 14px; color: var(--text-muted); }
+.avatar-wrap { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--navy-light)); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 600; border: 2px solid white; box-shadow: 0 2px 12px rgba(13,27,46,0.12); }
+
+/* ── HERO BANNER ── */
+.hero {
+  background: var(--navy);
+  border-radius: 20px;
+  padding: 48px 52px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.6s 0.1s ease both;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+/* Decorative rings */
+.hero-rings {
+  position: absolute;
+  right: -80px; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.hero-ring {
+  border-radius: 50%;
+  border: 1px solid rgba(15,188,173,0.12);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+.hero-ring:nth-child(1) { width: 220px; height: 220px; border-color: rgba(15,188,173,0.2); }
+.hero-ring:nth-child(2) { width: 360px; height: 360px; }
+.hero-ring:nth-child(3) { width: 500px; height: 500px; border-color: rgba(15,188,173,0.06); }
+
+.orbit {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--teal);
+  position: absolute;
+  top: 50%; left: 50%;
+  box-shadow: 0 0 14px rgba(15,188,173,0.5);
+  animation: orbit 10s linear infinite;
+  margin: -4.5px;
+}
+.orbit-2 {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(245,200,66,0.5);
+  animation: orbit2 16s linear infinite;
+  margin: -3px;
+}
+
+@keyframes orbit  { 0% { transform: rotate(0deg) translateX(110px) rotate(0deg); } 100% { transform: rotate(360deg) translateX(110px) rotate(-360deg); } }
+@keyframes orbit2 { 0% { transform: rotate(0deg) translateX(180px) rotate(0deg); } 100% { transform: rotate(360deg) translateX(180px) rotate(-360deg); } }
+
+.hero-logo {
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, var(--teal), var(--teal-dim));
+  border-radius: 22px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; color: white;
+  flex-shrink: 0;
+  position: relative; z-index: 1;
+  box-shadow: 0 8px 28px rgba(15,188,173,0.35);
+}
+
+.hero-content { position: relative; z-index: 1; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(15,188,173,0.12); border: 1px solid rgba(15,188,173,0.25);
+  border-radius: 20px; padding: 5px 13px;
+  font-size: 11px; font-weight: 600; color: var(--teal);
+  letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 14px;
+}
+.hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
+
+.hero-content h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 34px; color: white; line-height: 1.15; margin-bottom: 12px;
+}
+.hero-content h2 em { font-style: italic; color: var(--teal); }
+
+.hero-content p { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 480px; }
+
+.hero-stats {
+  display: flex; gap: 28px; margin-top: 24px;
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);
+}
+.hero-stat span { display: block; font-size: 22px; font-weight: 600; color: white; }
+.hero-stat p { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+/* ── SECTION LAYOUT ── */
+.section { margin-bottom: 28px; }
+.section-head { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.section-head .sh-icon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.sh-icon.teal { background: var(--teal-pale); color: var(--teal-dim); }
+.sh-icon.gold { background: var(--gold-pale); color: #9a7600; }
+.sh-icon.navy { background: #e8ecf4; color: var(--navy-light); }
+.section-head h3 { font-size: 17px; font-weight: 600; color: var(--navy); }
+
+/* ── HOW IT WORKS ── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.step-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 20px;
+  position: relative;
+  transition: all 0.25s;
+}
+.step-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(13,27,46,0.07); border-color: transparent; }
+
+.step-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px; line-height: 1;
+  color: var(--border); margin-bottom: 14px;
+}
+
+.step-icon {
+  width: 44px; height: 44px; border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 14px;
+}
+
+.step-card:nth-child(1) .step-icon { background: var(--teal-pale); color: var(--teal-dim); }
+.step-card:nth-child(2) .step-icon { background: var(--gold-pale); color: #9a7600; }
+.step-card:nth-child(3) .step-icon { background: #f3f0ff; color: #7c3aed; }
+.step-card:nth-child(4) .step-icon { background: #e8ecf4; color: var(--navy-light); }
+
+.step-card h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+.step-card p  { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+/* Arrow connector between steps */
+.step-card:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -14px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px; color: var(--border);
+  z-index: 1;
+}
+
+/* ── TECH CARDS ── */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  animation: fadeUp 0.6s 0.25s ease both;
+}
+
+.tech-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.25s;
+}
+.tech-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(13,27,46,0.07); border-color: transparent; }
+
+.tech-card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+
+.tech-icon {
+  width: 46px; height: 46px; border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.tech-icon.teal  { background: var(--teal-pale); color: var(--teal-dim); }
+.tech-icon.gold  { background: var(--gold-pale); color: #9a7600; }
+.tech-icon.purple { background: #f3f0ff; color: #7c3aed; }
+
+.tech-card h4 { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+.tech-card .tech-badge { font-size: 11px; font-weight: 500; color: var(--text-muted); }
+.tech-card p { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
+
+.tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tech-tag {
+  display: inline-block; padding: 4px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 500;
+  background: var(--cream); color: var(--navy);
+  border: 1px solid var(--border);
+}
+
+/* ── TEAM CARDS ── */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.team-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.25s;
+}
+.team-card:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(13,27,46,0.07); border-color: transparent; }
+
+.team-avatar {
+  width: 68px; height: 68px; border-radius: 50%;
+  margin: 0 auto 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px; color: white;
+  border: 3px solid white;
+  box-shadow: 0 4px 14px rgba(13,27,46,0.12);
+}
+.ta-1 { background: linear-gradient(135deg, var(--teal), var(--navy-light)); }
+.ta-2 { background: linear-gradient(135deg, var(--gold), #d4a000); }
+.ta-3 { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+
+.team-card h4 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.team-role { font-size: 12px; font-weight: 500; color: var(--teal-dim); margin-bottom: 10px; }
+.team-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; }
+
+.team-skills { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+.team-skill {
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 500;
+  background: var(--cream); color: var(--navy);
+  border: 1px solid var(--border);
+}
+
+/* ── FAQ ── */
+.faq-list { display: flex; flex-direction: column; gap: 10px; animation: fadeUp 0.6s 0.35s ease both; }
+
+.faq-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.faq-item:hover { border-color: #d0d7e2; }
+
+.faq-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px; cursor: pointer;
+  font-size: 15px; font-weight: 500; color: var(--navy);
+  user-select: none;
+}
+.faq-header:hover { color: var(--teal-dim); }
+
+.faq-arrow { font-size: 20px; color: var(--text-muted); transition: transform 0.25s; flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); color: var(--teal-dim); }
+
+.faq-body { display: none; padding: 0 22px 18px; font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+.faq-item.open .faq-body { display: block; }
+
+/* ── CTA ── */
+.cta-bar {
+  background: var(--navy);
+  border-radius: 18px;
+  padding: 32px 36px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+.cta-bar h3 { font-family: 'DM Serif Display', serif; font-size: 22px; color: white; margin-bottom: 6px; }
+.cta-bar p { font-size: 14px; color: rgba(255,255,255,0.45); }
+
+.btn-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px;
+  background: var(--teal); color: white;
+  border: none; border-radius: 12px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; text-decoration: none; white-space: nowrap;
+}
+.btn-cta:hover { background: var(--teal-dim); transform: translateY(-1px); }
+
+/* Toast */
+.toast { position: fixed; bottom: 28px; right: 28px; background: var(--navy); color: white; padding: 13px 18px; border-radius: 12px; font-size: 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 28px rgba(13,27,46,0.25); transform: translateY(80px); opacity: 0; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 999; }
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast i { color: var(--teal); }
+
+@keyframes pulse  { 0%,100%{opacity:1;}50%{opacity:0.3;} }
+@keyframes fadeUp   { from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;} }
+@keyframes fadeDown { from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:none;} }
+
+/* Responsive */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 70px; }
+  .sb-brand-name, .sb-label, .sb-link span, .sb-logout span { display: none; }
+  .sb-brand { padding: 24px 15px; justify-content: center; gap: 0; }
+  .sb-section { padding: 10px 8px 4px; }
+  .sb-link { justify-content: center; padding: 12px; gap: 0; }
+  .sb-logout { justify-content: center; padding: 12px; gap: 0; }
+  .main { padding: 28px 20px 60px; }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .tech-grid  { grid-template-columns: 1fr 1fr; }
+  .team-grid  { grid-template-columns: 1fr 1fr; }
+  .step-card::after { display: none; }
+  .hero { flex-direction: column; align-items: flex-start; gap: 20px; padding: 36px; }
+}
+@media (max-width: 640px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .tech-grid  { grid-template-columns: 1fr; }
+  .team-grid  { grid-template-columns: 1fr; }
+  .topbar { flex-direction: column; gap: 12px; }
+  .hero { padding: 28px; }
+  .hero-stats { flex-wrap: wrap; gap: 20px; }
+  .cta-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div style="display:flex;">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-inner">
+      <div class="sb-brand">
+        <div class="sb-brand-icon"><i class="mdi mdi-compass-outline"></i></div>
+        <div class="sb-brand-name">CareerPath</div>
+      </div>
+      <div class="sb-section">
+        <div class="sb-label">Menu Utama</div>
+        <nav class="sb-nav">
+          <a href="dashboard.html" class="sb-link"><i class="mdi mdi-view-dashboard-outline"></i><span>Dashboard</span></a>
+          <a href="profile.html"   class="sb-link"><i class="mdi mdi-account-outline"></i><span>Profil Saya</span></a>
+          <a href="career.html"    class="sb-link"><i class="mdi mdi-target"></i><span>Rekomendasi Karier</span></a>
+          <a href="learning.html"  class="sb-link"><i class="mdi mdi-book-open-outline"></i><span>Rencana Belajar</span></a>
+        </nav>
+      </div>
+      <div class="sb-section" style="margin-top:8px;">
+        <div class="sb-label">Lainnya</div>
+        <nav class="sb-nav">
+          <a href="about.html"   class="sb-link active"><i class="mdi mdi-information-outline"></i><span>Tentang</span></a>
+          <a href="contact.html" class="sb-link"><i class="mdi mdi-email-outline"></i><span>Kontak</span></a>
+        </nav>
+      </div>
+      <div class="sb-footer">
+        <div class="sb-logout" onclick="logout()"><i class="mdi mdi-logout"></i><span>Keluar</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <h1>Tentang <em>CareerPath</em></h1>
+        <p>Kenali lebih dalam platform AI rekomendasi karier kami</p>
+      </div>
+      <div class="avatar-wrap" id="avatar">CP</div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-rings">
+        <div class="hero-ring"></div>
+        <div class="hero-ring"></div>
+        <div class="hero-ring"></div>
+        <div class="orbit"></div>
+        <div class="orbit orbit-2"></div>
+      </div>
+
+      <div class="hero-logo"><i class="mdi mdi-compass-outline"></i></div>
+
+      <div class="hero-content">
+        <div class="hero-tag">AI-Powered Platform</div>
+        <h2>Menavigasi karier<br>dengan kecerdasan <em>buatan</em></h2>
+        <p>CareerPath menggunakan algoritma cosine similarity dan analisis berbasis AI untuk mencocokkan profil, keterampilan, dan aspirasi Anda dengan jalur karier yang paling relevan.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><span>24K+</span><p>Pengguna aktif</p></div>
+          <div class="hero-stat"><span>180+</span><p>Jalur karier</p></div>
+          <div class="hero-stat"><span>92%</span><p>Tingkat kepuasan</p></div>
+          <div class="hero-stat"><span>v2.4</span><p>Versi saat ini</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="section">
+      <div class="section-head">
+        <div class="sh-icon teal"><i class="mdi mdi-cog-outline"></i></div>
+        <h3>Cara Kerja Sistem</h3>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-icon"><i class="mdi mdi-account-edit-outline"></i></div>
+          <h4>Input Profil</h4>
+          <p>Anda mengisi data diri, keterampilan dengan level 1–5, pengalaman kerja, pendidikan, dan aspirasi karier Anda.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-icon"><i class="mdi mdi-vector-combine"></i></div>
+          <h4>Vektorisasi Profil</h4>
+          <p>Sistem mengkonversi profil Anda menjadi vektor multidimensional yang merepresentasikan kompetensi dan preferensi Anda.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-icon"><i class="mdi mdi-chart-scatter-plot"></i></div>
+          <h4>Cosine Similarity</h4>
+          <p>Algoritma menghitung jarak kosinus antara vektor profil Anda dengan vektor profil ideal tiap jalur karier dalam database.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <div class="step-icon"><i class="mdi mdi-trophy-outline"></i></div>
+          <h4>Rekomendasi Terurut</h4>
+          <p>Karier dengan skor kecocokan tertinggi diranking dan disajikan lengkap dengan roadmap dan analisis skill gap.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECH STACK -->
+    <div class="section">
+      <div class="section-head">
+        <div class="sh-icon gold"><i class="mdi mdi-code-braces"></i></div>
+        <h3>Teknologi yang Digunakan</h3>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-card">
+          <div class="tech-card-top">
+            <div class="tech-icon teal"><i class="mdi mdi-brain"></i></div>
+            <div>
+              <h4>Algoritma AI</h4>
+              <div class="tech-badge">Core Engine</div>
+            </div>
+          </div>
+          <p>Cosine similarity digunakan untuk mengukur kemiripan antara vektor profil pengguna dan profil karier ideal. Semakin tinggi skornya, semakin relevan rekomendasinya.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Cosine Similarity</span>
+            <span class="tech-tag">TF-IDF</span>
+            <span class="tech-tag">Vector Space Model</span>
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <div class="tech-card-top">
+            <div class="tech-icon gold"><i class="mdi mdi-language-python"></i></div>
+            <div>
+              <h4>Backend & Data</h4>
+              <div class="tech-badge">Processing Layer</div>
+            </div>
+          </div>
+          <p>Backend dibangun dengan Python dan framework ringan untuk memproses profil pengguna, menjalankan kalkulasi similarity, dan mengembalikan rekomendasi secara real-time.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">NumPy</span>
+            <span class="tech-tag">Scikit-learn</span>
+            <span class="tech-tag">Flask</span>
+          </div>
+        </div>
+
+        <div class="tech-card">
+          <div class="tech-card-top">
+            <div class="tech-icon purple"><i class="mdi mdi-monitor-dashboard"></i></div>
+            <div>
+              <h4>Frontend</h4>
+              <div class="tech-badge">UI Layer</div>
+            </div>
+          </div>
+          <p>Antarmuka dibangun dengan HTML5, CSS3, dan JavaScript vanilla — ringan, cepat, dan dapat diakses dari browser manapun tanpa instalasi tambahan.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">HTML5</span>
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">LocalStorage</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULA -->
+    <div class="section" style="animation: fadeUp 0.6s 0.28s ease both;">
+      <div class="section-head">
+        <div class="sh-icon navy"><i class="mdi mdi-function-variant"></i></div>
+        <h3>Formula Cosine Similarity</h3>
+      </div>
+      <div style="background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
+        <div>
+          <div style="font-size:11px; font-weight:600; color:var(--text-muted); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:14px;">Formula Matematika</div>
+          <div style="background: var(--navy); border-radius: 12px; padding: 20px 24px; margin-bottom:16px;">
+            <div style="font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--teal); text-align:center; line-height:2;">
+              cos(θ) = <span style="font-style:italic;">A · B</span><br>
+              <span style="font-size:14px; color:rgba(255,255,255,0.4);">───────────────</span><br>
+              ‖<span style="font-style:italic;">A</span>‖ × ‖<span style="font-style:italic;">B</span>‖
+            </div>
+          </div>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.65;"><strong style="color:var(--navy);">A</strong> = vektor profil pengguna &nbsp;|&nbsp; <strong style="color:var(--navy);">B</strong> = vektor profil karier<br>Nilai output berkisar 0 (tidak cocok) hingga 1 (sangat cocok).</p>
+        </div>
+        <div>
+          <div style="font-size:11px; font-weight:600; color:var(--text-muted); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:14px;">Interpretasi Skor</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:48px; height:48px; border-radius:12px; background:var(--teal-pale); display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--teal-dim); font-size:13px; flex-shrink:0;">≥85%</div>
+              <div><strong style="font-size:14px; color:var(--navy);">Sangat Cocok</strong><p style="font-size:12px; color:var(--text-muted);">Profil Anda sangat selaras — jalur ini sangat direkomendasikan</p></div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:48px; height:48px; border-radius:12px; background:var(--gold-pale); display:flex; align-items:center; justify-content:center; font-weight:700; color:#9a7600; font-size:13px; flex-shrink:0;">70–84%</div>
+              <div><strong style="font-size:14px; color:var(--navy);">Cukup Cocok</strong><p style="font-size:12px; color:var(--text-muted);">Perlu pengembangan di beberapa skill untuk memaksimalkan potensi</p></div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:48px; height:48px; border-radius:12px; background:#f3f0ff; display:flex; align-items:center; justify-content:center; font-weight:700; color:#7c3aed; font-size:13px; flex-shrink:0;">&lt;70%</div>
+              <div><strong style="font-size:14px; color:var(--navy);">Perlu Persiapan</strong><p style="font-size:12px; color:var(--text-muted);">Gap yang signifikan — butuh fondasi yang lebih kuat</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="section">
+      <div class="section-head">
+        <div class="sh-icon teal"><i class="mdi mdi-account-group-outline"></i></div>
+        <h3>Tim Pengembang</h3>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar ta-1">AR</div>
+          <h4>Andi Rizky</h4>
+          <div class="team-role">Project Lead & AI Engineer</div>
+          <p>Merancang arsitektur sistem rekomendasi berbasis cosine similarity dan mengembangkan pipeline data profil pengguna.</p>
+          <div class="team-skills">
+            <span class="team-skill">Python</span>
+            <span class="team-skill">Machine Learning</span>
+            <span class="team-skill">System Design</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar ta-2">SS</div>
+          <h4>Sari Sulistyowati</h4>
+          <div class="team-role">UI/UX & Frontend Dev</div>
+          <p>Mendesain seluruh antarmuka pengguna dan memastikan pengalaman yang konsisten, responsif, dan mudah digunakan.</p>
+          <div class="team-skills">
+            <span class="team-skill">UI/UX Design</span>
+            <span class="team-skill">HTML/CSS</span>
+            <span class="team-skill">JavaScript</span>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar ta-3">BH</div>
+          <h4>Budi Hartono</h4>
+          <div class="team-role">Data Analyst & QA</div>
+          <p>Membangun dan memvalidasi dataset karier, menguji akurasi model rekomendasi, dan melakukan evaluasi performa sistem.</p>
+          <div class="team-skills">
+            <span class="team-skill">Data Analysis</span>
+            <span class="team-skill">Testing</span>
+            <span class="team-skill">SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section">
+      <div class="section-head">
+        <div class="sh-icon gold"><i class="mdi mdi-frequently-asked-questions"></i></div>
+        <h3>Pertanyaan yang Sering Diajukan</h3>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-header">Apakah data profil saya aman dan privat?<i class="mdi mdi-chevron-down faq-arrow"></i></div>
+          <div class="faq-body">Ya. Seluruh data profil Anda disimpan secara lokal di browser menggunakan localStorage dan tidak dikirim ke server manapun. Kami tidak mengumpulkan atau menyimpan data pribadi Anda di cloud.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-header">Seberapa akurat rekomendasi yang diberikan?<i class="mdi mdi-chevron-down faq-arrow"></i></div>
+          <div class="faq-body">Akurasi rekomendasi sangat bergantung pada kelengkapan profil Anda. Semakin lengkap dan jujur data keterampilan serta aspirasi yang Anda isi, semakin relevan rekomendasinya. Dalam pengujian internal, sistem kami mencapai akurasi kepuasan 92% pada 500+ responden uji coba.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-header">Apakah CareerPath hanya untuk bidang teknologi?<i class="mdi mdi-chevron-down faq-arrow"></i></div>
+          <div class="faq-body">Tidak. Meski demo saat ini berfokus pada jalur karier di bidang data dan teknologi, database karier CareerPath mencakup 180+ jalur dari berbagai industri termasuk bisnis, kreatif, keuangan, kesehatan, dan pendidikan.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-header">Bagaimana cara kerja level keterampilan 1–5?<i class="mdi mdi-chevron-down faq-arrow"></i></div>
+          <div class="faq-body">Level keterampilan yang Anda pilih digunakan sebagai bobot dalam vektor profil: 1 = Pemula, 2 = Dasar, 3 = Menengah, 4 = Mahir, 5 = Ahli. Bobot yang lebih tinggi memberikan kontribusi lebih besar dalam perhitungan cosine similarity dengan profil karier target.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-header">Apakah saya perlu membuat akun untuk menggunakan CareerPath?<i class="mdi mdi-chevron-down faq-arrow"></i></div>
+          <div class="faq-body">Saat ini login menggunakan email sederhana dan data disimpan lokal di browser Anda. Tidak diperlukan registrasi formal atau verifikasi email — cukup masuk dan mulai mengisi profil Anda.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-bar">
+      <div>
+        <h3>Siap menemukan jalur karier Anda?</h3>
+        <p>Lengkapi profil dan biarkan AI bekerja untuk Anda — gratis.</p>
+      </div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="profile.html" class="btn-cta"><i class="mdi mdi-account-edit-outline"></i> Lengkapi Profil</a>
+        <a href="career.html"  class="btn-cta" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15);"><i class="mdi mdi-compass-outline"></i> Lihat Rekomendasi</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"><i class="mdi mdi-information-outline"></i><span id="toastMsg"></span></div>
+
+<script>
+  const email = localStorage.getItem('user') || '';
+  document.getElementById('avatar').textContent = (email.split('@')[0] || 'CP').substring(0, 2).toUpperCase();
+
+  function toggleFaq(el) { el.classList.toggle('open'); }
+
+  function logout() {
+    if (confirm('Yakin ingin keluar?')) { localStorage.removeItem('user'); window.location.href = 'index.html'; }
+  }
+
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>
