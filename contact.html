@@ -10,66 +10,219 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy:       #0d1b2e;
-  --navy-mid:   #162844;
-  --navy-light: #1e3a5f;
-  --teal:       #0fbcad;
-  --teal-dim:   #0d9e91;
-  --teal-pale:  #e6faf8;
-  --gold:       #f5c842;
-  --gold-pale:  #fef9e7;
-  --coral:      #f05a3a;
-  --coral-pale: #fef0ec;
-  --cream:      #faf8f3;
-  --white:      #ffffff;
-  --text-muted: #8a9ab0;
-  --border:     #eaecf0;
-  --sidebar-w:  260px;
+  --arctic-dark:  #0a141d;
+  --cyan-neon:     #00f0ff;
+  --cyan-dim:      #00b4cc;
+  --glass-bg:      rgba(16, 29, 41, 0.45);
+  --glass-border:  rgba(0, 240, 255, 0.15);
+  --glass-hover:   rgba(0, 240, 255, 0.08);
+  --text-main:     #e2f1f5;
+  --text-muted:    #8ba4b5;
+  --sidebar-w:     260px;
+
+  /* TAMBAHAN */
+  --glass-blur: blur(14px);
 }
 
-html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--navy); }
+html, body { 
+  font-family: 'DM Sans', sans-serif; 
+  background: var(--arctic-dark) url('bg-arctic.png') no-repeat center center fixed; 
+  background-size: cover;
+  color: var(--text-main); 
+  min-height: 100vh;
+}
 
-/* ── SIDEBAR ── */
-.sidebar { position: fixed; left: 0; top: 0; width: var(--sidebar-w); height: 100vh; background: var(--navy); display: flex; flex-direction: column; overflow: hidden; z-index: 100; }
-.sidebar::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(15,188,173,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,188,173,0.04) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
-.sidebar-inner { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; padding: 0 0 20px; }
-.sb-brand { padding: 28px 24px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 10px; }
-.sb-brand-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--teal), var(--teal-dim)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; flex-shrink: 0; }
-.sb-brand-name { font-family: 'DM Serif Display', serif; font-size: 19px; color: white; white-space: nowrap; }
-.sb-section { padding: 14px 16px 4px; }
-.sb-label { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 0 8px; margin-bottom: 6px; }
-.sb-nav { display: flex; flex-direction: column; gap: 2px; }
-.sb-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; text-decoration: none; color: rgba(255,255,255,0.55); font-size: 14px; transition: all 0.2s; white-space: nowrap; }
-.sb-link i { font-size: 18px; flex-shrink: 0; }
-.sb-link:hover { background: rgba(255,255,255,0.07); color: white; }
-.sb-link.active { background: rgba(15,188,173,0.15); color: var(--teal); font-weight: 500; border: 1px solid rgba(15,188,173,0.2); }
-.sb-footer { margin-top: auto; padding: 0 16px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; }
-.sb-logout { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; color: rgba(255,255,255,0.4); font-size: 14px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-.sb-logout:hover { background: rgba(255,80,80,0.1); color: #ff6b6b; }
-.sb-logout i { font-size: 18px; }
+/* ========================================================================== 
+   SIDEBAR REVISION
+   ========================================================================== */
+
+.sidebar { 
+  position: fixed; 
+  left: 0; 
+  top: 0; 
+  width: var(--sidebar-w); 
+  height: 100vh; 
+
+  background: rgba(5, 12, 26, 0.85); 
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+
+  display: flex; 
+  flex-direction: column; 
+  overflow: hidden; 
+  z-index: 100; 
+
+  border-right: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+
+
+.sidebar-inner { 
+  position: relative; 
+  z-index: 1; 
+  display: flex; 
+  flex-direction: column; 
+  height: 100%; 
+  padding: 0 0 20px; 
+}
+
+.sb-brand { 
+  padding: 28px 24px 24px; 
+  display: flex; 
+  align-items: center; 
+  gap: 14px; 
+  border-bottom: 1px solid rgba(0, 243, 255, 0.15); 
+  margin-bottom: 10px; 
+}
+
+.sb-brand-icon { 
+  width: 40px; 
+  height: 40px; 
+
+  background: linear-gradient(135deg, #00f0ff, #007bb8); 
+
+  border-radius: 12px; 
+
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+
+  color: #050c1a; 
+
+  font-size: 20px; 
+  flex-shrink: 0; 
+
+  box-shadow: 0 0 15px rgba(0,240,255,0.4);
+}
+
+.sb-brand-name { 
+  font-family: 'DM Serif Display', serif; 
+  font-size: 19px; 
+  color: white; 
+  white-space: nowrap; 
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+}
+
+.sb-section { 
+  padding: 14px 16px 4px; 
+}
+
+.sb-label { 
+  font-size: 10px; 
+  font-weight: 600; 
+  letter-spacing: 1.2px; 
+  text-transform: uppercase; 
+
+  color: rgba(0, 240, 255, 0.4); 
+
+  padding: 0 8px; 
+  margin-bottom: 6px; 
+}
+
+.sb-nav { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 2px; 
+}
+
+.sb-link { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+
+  padding: 11px 14px; 
+
+  border-radius: 10px; 
+
+  text-decoration: none; 
+
+  color: rgba(255,255,255,0.45); 
+
+  font-size: 14px; 
+
+  transition: all 0.2s; 
+
+  white-space: nowrap; 
+}
+
+.sb-link i { 
+  font-size: 18px; 
+  flex-shrink: 0; 
+}
+
+.sb-link:hover { 
+  background: rgba(0, 240, 255, 0.08); 
+  color: white; 
+}
+
+.sb-link.active { 
+  background: rgba(0, 240, 255, 0.15); 
+  color: #00f0ff; 
+
+  font-weight: 500; 
+
+  border: 1px solid rgba(0,240,255,0.25); 
+
+  text-shadow: 0 0 8px rgba(0,240,255,0.5);
+}
+
+.sb-footer { 
+  margin-top: auto; 
+  padding: 0 16px; 
+
+  border-top: 1px solid rgba(0, 243, 255, 0.15); 
+
+  padding-top: 16px; 
+}
+
+.sb-logout { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+
+  padding: 11px 14px; 
+
+  border-radius: 10px; 
+
+  color: rgba(255,255,255,0.4); 
+
+  font-size: 14px; 
+
+  cursor: pointer; 
+
+  transition: all 0.2s; 
+
+  white-space: nowrap; 
+}
+
+.sb-logout:hover { 
+  background: rgba(255, 74, 115, 0.15); 
+  color: #ff4a73; 
+}
+
+.sb-logout i { 
+  font-size: 18px; 
+}
 
 /* ── MAIN ── */
 .main { margin-left: var(--sidebar-w); min-height: 100vh; padding: 36px 40px 60px; }
 
 /* ── TOPBAR ── */
 .topbar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; animation: fadeDown 0.6s ease both; }
-.topbar-left h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--navy); line-height: 1.1; margin-bottom: 6px; }
-.topbar-left h1 em { font-style: italic; color: var(--teal-dim); }
+.topbar-left h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--text-main); line-height: 1.1; margin-bottom: 6px; }
+.topbar-left h1 em { font-style: italic; color: var(--cyan-neon); text-shadow: 0 0 10px rgba(0, 240, 255, 0.3); }
 .topbar-left p { font-size: 14px; color: var(--text-muted); }
-.avatar-wrap { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--navy-light)); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 600; border: 2px solid white; box-shadow: 0 2px 12px rgba(13,27,46,0.12); }
+.avatar-wrap { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan-dim), var(--arctic-dark)); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 600; border: 2px solid var(--cyan-neon); box-shadow: 0 2px 12px rgba(0,240,255,0.2); }
 
 /* ── LAYOUT ── */
-.contact-layout {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 24px;
-  align-items: start;
-}
+.contact-layout { display: grid; grid-template-columns: 1fr 380px; gap: 24px; align-items: start; }
 
 /* ── FORM CARD ── */
 .form-card {
-  background: var(--white);
-  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
   border-radius: 20px;
   padding: 36px;
   animation: fadeUp 0.6s 0.1s ease both;
@@ -78,210 +231,192 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
 .form-card-header { margin-bottom: 28px; }
 .form-card-header .fc-tag {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 600; color: var(--teal);
+  font-size: 11px; font-weight: 600; color: var(--cyan-neon);
   letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;
 }
-.fc-tag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
-.form-card-header h2 { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--navy); margin-bottom: 8px; }
-.form-card-header h2 em { font-style: italic; color: var(--teal-dim); }
+.fc-tag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--cyan-neon); animation: pulse 2s infinite; }
+.form-card-header h2 { font-family: 'DM Serif Display', serif; font-size: 26px; color: white; margin-bottom: 8px; }
+.form-card-header h2 em { font-style: italic; color: var(--cyan-neon); text-shadow: 0 0 8px rgba(0, 240, 255, 0.3); }
 .form-card-header p { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
 
 /* Form elements */
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
 .field { display: flex; flex-direction: column; gap: 7px; }
-.field label { font-size: 13px; font-weight: 500; color: var(--navy); }
+.field label { font-size: 13px; font-weight: 500; color: var(--text-main); }
 
 .field input,
 .field textarea,
 .field select {
   padding: 13px 14px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--glass-border);
   border-radius: 11px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px; color: var(--navy);
-  background: var(--cream); outline: none;
+  font-size: 14px; color: var(--text-main);
+  background: rgba(10, 20, 29, 0.5); outline: none;
   transition: all 0.2s; -webkit-appearance: none;
 }
 .field input::placeholder,
-.field textarea::placeholder { color: #b5c0cc; }
+.field textarea::placeholder { color: rgba(139, 164, 181, 0.4); }
 .field input:focus,
 .field textarea:focus,
 .field select:focus {
-  border-color: var(--teal); background: white;
-  box-shadow: 0 0 0 4px rgba(15,188,173,0.1);
+  border-color: var(--cyan-neon); background: rgba(10, 20, 29, 0.7);
+  box-shadow: 0 0 0 4px rgba(0, 240, 255, 0.15);
 }
 .field textarea { min-height: 130px; resize: vertical; line-height: 1.65; }
 
 /* Topic chips */
 .topic-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-
 .topic-chip {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 8px 14px; border-radius: 20px;
   font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
-  border: 1.5px solid var(--border); background: var(--cream);
+  border: 1.5px solid var(--glass-border); background: rgba(10, 20, 29, 0.4);
   color: var(--text-muted); cursor: pointer; transition: all 0.2s;
 }
-.topic-chip:hover { border-color: var(--teal); color: var(--teal-dim); }
-.topic-chip.selected { background: var(--teal-pale); color: var(--teal-dim); border-color: rgba(15,188,173,0.35); }
+.topic-chip:hover { border-color: var(--cyan-neon); color: var(--cyan-neon); background: var(--glass-hover); }
+.topic-chip.selected { background: rgba(0, 240, 255, 0.15); color: var(--cyan-neon); border-color: var(--cyan-neon); box-shadow: 0 0 10px rgba(0, 240, 255, 0.1); }
 .topic-chip i { font-size: 14px; }
 
 /* Rating stars */
 .rating-row { display: flex; align-items: center; gap: 6px; }
-.star {
-  font-size: 24px; cursor: pointer; color: var(--border);
-  transition: color 0.15s, transform 0.15s;
-}
-.star:hover, .star.active { color: var(--gold); transform: scale(1.15); }
+.star { font-size: 24px; cursor: pointer; color: var(--glass-border); transition: color 0.15s, transform 0.15s; }
+.star:hover, .star.active { color: #f5c842; transform: scale(1.15); text-shadow: 0 0 8px rgba(245, 200, 66, 0.4); }
 .rating-label { font-size: 13px; color: var(--text-muted); margin-left: 8px; }
 
 /* File upload zone */
 .upload-zone {
-  border: 2px dashed var(--border); border-radius: 12px;
+  border: 2px dashed var(--glass-border); border-radius: 12px;
   padding: 22px; text-align: center; cursor: pointer;
-  transition: all 0.2s; background: var(--cream);
+  transition: all 0.2s; background: rgba(10, 20, 29, 0.4);
 }
-.upload-zone:hover { border-color: var(--teal); background: var(--teal-pale); }
+.upload-zone:hover { border-color: var(--cyan-neon); background: var(--glass-hover); box-shadow: 0 0 10px rgba(0, 240, 255, 0.05); }
 .upload-zone i { font-size: 28px; color: var(--text-muted); margin-bottom: 8px; display: block; }
 .upload-zone p { font-size: 13px; color: var(--text-muted); }
-.upload-zone span { color: var(--teal-dim); font-weight: 500; }
+.upload-zone span { color: var(--cyan-neon); font-weight: 500; }
 
 /* Submit button */
 .btn-submit {
   width: 100%; padding: 15px;
-  background: var(--navy); color: white; border: none;
+  background: var(--cyan-neon); color: var(--arctic-dark); border: none;
   border-radius: 12px; font-family: 'DM Sans', sans-serif;
-  font-size: 15px; font-weight: 500; cursor: pointer;
+  font-size: 15px; font-weight: 600; cursor: pointer;
   display: flex; align-items: center; justify-content: center; gap: 10px;
   transition: all 0.25s; position: relative; overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
 }
-.btn-submit::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--teal), var(--teal-dim)); opacity: 0; transition: opacity 0.3s; }
-.btn-submit:hover::after { opacity: 1; }
-.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,27,46,0.2); }
-.btn-submit span, .btn-submit i { position: relative; z-index: 1; }
+.btn-submit:hover { background: #ffffff; transform: translateY(-2px); box-shadow: 0 0 20px #ffffff; }
 
 /* ── RIGHT COLUMN ── */
 .right-col { display: flex; flex-direction: column; gap: 18px; animation: fadeUp 0.6s 0.2s ease both; }
 
 /* Contact info card */
 .info-card {
-  background: var(--navy); border-radius: 18px;
+  background: rgba(10, 20, 29, 0.75); border-radius: 18px;
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   padding: 28px; position: relative; overflow: hidden;
+  border: 1px solid var(--glass-border);
 }
-.info-card::before { content: ''; position: absolute; right: -30px; top: -30px; width: 160px; height: 160px; border-radius: 50%; border: 1px solid rgba(15,188,173,0.12); }
-.info-card::after  { content: ''; position: absolute; right: 10px;  top: 10px;  width: 100px; height: 100px; border-radius: 50%; border: 1px solid rgba(15,188,173,0.08); }
+.info-card::before { content: ''; position: absolute; right: -30px; top: -30px; width: 160px; height: 160px; border-radius: 50%; border: 1px solid rgba(0, 240, 255, 0.08); }
 
 .info-card-top { position: relative; z-index: 1; margin-bottom: 22px; }
-.info-tag { font-size: 10px; font-weight: 600; color: var(--teal); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.info-tag { font-size: 10px; font-weight: 600; color: var(--cyan-neon); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
 .info-card h3 { font-family: 'DM Serif Display', serif; font-size: 20px; color: white; line-height: 1.2; }
-.info-card h3 em { font-style: italic; color: var(--teal); }
+.info-card h3 em { font-style: italic; color: var(--cyan-neon); text-shadow: 0 0 8px rgba(0, 240, 255, 0.3); }
 
 .contact-items { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
-
 .contact-item {
   display: flex; align-items: center; gap: 14px;
   padding: 14px 16px; border-radius: 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(10, 20, 29, 0.4); border: 1px solid var(--glass-border);
   text-decoration: none; transition: all 0.2s; cursor: pointer;
 }
-.contact-item:hover { background: rgba(15,188,173,0.12); border-color: rgba(15,188,173,0.2); }
+.contact-item:hover { background: var(--glass-hover); border-color: var(--cyan-neon); box-shadow: 0 0 12px rgba(0, 240, 255, 0.1); }
 
 .contact-item-icon {
   width: 38px; height: 38px; border-radius: 10px;
-  background: rgba(15,188,173,0.15); border: 1px solid rgba(15,188,173,0.2);
+  background: rgba(0, 240, 255, 0.1); border: 1px solid var(--glass-border);
   display: flex; align-items: center; justify-content: center;
-  color: var(--teal); font-size: 18px; flex-shrink: 0;
+  color: var(--cyan-neon); font-size: 18px; flex-shrink: 0;
 }
 .contact-item-text strong { display: block; font-size: 13px; font-weight: 500; color: white; margin-bottom: 1px; }
-.contact-item-text span { font-size: 12px; color: rgba(255,255,255,0.35); }
+.contact-item-text span { font-size: 12px; color: var(--text-muted); }
 
 /* Response time card */
 .response-card {
-  background: var(--white); border: 1px solid var(--border);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   border-radius: 16px; padding: 22px;
 }
-.response-card h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-.response-card h4 i { font-size: 16px; color: var(--teal-dim); }
-
+.response-card h4 { font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.response-card h4 i { font-size: 16px; color: var(--cyan-neon); }
 .response-items { display: flex; flex-direction: column; gap: 10px; }
 .response-item { display: flex; align-items: center; justify-content: space-between; }
 .response-item span { font-size: 13px; color: var(--text-muted); }
-.response-badge {
-  font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+.response-badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+.rb-fast  { background: rgba(0, 240, 255, 0.15);  color: var(--cyan-neon); border: 1px solid var(--glass-border); }
+.rb-mid   { background: rgba(245, 200, 66, 0.12);  color: #f5c842; border: 1px solid rgba(245, 200, 66, 0.2); }
+
+/* Jam operasional */
+.hours-card {
+  background: rgba(245, 200, 66, 0.05); border: 1px solid rgba(245,200,66,0.25);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px; padding: 22px;
 }
-.rb-fast  { background: var(--teal-pale);  color: var(--teal-dim); }
-.rb-mid   { background: var(--gold-pale);  color: #9a7600; }
-.rb-slow  { background: #e8ecf4; color: var(--navy-light); }
+.hours-card h4 { font-size: 14px; font-weight: 600; color: #f5c842; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.hours-card h4 i { font-size: 16px; color: #f5c842; }
+.hours-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.hours-day { font-size: 13px; color: var(--text-muted); }
+.hours-time { font-size: 13px; font-weight: 500; color: var(--text-main); }
+.hours-divider { height: 1px; background: rgba(245,200,66,0.15); margin: 10px 0; }
 
 /* Social card */
 .social-card {
-  background: var(--white); border: 1px solid var(--border);
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   border-radius: 16px; padding: 22px;
 }
-.social-card h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-.social-card h4 i { font-size: 16px; color: var(--teal-dim); }
-
+.social-card h4 { font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.social-card h4 i { font-size: 16px; color: var(--cyan-neon); }
 .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .social-btn {
   display: flex; align-items: center; gap: 10px;
-  padding: 12px 14px; border: 1.5px solid var(--border);
+  padding: 12px 14px; border: 1.5px solid var(--glass-border);
   border-radius: 11px; text-decoration: none;
-  color: var(--navy); font-size: 13px; font-weight: 500;
-  transition: all 0.2s; cursor: pointer; background: none;
+  color: var(--text-main); font-size: 13px; font-weight: 500;
+  transition: all 0.2s; cursor: pointer; background: rgba(10, 20, 29, 0.4);
   font-family: 'DM Sans', sans-serif;
 }
-.social-btn:hover { border-color: var(--teal); color: var(--teal-dim); background: var(--teal-pale); }
-.social-btn i { font-size: 18px; }
-
-/* Office hours card */
-.hours-card {
-  background: var(--gold-pale); border: 1px solid rgba(245,200,66,0.25);
-  border-radius: 16px; padding: 22px;
-}
-.hours-card h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-.hours-card h4 i { font-size: 16px; color: #9a7600; }
-.hours-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.hours-row:last-child { margin-bottom: 0; }
-.hours-day { font-size: 13px; color: var(--text-muted); }
-.hours-time { font-size: 13px; font-weight: 500; color: var(--navy); }
-.hours-row.closed .hours-time { color: #b0bec8; }
-.hours-divider { height: 1px; background: rgba(245,200,66,0.2); margin: 10px 0; }
+.social-btn:hover { border-color: var(--cyan-neon); color: var(--cyan-neon); background: var(--glass-hover); }
 
 /* Success state */
-.success-overlay {
-  display: none; flex-direction: column; align-items: center;
-  justify-content: center; padding: 52px 20px; text-align: center;
-}
+.success-overlay { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 52px 20px; text-align: center; }
 .success-overlay.show { display: flex; }
 .success-icon {
   width: 72px; height: 72px; border-radius: 50%;
-  background: var(--teal-pale); border: 2px solid rgba(15,188,173,0.25);
+  background: rgba(0, 240, 255, 0.12); border: 2px solid var(--glass-border);
   display: flex; align-items: center; justify-content: center;
-  font-size: 32px; color: var(--teal); margin-bottom: 20px;
-  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  font-size: 32px; color: var(--cyan-neon); margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
 }
-.success-overlay h3 { font-family: 'DM Serif Display', serif; font-size: 24px; margin-bottom: 8px; }
+.success-overlay h3 { font-family: 'DM Serif Display', serif; font-size: 24px; color: white; margin-bottom: 8px; }
 .success-overlay p { font-size: 14px; color: var(--text-muted); line-height: 1.65; max-width: 320px; margin-bottom: 24px; }
 
 /* Char counter */
 .char-info { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
 .char-hint { font-size: 11px; color: var(--text-muted); }
 .char-count { font-size: 11px; color: var(--text-muted); }
-.char-count.warn { color: var(--coral); }
-
-/* Divider */
-.form-divider { height: 1px; background: var(--border); margin: 24px 0; }
+.char-count.warn { color: var(--coral-neon); }
+.form-divider { height: 1px; background: var(--glass-border); margin: 24px 0; }
 
 /* Toast */
-.toast { position: fixed; bottom: 28px; right: 28px; background: var(--navy); color: white; padding: 13px 18px; border-radius: 12px; font-size: 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 28px rgba(13,27,46,0.25); transform: translateY(80px); opacity: 0; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 999; }
+.toast { position: fixed; bottom: 28px; right: 28px; background: rgba(10, 20, 29, 0.9); border: 1px solid var(--cyan-neon); color: white; padding: 13px 18px; border-radius: 12px; font-size: 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 28px rgba(0, 240, 255, 0.3); transform: translateY(80px); opacity: 0; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 999; }
 .toast.show { transform: translateY(0); opacity: 1; }
-.toast i { color: var(--teal); }
+.toast i { color: var(--cyan-neon); }
 
 @keyframes pulse  { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 @keyframes fadeUp   { from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;} }
 @keyframes fadeDown { from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:none;} }
-@keyframes popIn    { from{opacity:0;transform:scale(0.6);}to{opacity:1;transform:scale(1);} }
 
 @media (max-width: 1050px) { .contact-layout { grid-template-columns: 1fr; } .right-col { display: grid; grid-template-columns: 1fr 1fr; } }
 @media (max-width: 900px) {
@@ -294,17 +429,11 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
   .main { padding: 28px 20px 60px; }
   .form-row { grid-template-columns: 1fr; }
 }
-@media (max-width: 640px) {
-  .topbar { flex-direction: column; gap: 12px; }
-  .right-col { display: flex; flex-direction: column; }
-  .social-grid { grid-template-columns: 1fr; }
-}
 </style>
 </head>
 <body>
 <div style="display:flex;">
 
-  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="sidebar-inner">
       <div class="sb-brand">
@@ -314,17 +443,17 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
       <div class="sb-section">
         <div class="sb-label">Menu Utama</div>
         <nav class="sb-nav">
-          <a href="dashboard.html" class="sb-link"><i class="mdi mdi-view-dashboard-outline"></i><span>Dashboard</span></a>
-          <a href="profile.html"   class="sb-link"><i class="mdi mdi-account-outline"></i><span>Profil Saya</span></a>
-          <a href="career.html"    class="sb-link"><i class="mdi mdi-target"></i><span>Rekomendasi Karier</span></a>
-          <a href="learning.html"  class="sb-link"><i class="mdi mdi-book-open-outline"></i><span>Rencana Belajar</span></a>
+          <a href="dashboard.html" class="sb-link"><i class="mdi mdi-home-variant-outline"></i><span>Dashboard</span></a>
+          <a href="profile.html"   class="sb-link"><i class="mdi mdi-account-box-outline"></i><span>Profil Saya</span></a>
+          <a href="career.html"    class="sb-link"><i class="mdi mdi-briefcase-search-outline"></i><span>Rekomendasi Karier</span></a>
+          <a href="learning.html"  class="sb-link"><i class="mdi mdi-notebook-edit-outline"></i><span>Rencana Belajar</span></a>
         </nav>
       </div>
       <div class="sb-section" style="margin-top:8px;">
         <div class="sb-label">Lainnya</div>
         <nav class="sb-nav">
           <a href="about.html"   class="sb-link"><i class="mdi mdi-information-outline"></i><span>Tentang</span></a>
-          <a href="contact.html" class="sb-link active"><i class="mdi mdi-email-outline"></i><span>Kontak</span></a>
+          <a href="contact.html" class="sb-link active"><i class="mdi mdi-message-text-outline"></i><span>Hubungi</span></a>
         </nav>
       </div>
       <div class="sb-footer">
@@ -333,68 +462,58 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
 
-    <!-- TOPBAR -->
     <div class="topbar">
       <div class="topbar-left">
         <h1>Hubungi <em>Kami</em></h1>
-        <p>Ada pertanyaan, masukan, atau laporan? Kami siap membantu</p>
+        <p>Ada pertanyaan, kendala, atau saran terkait CareerPath? Tim kami siap membantu</p>
       </div>
       <div class="avatar-wrap" id="avatar">CP</div>
     </div>
 
     <div class="contact-layout">
 
-      <!-- ── FORM ── -->
       <div class="form-card">
-
-        <!-- Normal form -->
         <div id="formView">
           <div class="form-card-header">
             <div class="fc-tag">Kirim Pesan</div>
             <h2>Kami senang<br>mendengar dari <em>Anda</em></h2>
-            <p>Isi formulir di bawah dan tim kami akan merespons dalam 1×24 jam kerja.</p>
+            <p>Isi formulir di bawah ini dan tim dukungan kami akan merespons dalam 1×24 jam kerja.</p>
           </div>
 
-          <!-- Topic -->
           <div class="field" style="margin-bottom:20px;">
             <label>Topik Pesan</label>
             <div class="topic-grid" id="topicGrid">
               <button class="topic-chip selected" onclick="selectTopic(this)"><i class="mdi mdi-help-circle-outline"></i> Pertanyaan Umum</button>
-              <button class="topic-chip" onclick="selectTopic(this)"><i class="mdi mdi-bug-outline"></i> Laporkan Bug</button>
+              <button class="topic-chip" onclick="selectTopic(this)"><i class="mdi mdi-bug-outline"></i> Laporkan Masalah</button>
               <button class="topic-chip" onclick="selectTopic(this)"><i class="mdi mdi-lightbulb-outline"></i> Saran Fitur</button>
-              <button class="topic-chip" onclick="selectTopic(this)"><i class="mdi mdi-briefcase-outline"></i> Kolaborasi</button>
+              <button class="topic-chip" onclick="selectTopic(this)"><i class="mdi mdi-briefcase-outline"></i> Kerjasama</button>
               <button class="topic-chip" onclick="selectTopic(this)"><i class="mdi mdi-account-outline"></i> Akun & Profil</button>
-              <button class="topic-chip" onclick="selectTopic(this)"><i class="mdi mdi-dots-horizontal"></i> Lainnya</button>
             </div>
           </div>
 
           <div class="form-divider"></div>
 
-          <!-- Name & Email -->
           <div class="form-row">
             <div class="field">
-              <label>Nama Lengkap <span style="color:var(--coral);">*</span></label>
+              <label>Nama Lengkap <span style="color:var(--coral-neon);">*</span></label>
               <input type="text" id="contactName" placeholder="Nama Anda">
             </div>
             <div class="field">
-              <label>Email <span style="color:var(--coral);">*</span></label>
+              <label>Email <span style="color:var(--coral-neon);">*</span></label>
               <input type="email" id="contactEmail" placeholder="email@contoh.com">
             </div>
           </div>
 
-          <!-- Subject -->
           <div class="field" style="margin-bottom:18px;">
-            <label>Subjek <span style="color:var(--coral);">*</span></label>
+            <label>Subjek <span style="color:var(--coral-neon);">*</span></label>
             <input type="text" id="contactSubject" placeholder="Judul singkat pesan Anda">
           </div>
 
-          <!-- Message -->
           <div class="field" style="margin-bottom:6px;">
-            <label>Pesan <span style="color:var(--coral);">*</span></label>
-            <textarea id="contactMsg" placeholder="Tulis pesan Anda di sini — semakin detail, semakin mudah kami membantu..." oninput="countChars(this)"></textarea>
+            <label>Pesan <span style="color:var(--coral-neon);">*</span></label>
+            <textarea id="contactMsg" placeholder="Tulis pesan Anda di sini..." oninput="countChars(this)"></textarea>
           </div>
           <div class="char-info">
             <span class="char-hint">Minimal 20 karakter</span>
@@ -403,7 +522,6 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
 
           <div class="form-divider"></div>
 
-          <!-- Rating -->
           <div class="field" style="margin-bottom:20px;">
             <label>Bagaimana pengalaman Anda dengan CareerPath?</label>
             <div class="rating-row" id="ratingRow">
@@ -416,191 +534,132 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
             </div>
           </div>
 
-          <!-- File upload -->
           <div class="field" style="margin-bottom:24px;">
             <label>Lampiran <span style="color:var(--text-muted); font-weight:400;">(opsional)</span></label>
             <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
               <i class="mdi mdi-cloud-upload-outline"></i>
               <p>Drag & drop atau <span>klik untuk memilih file</span></p>
-              <p style="font-size:11px; margin-top:4px;">PNG, JPG, PDF — maks. 5MB</p>
               <input type="file" id="fileInput" style="display:none" onchange="showFile(this)" accept=".png,.jpg,.jpeg,.pdf">
             </div>
-            <div id="fileInfo" style="display:none; margin-top:8px; font-size:13px; color:var(--teal-dim); display:flex; align-items:center; gap:6px;">
+            <div id="fileInfo" style="display:none; margin-top:8px; font-size:13px; color:var(--cyan-dim); display:flex; align-items:center; gap:6px;">
               <i class="mdi mdi-file-check-outline"></i><span id="fileName"></span>
             </div>
           </div>
 
-          <!-- Submit -->
           <button class="btn-submit" onclick="submitForm()">
             <span id="submitText">Kirim Pesan</span>
             <i class="mdi mdi-send" id="submitIcon"></i>
           </button>
         </div>
 
-        <!-- Success state -->
         <div class="success-overlay" id="successView">
           <div class="success-icon"><i class="mdi mdi-check"></i></div>
           <h3>Pesan Terkirim!</h3>
-          <p>Terima kasih telah menghubungi kami. Tim CareerPath akan membalas ke email Anda dalam 1×24 jam kerja.</p>
+          <p>Terima kasih telah menghubungi kami. Tim administrasi CareerPath akan membalas ke email Anda dalam waktu dekat.</p>
           <button class="btn-submit" style="max-width:220px;" onclick="resetForm()">
             <span>Kirim Pesan Lain</span>
-            <i class="mdi mdi-email-plus-outline"></i>
           </button>
         </div>
-
       </div>
 
-      <!-- ── RIGHT COLUMN ── -->
       <div class="right-col">
-
-        <!-- Contact info -->
         <div class="info-card">
           <div class="info-card-top">
             <div class="info-tag">Kontak Langsung</div>
-            <h3>Selalu ada<br>untuk <em>membantu</em></h3>
+            <h3>Selalu siap<br>membimbing <em>Anda</em></h3>
           </div>
           <div class="contact-items">
-            <div class="contact-item" onclick="copyToClipboard('halo@careerpath.id', 'Email disalin!')">
+            <div class="contact-item" onclick="copyToClipboard('support@careerpath.id', 'Email disalin!')">
               <div class="contact-item-icon"><i class="mdi mdi-email-outline"></i></div>
               <div class="contact-item-text">
-                <strong>halo@careerpath.id</strong>
-                <span>Email utama — klik untuk salin</span>
+                <strong>support@careerpath.id</strong>
+                <span>Email resmi — klik untuk salin</span>
               </div>
             </div>
             <div class="contact-item" onclick="copyToClipboard('+62 812-3456-7890', 'Nomor disalin!')">
               <div class="contact-item-icon"><i class="mdi mdi-whatsapp"></i></div>
               <div class="contact-item-text">
                 <strong>+62 812-3456-7890</strong>
-                <span>WhatsApp — klik untuk salin</span>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-item-icon"><i class="mdi mdi-map-marker-outline"></i></div>
-              <div class="contact-item-text">
-                <strong>Jakarta, Indonesia</strong>
-                <span>Universitas X, Gedung Teknik Lt. 3</span>
+                <span>WhatsApp Admin — klik untuk salin</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Response time -->
         <div class="response-card">
           <h4><i class="mdi mdi-clock-fast"></i> Estimasi Waktu Respons</h4>
           <div class="response-items">
-            <div class="response-item">
-              <span>Bug & Error kritis</span>
-              <span class="response-badge rb-fast">< 4 jam</span>
-            </div>
-            <div class="response-item">
-              <span>Pertanyaan umum</span>
-              <span class="response-badge rb-mid">1×24 jam</span>
-            </div>
-            <div class="response-item">
-              <span>Saran & Kolaborasi</span>
-              <span class="response-badge rb-slow">2–3 hari kerja</span>
-            </div>
+            <div class="response-item"><span>Kendala Akun / Bug</span><span class="response-badge rb-fast">< 4 jam</span></div>
+            <div class="response-item"><span>Pertanyaan Umum</span><span class="response-badge rb-mid">1×24 jam</span></div>
           </div>
         </div>
 
-        <!-- Jam operasional -->
         <div class="hours-card">
-          <h4><i class="mdi mdi-calendar-clock"></i> Jam Operasional Tim</h4>
+          <h4><i class="mdi mdi-calendar-clock"></i> Jam Kerja Tim Support</h4>
           <div class="hours-row"><span class="hours-day">Senin – Jumat</span><span class="hours-time">08.00 – 17.00 WIB</span></div>
           <div class="hours-row"><span class="hours-day">Sabtu</span><span class="hours-time">09.00 – 13.00 WIB</span></div>
           <div class="hours-divider"></div>
-          <div class="hours-row closed"><span class="hours-day">Minggu & Hari Libur</span><span class="hours-time">Libur</span></div>
-          <p style="font-size:11px;color:#9a7600;margin-top:12px;line-height:1.5;">⚡ Pesan yang diterima di luar jam operasional akan diproses pada hari kerja berikutnya.</p>
+          <div class="hours-row" style="opacity:0.4;"><span class="hours-day">Minggu / Hari Libur</span><span class="hours-time">Tutup</span></div>
         </div>
-
-        <!-- Social -->
-        <div class="social-card">
-          <h4><i class="mdi mdi-share-variant-outline"></i> Ikuti Kami</h4>
-          <div class="social-grid">
-            <button class="social-btn" onclick="showToast('Membuka Instagram...')"><i class="mdi mdi-instagram" style="color:#e1306c;"></i> Instagram</button>
-            <button class="social-btn" onclick="showToast('Membuka LinkedIn...')"><i class="mdi mdi-linkedin"  style="color:#0077b5;"></i> LinkedIn</button>
-            <button class="social-btn" onclick="showToast('Membuka GitHub...')"><i class="mdi mdi-github"    style="color:#333;"></i> GitHub</button>
-            <button class="social-btn" onclick="showToast('Membuka Twitter...')"><i class="mdi mdi-twitter"  style="color:#1da1f2;"></i> Twitter</button>
-          </div>
-        </div>
-
       </div>
+
     </div>
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"><i class="mdi mdi-check-circle-outline"></i><span id="toastMsg"></span></div>
 
 <script>
-  // Init user
   const email = localStorage.getItem('user') || '';
   const name  = email.split('@')[0] || '';
-  document.getElementById('avatar').textContent       = (name || 'CP').substring(0, 2).toUpperCase();
-  document.getElementById('contactEmail').value       = email;
-  document.getElementById('contactName').value        = name.charAt(0).toUpperCase() + name.slice(1);
+  document.getElementById('avatar').textContent = (name || 'CP').substring(0, 2).toUpperCase();
+  document.getElementById('contactEmail').value = email;
+  document.getElementById('contactName').value  = name.charAt(0).toUpperCase() + name.slice(1);
 
-  // Topic select
   function selectTopic(el) {
     document.querySelectorAll('.topic-chip').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
   }
 
-  // Rating
   let currentRating = 0;
   const RATING_LABELS = ['', 'Sangat Buruk', 'Kurang Baik', 'Cukup Baik', 'Baik', 'Sangat Baik'];
-
   function setRating(val) {
     currentRating = val;
-    document.querySelectorAll('.star').forEach(s => {
-      s.classList.toggle('active', parseInt(s.dataset.v) <= val);
-    });
+    document.querySelectorAll('.star').forEach(s => s.classList.toggle('active', parseInt(s.dataset.v) <= val));
     document.getElementById('ratingLabel').textContent = RATING_LABELS[val];
   }
 
-  // Char counter
   function countChars(el) {
     const len = el.value.length;
-    const counter = document.getElementById('charCount');
-    counter.textContent = `${len} / 1000`;
-    counter.classList.toggle('warn', len > 900);
+    document.getElementById('charCount').textContent = `${len} / 1000`;
     if (len > 1000) el.value = el.value.slice(0, 1000);
   }
 
-  // File upload
   function showFile(input) {
     if (!input.files.length) return;
     const file = input.files[0];
-    if (file.size > 5 * 1024 * 1024) { showToast('File melebihi batas 5MB.'); input.value = ''; return; }
     document.getElementById('fileName').textContent = `${file.name} (${(file.size/1024).toFixed(0)} KB)`;
     document.getElementById('fileInfo').style.display = 'flex';
   }
 
-  // Submit
   function submitForm() {
-    const name    = document.getElementById('contactName').value.trim();
-    const email   = document.getElementById('contactEmail').value.trim();
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
     const subject = document.getElementById('contactSubject').value.trim();
-    const msg     = document.getElementById('contactMsg').value.trim();
+    const msg = document.getElementById('contactMsg').value.trim();
 
-    if (!name || !email || !subject || !msg) { showToast('Harap lengkapi semua field wajib.'); return; }
+    if (!name || !email || !subject || !msg) { showToast('Harap isi semua field wajib.'); return; }
     if (msg.length < 20) { showToast('Pesan minimal 20 karakter.'); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Format email tidak valid.'); return; }
 
-    // Simulate sending
-    const btn  = document.querySelector('.btn-submit');
-    const text = document.getElementById('submitText');
-    const icon = document.getElementById('submitIcon');
+    const btn = document.querySelector('.btn-submit');
     btn.disabled = true;
-    text.textContent = 'Mengirim...';
-    icon.className = 'mdi mdi-loading';
-    icon.style.animation = 'spin 0.8s linear infinite';
+    document.getElementById('submitText').textContent = 'Mengirim...';
 
     setTimeout(() => {
       document.getElementById('formView').style.display = 'none';
       document.getElementById('successView').classList.add('show');
       btn.disabled = false;
-    }, 1800);
+    }, 1500);
   }
 
   function resetForm() {
@@ -608,24 +667,14 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
     document.getElementById('successView').classList.remove('show');
     document.getElementById('contactSubject').value = '';
     document.getElementById('contactMsg').value = '';
-    document.getElementById('charCount').textContent = '0 / 1000';
     document.getElementById('fileInfo').style.display = 'none';
     document.getElementById('fileInput').value = '';
     setRating(0);
-    document.querySelectorAll('.topic-chip').forEach((c, i) => c.classList.toggle('selected', i === 0));
-    const btn  = document.querySelector('.btn-submit');
     document.getElementById('submitText').textContent = 'Kirim Pesan';
-    document.getElementById('submitIcon').className = 'mdi mdi-send';
-    document.getElementById('submitIcon').style.animation = '';
-    btn.disabled = false;
   }
 
-  // Copy to clipboard
-  function copyToClipboard(text, msg) {
-    navigator.clipboard.writeText(text).then(() => showToast(msg)).catch(() => showToast(text));
-  }
+  function copyToClipboard(text, msg) { navigator.clipboard.writeText(text).then(() => showToast(msg)); }
 
-  // Toast
   let toastTimer;
   function showToast(msg) {
     const t = document.getElementById('toast');
@@ -638,11 +687,6 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
   function logout() {
     if (confirm('Yakin ingin keluar?')) { localStorage.removeItem('user'); window.location.href = 'index.html'; }
   }
-
-  // Spin keyframe for loading
-  const s = document.createElement('style');
-  s.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-  document.head.appendChild(s);
 </script>
 </body>
 </html>
