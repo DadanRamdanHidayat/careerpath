@@ -10,44 +10,49 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --navy:       #0d1b2e;
-  --navy-mid:   #162844;
-  --navy-light: #1e3a5f;
-  --teal:       #0fbcad;
-  --teal-dim:   #0d9e91;
-  --teal-pale:  #e6faf8;
-  --gold:       #f5c842;
-  --gold-pale:  #fef9e7;
-  --coral:      #f05a3a;
-  --coral-pale: #fef0ec;
-  --purple:     #a78bfa;
-  --purple-pale:#f3f0ff;
-  --cream:      #faf8f3;
-  --white:      #ffffff;
-  --text-muted: #8a9ab0;
-  --border:     #eaecf0;
+  --navy:       #060d1a;
+  --navy-mid:   rgba(10, 25, 47, 0.7);
+  --navy-light: rgba(20, 40, 80, 0.55);
+  --gold:       #00f0ff; /* Mengubah aksen utama menjadi Neon Cyan */
+  --gold-dim:   #00b8d4; /* Mengubah dimensi aksen menjadi Deep Cyan */
+  --gold-pale:  rgba(0, 240, 255, 0.1);
+  --coral:      #ff4a73; /* Mengubah coral menjadi warna es hangat kemerahan */
+  --coral-pale: rgba(255, 74, 115, 0.1);
+  --silver:     rgba(224, 247, 250, 0.15); /* Aksen Es transparan */
+  --cream:      #030710;
+  --white:      rgba(255, 255, 255, 0.04); /* Komponen berbasis kaca transparan */
+  --text-muted: #8fa3bf;
+  --border:     rgba(0, 240, 255, 0.15); /* Batas pendaran neon es halus */
   --sidebar-w:  260px;
+  --glass-bg:   rgba(8, 20, 44, 0.65);
+  --glass-blur: blur(14px);
 }
 
-html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--navy); }
+html, body { 
+  font-family: 'DM Sans', sans-serif; 
+  background: #040a14 url('bg-arctic.png') no-repeat center center fixed; 
+  background-size: cover;
+  color: #e2ecf8; 
+  min-height: 100vh;
+}
 
 /* ── SIDEBAR ── */
-.sidebar { position: fixed; left: 0; top: 0; width: var(--sidebar-w); height: 100vh; background: var(--navy); display: flex; flex-direction: column; overflow: hidden; z-index: 100; }
-.sidebar::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(15,188,173,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,188,173,0.04) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
+.sidebar { position: fixed; left: 0; top: 0; width: var(--sidebar-w); height: 100vh; background: rgba(5, 12, 26, 0.85); backdrop-filter: var(--glass-blur); display: flex; flex-direction: column; overflow: hidden; z-index: 100; border-right: 1px solid var(--border); }
+.sidebar::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,240,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.02) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
 .sidebar-inner { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; padding: 0 0 20px; }
-.sb-brand { padding: 28px 24px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 10px; }
-.sb-brand-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--teal), var(--teal-dim)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; flex-shrink: 0; }
-.sb-brand-name { font-family: 'DM Serif Display', serif; font-size: 19px; color: white; white-space: nowrap; }
+.sb-brand { padding: 28px 24px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid var(--border); margin-bottom: 10px; }
+.sb-brand-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #00f0ff, #007bb8); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #050c1a; font-size: 20px; flex-shrink: 0; box-shadow: 0 0 15px rgba(0,240,255,0.4); }
+.sb-brand-name { font-family: 'DM Serif Display', serif; font-size: 19px; color: white; white-space: nowrap; text-shadow: 0 0 10px rgba(0,240,255,0.3); }
 .sb-section { padding: 14px 16px 4px; }
-.sb-label { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 0 8px; margin-bottom: 6px; }
+.sb-label { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(0, 240, 255, 0.4); padding: 0 8px; margin-bottom: 6px; }
 .sb-nav { display: flex; flex-direction: column; gap: 2px; }
-.sb-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; text-decoration: none; color: rgba(255,255,255,0.55); font-size: 14px; transition: all 0.2s; white-space: nowrap; }
+.sb-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; text-decoration: none; color: rgba(255,255,255,0.45); font-size: 14px; transition: all 0.2s; white-space: nowrap; }
 .sb-link i { font-size: 18px; flex-shrink: 0; }
-.sb-link:hover { background: rgba(255,255,255,0.07); color: white; }
-.sb-link.active { background: rgba(15,188,173,0.15); color: var(--teal); font-weight: 500; border: 1px solid rgba(15,188,173,0.2); }
-.sb-footer { margin-top: auto; padding: 0 16px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; }
+.sb-link:hover { background: rgba(0, 240, 255, 0.08); color: white; }
+.sb-link.active { background: rgba(0, 240, 255, 0.15); color: var(--gold); font-weight: 500; border: 1px solid rgba(0,240,255,0.25); text-shadow: 0 0 8px rgba(0,240,255,0.5); }
+.sb-footer { margin-top: auto; padding: 0 16px; border-top: 1px solid var(--border); padding-top: 16px; }
 .sb-logout { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; color: rgba(255,255,255,0.4); font-size: 14px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-.sb-logout:hover { background: rgba(255,80,80,0.1); color: #ff6b6b; }
+.sb-logout:hover { background: rgba(255, 74, 115, 0.15); color: #ff4a73; }
 .sb-logout i { font-size: 18px; }
 
 /* ── MAIN ── */
@@ -55,730 +60,963 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
 
 /* ── TOPBAR ── */
 .topbar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; animation: fadeDown 0.6s ease both; }
-.topbar-left h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--navy); line-height: 1.1; margin-bottom: 6px; }
-.topbar-left h1 em { font-style: italic; color: var(--teal-dim); }
+.topbar-left h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: white; line-height: 1.1; margin-bottom: 6px; }
+.topbar-left h1 em { font-style: italic; color: var(--gold); text-shadow: 0 0 12px rgba(0,240,255,0.4); }
 .topbar-left p { font-size: 14px; color: var(--text-muted); }
-.avatar-wrap { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--navy-light)); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 600; border: 2px solid white; box-shadow: 0 2px 12px rgba(13,27,46,0.12); }
+.avatar-wrap { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), #0a252f); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 600; border: 2px solid var(--gold); box-shadow: 0 0 15px rgba(0,240,255,0.25); }
 
-/* ── PROGRESS OVERVIEW ── */
+/* ── OVERVIEW BANNER (Bento Box) ── */
 .overview-banner {
-  background: var(--navy); border-radius: 18px;
+  background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border); border-radius: 18px;
   padding: 26px 30px; margin-bottom: 24px;
   display: flex; align-items: center; gap: 24px;
   position: relative; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(0,240,255,0.05);
   animation: fadeUp 0.6s 0.1s ease both;
 }
-.overview-banner::before { content: ''; position: absolute; right: -50px; top: -50px; width: 240px; height: 240px; border-radius: 50%; border: 1px solid rgba(15,188,173,0.1); }
-.overview-banner::after  { content: ''; position: absolute; right: 30px;  top: 30px;  width: 140px; height: 140px; border-radius: 50%; border: 1px solid rgba(15,188,173,0.07); }
-
-.ob-ring {
-  position: relative; z-index: 1; flex-shrink: 0;
-  width: 90px; height: 90px;
-}
+.overview-banner::before { content: ''; position: absolute; right: -50px; top: -50px; width: 240px; height: 240px; border-radius: 50%; border: 1px solid rgba(0,240,255,0.08); }
+.overview-banner::after  { content: ''; position: absolute; right: 30px; top: 30px; width: 140px; height: 140px; border-radius: 50%; border: 1px solid rgba(0,240,255,0.04); }
+.ob-ring { position: relative; z-index: 1; flex-shrink: 0; width: 90px; height: 90px; }
 .ob-ring svg { transform: rotate(-90deg); }
-.ob-ring-bg  { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 6; }
-.ob-ring-fill { fill: none; stroke: var(--teal); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 226; stroke-dashoffset: 226; transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
+.ob-ring-bg   { fill: none; stroke: rgba(255,255,255,0.04); stroke-width: 6; }
+.ob-ring-fill { fill: none; stroke: var(--gold); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 226; stroke-dashoffset: 226; transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); filter: drop-shadow(0 0 6px var(--gold)); }
 .ob-ring-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .ob-ring-text strong { font-size: 18px; font-weight: 600; color: white; line-height: 1; }
-.ob-ring-text span { font-size: 10px; color: rgba(255,255,255,0.4); }
-
+.ob-ring-text span { font-size: 10px; color: var(--text-muted); }
 .ob-info { flex: 1; position: relative; z-index: 1; }
-.ob-tag { font-size: 10px; font-weight: 600; color: var(--teal); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.ob-tag { font-size: 10px; font-weight: 600; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; text-shadow: 0 0 6px rgba(0,240,255,0.4); }
 .ob-info h3 { font-family: 'DM Serif Display', serif; font-size: 20px; color: white; margin-bottom: 6px; }
-.ob-info p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; }
-
+.ob-info p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 .ob-stats { display: flex; gap: 24px; position: relative; z-index: 1; flex-shrink: 0; }
 .ob-stat { text-align: center; }
-.ob-stat strong { display: block; font-family: 'DM Serif Display', serif; font-size: 26px; color: white; line-height: 1; }
-.ob-stat span { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; display: block; }
-.ob-stat-div { width: 1px; background: rgba(255,255,255,0.08); align-self: stretch; }
+.ob-stat strong { display: block; font-family: 'DM Serif Display', serif; font-size: 26px; color: white; line-height: 1; text-shadow: 0 0 8px rgba(255,255,255,0.2); }
+.ob-stat span { font-size: 11px; color: var(--text-muted); margin-top: 2px; display: block; }
+.ob-stat-div { width: 1px; background: var(--border); align-self: stretch; }
 
-/* ── 70-20-10 FRAMEWORK ── */
-.framework-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-  margin-bottom: 28px;
-  animation: fadeUp 0.6s 0.15s ease both;
-}
-
-.fw-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: 16px; padding: 22px 20px;
-  position: relative; overflow: hidden; transition: all 0.25s;
-}
-.fw-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(13,27,46,0.08); border-color: transparent; }
+/* ── 70-20-10 (Bento Grid) ── */
+.framework-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; animation: fadeUp 0.6s 0.15s ease both; }
+.fw-card { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); border-radius: 16px; padding: 22px 20px; position: relative; overflow: hidden; transition: all 0.25s; box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
+.fw-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,240,255,0.15); border-color: rgba(0,240,255,0.4); }
 .fw-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 16px 16px 0 0; }
-.fw-card.c70::before { background: linear-gradient(90deg, var(--teal), var(--teal-dim)); }
-.fw-card.c20::before { background: linear-gradient(90deg, var(--gold), #d4a000); }
-.fw-card.c10::before { background: linear-gradient(90deg, var(--purple), #7c3aed); }
-
-.fw-pct {
-  font-family: 'DM Serif Display', serif;
-  font-size: 42px; line-height: 1; margin-bottom: 4px;
-}
-.c70 .fw-pct { color: var(--teal); }
-.c20 .fw-pct { color: var(--gold); }
-.c10 .fw-pct { color: var(--purple); }
-
-.fw-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+.fw-card.c70::before { background: linear-gradient(90deg, var(--gold), #007bb8); }
+.fw-card.c20::before { background: linear-gradient(90deg, #94a3b8, var(--gold-dim)); }
+.fw-card.c10::before { background: linear-gradient(90deg, var(--coral), #b82c4a); }
+.fw-pct { font-family: 'DM Serif Display', serif; font-size: 42px; line-height: 1; margin-bottom: 4px; text-shadow: 0 0 10px rgba(255,255,255,0.1); }
+.c70 .fw-pct { color: var(--gold); text-shadow: 0 0 12px rgba(0,240,255,0.3); }
+.c20 .fw-pct { color: #e0f7fa; }
+.c10 .fw-pct { color: var(--coral); text-shadow: 0 0 12px rgba(255,74,115,0.3); }
+.fw-title { font-size: 14px; font-weight: 600; color: white; margin-bottom: 6px; }
 .fw-desc  { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; }
-
-.fw-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 14px; }
-.fw-fill { height: 100%; border-radius: 2px; transition: width 1.1s cubic-bezier(0.4,0,0.2,1); width: 0%; }
-.c70 .fw-fill { background: var(--teal); }
-.c20 .fw-fill { background: var(--gold); }
-.c10 .fw-fill { background: var(--purple); }
-
+.fw-bar   { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.03); }
+.fw-fill  { height: 100%; border-radius: 2px; transition: width 1.1s cubic-bezier(0.4,0,0.2,1); width: 0%; filter: drop-shadow(0 0 4px var(--gold)); }
+.c70 .fw-fill { background: var(--gold); }
+.c20 .fw-fill { background: #e0f7fa; }
+.c10 .fw-fill { background: var(--coral); filter: drop-shadow(0 0 4px var(--coral)); }
 .fw-items { display: flex; flex-direction: column; gap: 6px; }
-.fw-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--navy); }
+.fw-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #cbd5e1; }
 .fw-item i { font-size: 14px; }
-.c70 .fw-item i { color: var(--teal-dim); }
-.c20 .fw-item i { color: #9a7600; }
-.c10 .fw-item i { color: #7c3aed; }
+.c70 .fw-item i { color: var(--gold); }
+.c20 .fw-item i { color: #e0f7fa; }
+.c10 .fw-item i { color: var(--coral); }
 
-/* ── SECTION HEADER ── */
+/* ── SECTION HEAD ── */
 .sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.sec-head h3 { font-size: 17px; font-weight: 600; color: var(--navy); }
-.sec-head a, .sec-head button { font-size: 13px; color: var(--teal-dim); text-decoration: none; font-weight: 500; background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.sec-head h3 { font-size: 17px; font-weight: 600; color: white; text-shadow: 0 0 8px rgba(0,240,255,0.2); }
+.sec-head a, .sec-head button.link-btn { font-size: 13px; color: var(--gold); text-decoration: none; font-weight: 500; background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; text-shadow: 0 0 6px rgba(0,240,255,0.3); }
 
-/* ── WEEK TABS ── */
-.week-tabs {
-  display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;
-  margin-bottom: 20px;
-  animation: fadeUp 0.6s 0.2s ease both;
-  scrollbar-width: none;
-}
+/* ── WEEK TABS (Tabel Komparasi / Linimasa) ── */
+.week-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 20px; animation: fadeUp 0.6s 0.2s ease both; scrollbar-width: none; }
 .week-tabs::-webkit-scrollbar { display: none; }
-.week-tab {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 10px 18px; border-radius: 12px; cursor: pointer;
-  border: 1.5px solid var(--border); background: var(--white);
-  transition: all 0.2s; flex-shrink: 0; min-width: 80px;
-  font-family: 'DM Sans', sans-serif;
-}
-.week-tab:hover { border-color: var(--teal); }
-.week-tab.active { background: var(--navy); border-color: var(--navy); }
+.week-tab { display: flex; flex-direction: column; align-items: center; padding: 10px 18px; border-radius: 12px; cursor: pointer; border: 1px solid var(--border); background: var(--glass-bg); backdrop-filter: var(--glass-blur); transition: all 0.2s; flex-shrink: 0; min-width: 80px; font-family: 'DM Sans', sans-serif; }
+.week-tab:hover { border-color: var(--gold); background: rgba(0,240,255,0.05); }
+.week-tab.active { background: rgba(0, 240, 255, 0.15); border-color: var(--gold); box-shadow: 0 0 12px rgba(0,240,255,0.2); }
 .week-tab .wt-label { font-size: 10px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 3px; }
-.week-tab.active .wt-label { color: rgba(255,255,255,0.4); }
-.week-tab .wt-num { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); line-height: 1; }
-.week-tab.active .wt-num { color: white; }
+.week-tab.active .wt-label { color: rgba(255,255,255,0.6); }
+.week-tab .wt-num { font-family: 'DM Serif Display', serif; font-size: 22px; color: white; line-height: 1; }
+.week-tab.active .wt-num { color: var(--gold); text-shadow: 0 0 8px rgba(0,240,255,0.4); }
 .week-tab .wt-dots { display: flex; gap: 3px; margin-top: 5px; }
-.wt-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--border); }
-.wt-dot.done { background: var(--teal); }
-.week-tab.active .wt-dot { background: rgba(255,255,255,0.25); }
-.week-tab.active .wt-dot.done { background: var(--teal); }
+.wt-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+.wt-dot.done { background: var(--gold); box-shadow: 0 0 4px var(--gold); }
+.week-tab.active .wt-dot { background: rgba(255,255,255,0.2); }
+.week-tab.active .wt-dot.done { background: var(--gold); }
 
-/* ── TASK LIST ── */
+/* ── TASK CARDS (Komparasi Sisi-ke-Sisi) ── */
 .task-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; animation: fadeUp 0.6s 0.25s ease both; }
-
-.task-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: 16px; padding: 20px;
-  transition: all 0.25s;
-}
-.task-card:hover { box-shadow: 0 6px 20px rgba(13,27,46,0.06); }
-
+.task-card { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); border-radius: 16px; padding: 20px; transition: all 0.25s; box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
+.task-card:hover { box-shadow: 0 6px 20px rgba(0,240,255,0.1); border-color: rgba(0,240,255,0.3); }
 .tc-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
 .tc-icon { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-.tc-icon.teal   { background: var(--teal-pale);   color: var(--teal-dim); }
-.tc-icon.gold   { background: var(--gold-pale);   color: #9a7600; }
-.tc-icon.purple { background: var(--purple-pale); color: #7c3aed; }
-.tc-icon.coral  { background: var(--coral-pale);  color: var(--coral); }
-
+.tc-icon.gold  { background: var(--gold-pale); color: var(--gold); border: 1px solid rgba(0,240,255,0.2); }
+.tc-icon.navy  { background: var(--silver);    color: #e0f7fa; border: 1px solid rgba(224,247,250,0.2); }
+.tc-icon.coral { background: var(--coral-pale); color: var(--coral); border: 1px solid rgba(255,74,115,0.2); }
+.tc-icon.dark  { background: rgba(255,255,255,0.06); color: #ffffff; border: 1px solid rgba(255,255,255,0.1); }
 .tc-meta { flex: 1; }
-.tc-meta strong { font-size: 14px; font-weight: 600; color: var(--navy); display: block; margin-bottom: 2px; }
+.tc-meta strong { font-size: 14px; font-weight: 600; color: white; display: block; margin-bottom: 2px; }
 .tc-meta span   { font-size: 11px; color: var(--text-muted); }
-
 .tc-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 500; flex-shrink: 0; }
-.tc-badge.ongoing  { background: var(--teal-pale); color: var(--teal-dim); }
-.tc-badge.todo     { background: var(--cream); color: var(--text-muted); border: 1px solid var(--border); }
-.tc-badge.done     { background: #e8f5e9; color: #2e7d32; }
-.tc-badge.overdue  { background: var(--coral-pale); color: var(--coral); }
-
+.tc-badge.ongoing { background: var(--gold-pale); color: var(--gold); border: 1px solid rgba(0,240,255,0.3); }
+.tc-badge.todo    { background: rgba(255,255,255,0.04); color: var(--text-muted); border: 1px solid var(--border); }
+.tc-badge.done    { background: rgba(46, 125, 50, 0.2); color: #81c784; border: 1px solid rgba(74, 175, 80, 0.3); }
+.tc-badge.overdue { background: var(--coral-pale); color: var(--coral); border: 1px solid rgba(255,74,115,0.3); }
 .task-items { display: flex; flex-direction: column; gap: 8px; }
-
-.task-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 10px; border-radius: 9px;
-  background: var(--cream); cursor: pointer;
-  transition: background 0.15s; user-select: none;
-}
-.task-item:hover { background: #f0ede6; }
-.task-item.checked { opacity: 0.55; }
-
-.task-check {
-  width: 18px; height: 18px; border-radius: 5px;
-  border: 1.5px solid var(--border); flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s; background: white;
-}
-.task-item.checked .task-check { background: var(--teal); border-color: var(--teal); }
-.task-item.checked .task-check::after { content: ''; width: 4px; height: 7px; border: 1.5px solid white; border-top: none; border-left: none; transform: rotate(40deg) translateY(-1px); display: block; }
-
-.task-label { font-size: 13px; color: var(--navy); flex: 1; line-height: 1.3; }
+.task-item { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 9px; background: rgba(255,255,255,0.03); cursor: pointer; transition: background 0.15s; border: 1px solid rgba(255,255,255,0.02); user-select: none; }
+.task-item:hover { background: rgba(255,255,255,0.07); border-color: rgba(0,240,255,0.1); }
+.task-item.checked { opacity: 0.45; }
+.task-check { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid rgba(255,255,255,0.2); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; background: rgba(0,0,0,0.2); }
+.task-item.checked .task-check { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 6px var(--gold); }
+.task-item.checked .task-check::after { content: ''; width: 4px; height: 7px; border: 1.5px solid #050c1a; border-top: none; border-left: none; transform: rotate(40deg) translateY(-1px); display: block; }
+.task-label { font-size: 13px; color: #cbd5e1; flex: 1; line-height: 1.3; }
 .task-item.checked .task-label { text-decoration: line-through; color: var(--text-muted); }
 .task-dur { font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+.tc-progress { margin-top: 12px; }
+.tc-prog-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.tc-prog-row span { font-size: 11px; color: var(--text-muted); }
+.tc-prog-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; border: 1px solid rgba(255,255,255,0.02); }
+.tc-prog-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--gold), #007bb8); transition: width 0.6s ease; filter: drop-shadow(0 0 4px var(--gold)); }
 
-/* ── COURSE CATALOG ── */
+/* ── COURSES (Daftar Aktivitas Eksternal) ── */
 .course-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; animation: fadeUp 0.6s 0.3s ease both; }
-
-.course-item {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: 14px; padding: 18px 20px;
-  display: flex; align-items: center; gap: 16px;
-  transition: all 0.25s;
-}
-.course-item:hover { box-shadow: 0 6px 20px rgba(13,27,46,0.06); transform: translateX(3px); }
-
-.course-thumb {
-  width: 52px; height: 52px; border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; flex-shrink: 0;
-}
-.course-thumb.teal   { background: var(--teal-pale); }
-.course-thumb.gold   { background: var(--gold-pale); }
-.course-thumb.purple { background: var(--purple-pale); }
-.course-thumb.coral  { background: var(--coral-pale); }
-.course-thumb.navy   { background: #e8ecf4; }
-
+.course-item { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; display: flex; align-items: center; gap: 16px; transition: all 0.25s; box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
+.course-item:hover { box-shadow: 0 6px 20px rgba(0,240,255,0.1); transform: translateX(3px); border-color: rgba(0,240,255,0.2); }
+.course-thumb { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.course-thumb.gold  { background: var(--gold-pale); color: var(--gold); border: 1px solid rgba(0,240,255,0.2); }
+.course-thumb.navy  { background: var(--silver); color: #e0f7fa; border: 1px solid rgba(224,247,250,0.2); }
+.course-thumb.coral { background: var(--coral-pale); color: var(--coral); border: 1px solid rgba(255,74,115,0.2); }
+.course-thumb.dark  { background: rgba(255,255,255,0.06); color: white; border: 1px solid rgba(255,255,255,0.1); }
+.course-thumb.cream { background: rgba(0,0,0,0.2); border: 1px solid var(--border); }
 .course-info { flex: 1; min-width: 0; }
-.course-info strong { font-size: 14px; font-weight: 600; color: var(--navy); display: block; margin-bottom: 3px; }
-.course-info span   { font-size: 12px; color: var(--text-muted); }
-
+.course-info strong { font-size: 14px; font-weight: 600; color: white; display: block; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.course-info span { font-size: 12px; color: var(--text-muted); }
 .course-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
-
 .course-progress-wrap { width: 100px; }
-.course-prog-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-.course-prog-fill { height: 100%; border-radius: 2px; background: var(--teal); }
+.course-prog-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+.course-prog-fill { height: 100%; border-radius: 2px; background: var(--gold); filter: drop-shadow(0 0 4px var(--gold)); }
 .course-prog-label { font-size: 10px; color: var(--text-muted); text-align: right; margin-top: 3px; }
-
-.course-tags { display: flex; gap: 5px; }
+.course-tags { display: flex; gap: 5px; margin-top: 6px; }
 .ctag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 500; }
-.ctag.free { background: var(--teal-pale); color: var(--teal-dim); }
-.ctag.paid { background: var(--gold-pale); color: #9a7600; }
-.ctag.cert { background: var(--purple-pale); color: #7c3aed; }
+.ctag.free { background: var(--gold-pale); color: var(--gold); border: 1px solid rgba(0,240,255,0.2); }
+.ctag.paid { background: var(--silver); color: #e0f7fa; border: 1px solid rgba(224,247,250,0.2); }
+.ctag.cert { background: rgba(46, 125, 50, 0.15); color: #81c784; border: 1px solid rgba(74, 175, 80, 0.2); }
 .ctag i { font-size: 11px; }
+.btn-enroll { padding: 7px 14px; border-radius: 9px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 5px; }
+.btn-enroll.start     { background: var(--gold); color: #050c1a; border: none; font-weight: 600; box-shadow: 0 0 10px rgba(0,240,255,0.2); }
+.btn-enroll.start:hover { background: #55f5ff; transform: translateY(-1px); }
+.btn-enroll.enrolled  { background: rgba(255,255,255,0.06); color: var(--gold); border: 1px solid var(--border); }
+.btn-enroll.enrolled:hover { background: var(--gold-pale); }
+.btn-enroll.completed { background: rgba(46,125,50,0.2); color: #81c784; border: 1px solid rgba(74,175,80,0.3); }
 
-.btn-enroll {
-  padding: 7px 14px; border-radius: 9px;
-  font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
-  cursor: pointer; transition: all 0.2s; border: none;
-  display: inline-flex; align-items: center; gap: 5px;
-}
-.btn-enroll.active { background: var(--navy); color: white; }
-.btn-enroll.active:hover { background: var(--navy-light); }
-.btn-enroll.enrolled { background: var(--teal-pale); color: var(--teal-dim); border: 1px solid rgba(15,188,173,0.2); }
-.btn-enroll.enrolled:hover { background: var(--teal); color: white; }
+/* ═══════════════════════════════════════
+   CHECK-IN HARIAN + KALENDER (Bagan Kemajuan Bento)
+═══════════════════════════════════════ */
+.checkin-section { animation: fadeUp 0.6s 0.35s ease both; margin-bottom: 28px; }
+.checkin-card { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+.checkin-header { display: flex; align-items: center; justify-content: space-between; padding: 22px 28px; border-bottom: 1px solid var(--border); }
+.checkin-header-left { display: flex; align-items: center; gap: 12px; }
+.checkin-header-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--gold-pale); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--gold); border: 1px solid rgba(0,240,255,0.2); }
+.checkin-header h3 { font-size: 16px; font-weight: 600; color: white; margin-bottom: 2px; }
+.checkin-header p  { font-size: 12px; color: var(--text-muted); }
 
-/* ── STREAK CALENDAR ── */
-.streak-section { animation: fadeUp 0.6s 0.35s ease both; margin-bottom: 28px; }
-.streak-banner { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; }
-.streak-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.streak-fire { display: flex; align-items: center; gap: 8px; }
-.streak-fire span { font-size: 22px; }
-.streak-fire strong { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); }
-.streak-fire em { font-size: 13px; color: var(--text-muted); font-style: normal; margin-left: 4px; }
+.btn-checkin { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: rgba(255,255,255,0.06); color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 11px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.btn-checkin:hover { background: rgba(255,255,255,0.12); border-color: rgba(0,240,255,0.2); transform: translateY(-1px); }
+.btn-checkin.gold-btn { background: var(--gold); color: #050c1a; font-weight: 600; border: none; box-shadow: 0 0 12px rgba(0,240,255,0.3); }
+.btn-checkin.gold-btn:hover { background: #55f5ff; }
 
-.streak-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
-.streak-day-label { font-size: 9px; text-align: center; color: var(--text-muted); font-weight: 600; padding-bottom: 4px; }
-.streak-day {
-  aspect-ratio: 1; border-radius: 6px; background: var(--cream);
-  transition: all 0.15s; cursor: default;
-  position: relative;
-}
-.streak-day.done  { background: var(--teal); }
-.streak-day.light { background: rgba(15,188,173,0.25); }
-.streak-day.today { outline: 2px solid var(--teal); outline-offset: 2px; }
-.streak-day.missed { background: var(--coral-pale); }
+/* Streak bar */
+.streak-bar { display: flex; align-items: center; justify-content: space-between; padding: 16px 28px; background: rgba(0,0,0,0.15); border-bottom: 1px solid var(--border); }
+.streak-bar-left { display: flex; align-items: center; gap: 16px; }
+.streak-count { display: flex; align-items: center; gap: 8px; }
+.streak-count strong { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--gold); line-height: 1; text-shadow: 0 0 10px rgba(0,240,255,0.3); }
+.streak-count span { font-size: 12px; color: var(--text-muted); }
+.streak-max { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
+.streak-max strong { color: white; font-weight: 600; }
+.streak-divider { width: 1px; height: 28px; background: var(--border); }
+.streak-days { display: flex; gap: 8px; }
+.streak-day-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.streak-day-circle { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; background: rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.1); transition: all 0.2s; color: white; }
+.streak-day-circle.active { background: var(--gold); border-color: var(--gold); font-size: 14px; color: #050c1a; box-shadow: 0 0 8px var(--gold); }
+.streak-day-circle.empty  { background: rgba(0,0,0,0.2); }
+.streak-day-label { font-size: 9px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
 
-/* ── NOTES ── */
-.notes-section { animation: fadeUp 0.6s 0.4s ease both; }
-.notes-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; }
-.notes-area {
-  width: 100%; min-height: 100px; padding: 12px 14px;
-  border: 1.5px solid var(--border); border-radius: 11px;
-  font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--navy);
-  background: var(--cream); outline: none; resize: vertical; line-height: 1.65;
-  transition: all 0.2s; margin-bottom: 12px;
-}
-.notes-area:focus { border-color: var(--teal); background: white; box-shadow: 0 0 0 4px rgba(15,188,173,0.1); }
+/* Calendar nav */
+.cal-nav { display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding: 14px 28px 10px; }
+.cal-nav-btn { width: 30px; height: 30px; border-radius: 8px; border: 1.5px solid var(--border); background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; color: white; transition: all 0.2s; }
+.cal-nav-btn:hover { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 6px rgba(0,240,255,0.2); }
+.cal-month { font-family: 'DM Serif Display', serif; font-size: 18px; color: white; text-shadow: 0 0 6px rgba(0,240,255,0.2); }
+
+/* Calendar grid */
+.cal-wrap { padding: 0 20px 20px; }
+.cal-header { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 4px; }
+.cal-header-day { text-align: center; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; padding: 8px 0; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.cal-cell { min-height: 80px; border-radius: 10px; padding: 8px; border: 1.5px solid rgba(255,255,255,0.03); background: rgba(255,255,255,0.02); position: relative; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; }
+.cal-cell:hover { border-color: var(--gold); background: rgba(0,240,255,0.04); }
+.cal-cell.other-month { background: transparent; border-color: transparent; cursor: default; opacity: 0.3; }
+.cal-cell.other-month:hover { border-color: transparent; background: transparent; }
+.cal-cell.today { border-color: #e0f7fa; background: rgba(224,247,250,0.05); }
+.cal-cell.has-note { border-color: rgba(0,240,255,0.3); background: rgba(0,240,255,0.02); }
+.cal-cell.selected { border-color: var(--gold); background: rgba(0,240,255,0.08); box-shadow: inset 0 0 8px rgba(0,240,255,0.1); }
+.cal-date { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: #cbd5e1; margin-bottom: 4px; flex-shrink: 0; }
+.cal-cell.today .cal-date { background: #e0f7fa; color: #050c1a; font-weight: 700; box-shadow: 0 0 6px #e0f7fa; }
+.cal-cell.selected .cal-date { background: var(--gold); color: #050c1a; font-weight: 700; box-shadow: 0 0 6px var(--gold); }
+
+.cal-note-preview { flex: 1; overflow: hidden; }
+.cal-note-chip { display: flex; align-items: center; gap: 4px; background: var(--gold-pale); border-radius: 5px; padding: 3px 6px; margin-bottom: 3px; font-size: 10px; color: var(--gold); font-weight: 500; border: 1px solid rgba(0,240,255,0.15); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+.cal-note-chip i { font-size: 11px; flex-shrink: 0; }
+
+/* Note drawer */
+.note-drawer { border-top: 1px solid var(--border); padding: 24px 28px; display: none; background: rgba(0,0,0,0.2); animation: slideDown 0.25s ease both; }
+.note-drawer.open { display: block; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+.drawer-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.drawer-date-label { font-family: 'DM Serif Display', serif; font-size: 18px; color: white; }
+.drawer-date-label span { font-style: italic; color: var(--gold); text-shadow: 0 0 8px rgba(0,240,255,0.3); }
+.drawer-close { width: 30px; height: 30px; border-radius: 8px; border: 1.5px solid var(--border); background: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted); font-size: 18px; transition: all 0.15s; }
+.drawer-close:hover { border-color: var(--coral); color: var(--coral); }
+.drawer-textarea { width: 100%; min-height: 120px; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: white; background: rgba(0,0,0,0.3); outline: none; resize: vertical; line-height: 1.65; transition: all 0.2s; margin-bottom: 14px; }
+.drawer-textarea:focus { border-color: var(--gold); background: rgba(5,12,26,0.5); box-shadow: 0 0 12px rgba(0,240,255,0.2); }
+.drawer-textarea::placeholder { color: #536b8c; }
+.drawer-actions { display: flex; gap: 10px; align-items: center; }
+.drawer-hint { font-size: 12px; color: var(--text-muted); margin-left: auto; }
+
+.drawer-notes-list { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+.drawer-note-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; }
+.dni-icon { width: 32px; height: 32px; border-radius: 9px; background: var(--gold-pale); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 15px; flex-shrink: 0; }
+.dni-content { flex: 1; min-width: 0; }
+.dni-text { font-size: 13px; color: #cbd5e1; line-height: 1.55; word-break: break-word; }
+.dni-time { font-size: 11px; color: var(--text-muted); margin-top: 5px; }
+.dni-del { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 16px; padding: 2px; transition: color 0.15s; flex-shrink: 0; }
+.dni-del:hover { color: var(--coral); }
+.drawer-empty { text-align: center; padding: 28px 0 10px; color: var(--text-muted); }
+.drawer-empty i { font-size: 32px; display: block; margin-bottom: 8px; color: rgba(255,255,255,0.1); }
+.drawer-empty p { font-size: 13px; }
 
 /* ── BUTTONS ── */
-.btn-primary { display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; background: var(--navy); color: white; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-.btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); }
-.btn-primary i { font-size: 15px; }
-.btn-outline { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; background: white; color: var(--navy); border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-.btn-outline:hover { border-color: var(--teal); color: var(--teal-dim); }
+.btn-primary { display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; background: var(--gold); color: #050c1a; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 10px rgba(0,240,255,0.2); }
+.btn-primary:hover { background: #55f5ff; transform: translateY(-1px); }
 
 /* Toast */
-.toast { position: fixed; bottom: 28px; right: 28px; background: var(--navy); color: white; padding: 13px 18px; border-radius: 12px; font-size: 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 28px rgba(13,27,46,0.25); transform: translateY(80px); opacity: 0; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 999; }
-.toast.show { transform: translateY(0); opacity: 1; }
-.toast i { color: var(--teal); }
+.toast { position: fixed; bottom: 30px; right: 30px; background: rgba(5, 12, 26, 0.9); border: 1px solid var(--gold); color: white; padding: 12px 20px; border-radius: 10px; display: flex; align-items: center; gap: 10px; font-size: 13px; box-shadow: 0 8px 24px rgba(0,240,255,0.2); z-index: 2000; opacity: 0; transform: translateY(20px); pointer-events: none; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); backdrop-filter: var(--glass-blur); }
+.toast.show { opacity: 1; transform: none; }
+.toast i { color: var(--gold); font-size: 16px; }
 
-@keyframes fadeUp   { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-@keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: none; } }
 
-@media (max-width: 900px) {
-  :root { --sidebar-w: 70px; }
-  .sb-brand-name, .sb-label, .sb-link span, .sb-logout span { display: none; }
-  .sb-brand { padding: 24px 15px; justify-content: center; gap: 0; }
-  .sb-section { padding: 10px 8px 4px; }
-  .sb-link { justify-content: center; padding: 12px; gap: 0; }
-  .sb-logout { justify-content: center; padding: 12px; gap: 0; }
-  .main { padding: 28px 20px 60px; }
+@media (max-width: 1100px) {
   .framework-grid { grid-template-columns: 1fr; }
   .task-grid { grid-template-columns: 1fr; }
-  .ob-stats { display: none; }
-}
-@media (max-width: 640px) {
-  .topbar { flex-direction: column; gap: 12px; }
-  .overview-banner { flex-direction: column; }
 }
 </style>
 </head>
 <body>
-<div style="display:flex;">
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="sidebar-inner">
-      <div class="sb-brand">
-        <div class="sb-brand-icon"><i class="mdi mdi-compass-outline"></i></div>
-        <div class="sb-brand-name">CareerPath</div>
-      </div>
-      <div class="sb-section">
-        <div class="sb-label">Menu Utama</div>
-        <nav class="sb-nav">
-          <a href="dashboard.html" class="sb-link"><i class="mdi mdi-view-dashboard-outline"></i><span>Dashboard</span></a>
-          <a href="profile.html"   class="sb-link"><i class="mdi mdi-account-outline"></i><span>Profil Saya</span></a>
-          <a href="career.html"    class="sb-link"><i class="mdi mdi-target"></i><span>Rekomendasi Karier</span></a>
-          <a href="learning.html"  class="sb-link active"><i class="mdi mdi-book-open-outline"></i><span>Rencana Belajar</span></a>
-        </nav>
-      </div>
-      <div class="sb-section" style="margin-top:8px;">
-        <div class="sb-label">Lainnya</div>
-        <nav class="sb-nav">
-          <a href="about.html"   class="sb-link"><i class="mdi mdi-information-outline"></i><span>Tentang</span></a>
-          <a href="contact.html" class="sb-link"><i class="mdi mdi-email-outline"></i><span>Kontak</span></a>
-        </nav>
-      </div>
-      <div class="sb-footer">
-        <div class="sb-logout" onclick="logout()"><i class="mdi mdi-logout"></i><span>Keluar</span></div>
-      </div>
+<div class="sidebar">
+  <div class="sidebar-inner">
+    <div class="sb-brand">
+      <div class="sb-brand-icon"><i class="mdi mdi-compass-outline"></i></div>
+      <div class="sb-brand-name">CareerPath</div>
     </div>
-  </div>
-
-  <!-- MAIN -->
-  <div class="main">
-
-    <!-- TOPBAR -->
-    <div class="topbar">
-      <div class="topbar-left">
-        <h1>Rencana <em>Belajar</em></h1>
-        <p>Jalur pembelajaran menuju Data Analyst — dipersonalisasi oleh AI</p>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px;">
-        <button class="btn-outline" onclick="showToast('Mengekspor rencana belajar sebagai PDF...')"><i class="mdi mdi-download-outline"></i> Ekspor PDF</button>
-        <div class="avatar-wrap" id="avatar">CP</div>
+    
+    <div class="sb-section">
+      <div class="sb-label">Menu Utama</div>
+      <div class="sb-nav">
+        <a href="dashboard.html" class="sb-link"><i class="mdi mdi-home-variant-outline"></i> Dashboard</a>
+        <a href="profile.html" class="sb-link"><i class="mdi mdi-account-box-outline"></i> Profil Saya</a>
+        <a href="career.html" class="sb-link"><i class="mdi mdi-briefcase-search-outline"></i> Rekomendasi Karier</a>
+        <a href="learning.html" class="sb-link active"><i class="mdi mdi-notebook-edit-outline"></i> Rencana Belajar</a>
       </div>
     </div>
 
-    <!-- OVERVIEW BANNER -->
-    <div class="overview-banner">
-      <div class="ob-ring">
-        <svg width="90" height="90" viewBox="0 0 90 90">
-          <circle class="ob-ring-bg"   cx="45" cy="45" r="36"/>
-          <circle class="ob-ring-fill" cx="45" cy="45" r="36" id="ringCircle"/>
-        </svg>
-        <div class="ob-ring-text">
-          <strong id="ringPct">0%</strong>
-          <span>selesai</span>
-        </div>
-      </div>
-      <div class="ob-info">
-        <div class="ob-tag">Progress Keseluruhan</div>
-        <h3>Menuju Data Analyst — Minggu 4 dari 16</h3>
-        <p>Anda sedang on-track! Selesaikan modul Python minggu ini untuk lanjut ke Pandas & Data Cleaning.</p>
-      </div>
-      <div class="ob-stats">
-        <div class="ob-stat">
-          <strong>12</strong>
-          <span>Tugas Selesai</span>
-        </div>
-        <div class="ob-stat-div"></div>
-        <div class="ob-stat">
-          <strong>7</strong>
-          <span>Hari Streak</span>
-        </div>
-        <div class="ob-stat-div"></div>
-        <div class="ob-stat">
-          <strong>38<small style="font-size:14px;">h</small></strong>
-          <span>Jam Belajar</span>
-        </div>
+    <div class="sb-section">
+      <div class="sb-label">Lainnya</div>
+      <div class="sb-nav">
+        <a href="about.html" class="sb-link"><i class="mdi mdi-information-outline"></i> Tentang</a>
+        <a href="contact.html" class="sb-link"><i class="mdi mdi-message-text-outline"></i> Hubungi</a>
       </div>
     </div>
 
-    <!-- 70-20-10 FRAMEWORK -->
-    <div class="sec-head" style="animation: fadeUp 0.6s 0.12s ease both;">
-      <h3>Framework 70-20-10</h3>
-      <a href="#" onclick="return false;">Apa ini?</a>
+    <div class="sb-footer">
+      <div class="sb-logout" onclick="logout()"><i class="mdi mdi-logout"></i> Keluar</div>
     </div>
-    <div class="framework-grid">
-
-      <div class="fw-card c70">
-        <div class="fw-pct">70%</div>
-        <div class="fw-title">On-the-Job Learning</div>
-        <div class="fw-desc">Belajar dengan langsung mengerjakan proyek nyata, studi kasus, dan latihan praktis.</div>
-        <div class="fw-bar"><div class="fw-fill" data-w="70"></div></div>
-        <div class="fw-items">
-          <div class="fw-item"><i class="mdi mdi-check-circle-outline"></i> Proyek analisis dataset nyata</div>
-          <div class="fw-item"><i class="mdi mdi-check-circle-outline"></i> Latihan SQL dengan database riil</div>
-          <div class="fw-item"><i class="mdi mdi-check-circle-outline"></i> Kompetisi Kaggle</div>
-          <div class="fw-item"><i class="mdi mdi-check-circle-outline"></i> Build portofolio GitHub</div>
-        </div>
-      </div>
-
-      <div class="fw-card c20">
-        <div class="fw-pct">20%</div>
-        <div class="fw-title">Peer Learning</div>
-        <div class="fw-desc">Belajar dari mentor, komunitas, dan diskusi dengan sesama yang sedang di jalur yang sama.</div>
-        <div class="fw-bar"><div class="fw-fill" data-w="20"></div></div>
-        <div class="fw-items">
-          <div class="fw-item"><i class="mdi mdi-account-group-outline"></i> Sesi mentoring mingguan</div>
-          <div class="fw-item"><i class="mdi mdi-account-group-outline"></i> Forum diskusi komunitas</div>
-          <div class="fw-item"><i class="mdi mdi-account-group-outline"></i> Pair programming / study group</div>
-          <div class="fw-item"><i class="mdi mdi-account-group-outline"></i> Code review dari senior</div>
-        </div>
-      </div>
-
-      <div class="fw-card c10">
-        <div class="fw-pct">10%</div>
-        <div class="fw-title">Formal Training</div>
-        <div class="fw-desc">Kursus terstruktur, bootcamp, dan sertifikasi yang memberikan fondasi teori yang kuat.</div>
-        <div class="fw-bar"><div class="fw-fill" data-w="10"></div></div>
-        <div class="fw-items">
-          <div class="fw-item"><i class="mdi mdi-school-outline"></i> Kursus Python di Coursera</div>
-          <div class="fw-item"><i class="mdi mdi-school-outline"></i> Google Data Analytics Cert.</div>
-          <div class="fw-item"><i class="mdi mdi-school-outline"></i> Workshop visualisasi data</div>
-          <div class="fw-item"><i class="mdi mdi-school-outline"></i> Webinar industri bulanan</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- WEEK NAVIGATOR -->
-    <div class="sec-head" style="animation: fadeUp 0.6s 0.2s ease both;">
-      <h3>Jadwal Mingguan</h3>
-      <button class="btn-primary" style="font-size:12px;padding:7px 14px;" onclick="showToast('Minggu baru ditambahkan!')"><i class="mdi mdi-plus"></i> Tambah Minggu</button>
-    </div>
-    <div class="week-tabs" id="weekTabs"></div>
-
-    <!-- TASK CARDS -->
-    <div class="task-grid" id="taskGrid"></div>
-
-    <!-- COURSES -->
-    <div class="sec-head">
-      <h3>Kursus yang Direkomendasikan</h3>
-      <a href="#" onclick="showToast('Melihat semua kursus...'); return false;">Lihat semua →</a>
-    </div>
-    <div class="course-list" id="courseList"></div>
-
-    <!-- STREAK CALENDAR -->
-    <div class="streak-section">
-      <div class="sec-head"><h3>Streak Belajar</h3></div>
-      <div class="streak-banner">
-        <div class="streak-header">
-          <div class="streak-fire">
-            <span>🔥</span>
-            <strong>7</strong>
-            <em>hari berturut-turut</em>
-          </div>
-          <div style="font-size:12px;color:var(--text-muted);">April 2025</div>
-        </div>
-        <div class="streak-grid" id="streakGrid"></div>
-      </div>
-    </div>
-
-    <!-- NOTES -->
-    <div class="notes-section">
-      <div class="sec-head"><h3>Catatan Belajar</h3></div>
-      <div class="notes-card">
-        <textarea class="notes-area" id="notesArea" placeholder="Tulis catatan, insight, atau hal yang ingin Anda ingat dari sesi belajar hari ini..."></textarea>
-        <div style="display:flex;gap:10px;">
-          <button class="btn-primary" onclick="saveNotes()"><i class="mdi mdi-content-save-outline"></i> Simpan Catatan</button>
-          <button class="btn-outline" onclick="clearNotes()"><i class="mdi mdi-delete-outline"></i> Hapus</button>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
-<!-- Toast -->
-<div class="toast" id="toast"><i class="mdi mdi-check-circle-outline"></i><span id="toastMsg"></span></div>
+<div class="main">
+  
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1>Rencana Belajar <em>AI</em></h1>
+      <p>Kurikulum personalisasi berbasis kerangka kerja praktis 70-20-10 untuk mencapai target profesi Anda.</p>
+    </div>
+    <div class="avatar-wrap" id="avatar">CP</div>
+  </div>
+
+  <div class="overview-banner">
+    <div class="ob-ring">
+      <svg width="90" height="90">
+        <circle class="ob-ring-bg" cx="45" cy="45" r="36" />
+        <circle class="ob-ring-fill" id="overallProgCircle" cx="45" cy="45" r="36" />
+      </svg>
+      <div class="ob-ring-text">
+        <strong id="overallProgTxt">0%</strong>
+        <span>Selesai</span>
+      </div>
+    </div>
+    <div class="ob-info">
+      <div class="ob-tag" id="targetProfTag">Target Profesi: Loading...</div>
+      <h3 id="curriculumTitle">Kurikulum Akselerasi Jalur Karier</h3>
+      <p>Pembagian aktivitas berfokus pada pengalaman langsung (70%), pembelajaran sosial & mentoring (20%), serta pelatihan formal (10%) untuk efektivitas maksimal.</p>
+    </div>
+    <div class="ob-stats">
+      <div class="ob-stat">
+        <strong id="statDoneTasks">0</strong>
+        <span>Aktivitas Kelar</span>
+      </div>
+      <div class="ob-stat-div"></div>
+      <div class="ob-stat">
+        <strong id="statTotalTasks">0</strong>
+        <span>Total Aktivitas</span>
+      </div>
+      <div class="ob-stat-div"></div>
+      <div class="ob-stat">
+        <strong id="statNotes">0</strong>
+        <span>Catatan Jurnal</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="framework-grid">
+    <div class="fw-card c70">
+      <div class="fw-pct">70%</div>
+      <div class="fw-title">Experiential Learning</div>
+      <div class="fw-desc">Pembelajaran lewat praktik langsung, proyek riil, keras kepala memecahkan masalah di lapangan.</div>
+      <div class="fw-bar"><div class="fw-fill" data-w="70"></div></div>
+      <div class="fw-items">
+        <div class="fw-item"><i class="mdi mdi-checkbox-marked-circle-outline"></i> Proyek mandiri portofolio</div>
+        <div class="fw-item"><i class="mdi mdi-checkbox-marked-circle-outline"></i> Studi kasus riil industri</div>
+        <div class="fw-item"><i class="mdi mdi-checkbox-marked-circle-outline"></i> Pemecahan masalah praktis</div>
+      </div>
+    </div>
+    <div class="fw-card c20">
+      <div class="fw-pct">20%</div>
+      <div class="fw-title">Social Learning</div>
+      <div class="fw-desc">Belajar dari orang lain lewat umpan balik, mentoring, komunitas, dan diskusi dengan sesama rekan sejawat.</div>
+      <div class="fw-bar"><div class="fw-fill" data-w="20"></div></div>
+      <div class="fw-items">
+        <div class="fw-item"><i class="mdi mdi-account-group-outline"></i> Sesi mentoring mingguan</div>
+        <div class="fw-item"><i class="mdi mdi-account-group-outline"></i> Forum diskusi komunitas</div>
+        <div class="fw-item"><i class="mdi mdi-account-group-outline"></i> Kajian kode / peer review</div>
+      </div>
+    </div>
+    <div class="fw-card c10">
+      <div class="fw-pct">10%</div>
+      <div class="fw-title">Formal Training</div>
+      <div class="fw-desc">Kursus terstruktur, bootcamp, materi terstruktur, dan sertifikasi yang memberikan fondasi teori kuat.</div>
+      <div class="fw-bar"><div class="fw-fill" data-w="10"></div></div>
+      <div class="fw-items">
+        <div class="fw-item"><i class="mdi mdi-school-outline"></i> Kursus dasar online</div>
+        <div class="fw-item"><i class="mdi mdi-school-outline"></i> Sertifikasi kompetensi resmi</div>
+        <div class="fw-item"><i class="mdi mdi-school-outline"></i> Workshop instensif teori</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-head">
+    <h3>Peta Jalan & Detail Aktivitas Mingguan</h3>
+    <span style="font-size:12px; color:var(--text-muted);" id="timelineRangeLabel">Estimasi Durasi: 12 Minggu</span>
+  </div>
+
+  <div class="week-tabs" id="weekTabsWrap">
+    </div>
+
+  <div class="task-grid" id="tasksContainer">
+    </div>
+
+  <div class="sec-head">
+    <h3>Rekomendasi Pelatihan & Kursus Formal (10%)</h3>
+    <a href="career.html">Cari Lowongan <i class="mdi mdi-arrow-right"></i></a>
+  </div>
+  <div class="course-list" id="coursesContainer">
+    </div>
+
+  <div class="checkin-section">
+    <div class="sec-head">
+      <h3>Jurnal Refleksi & Komitmen Belajar</h3>
+    </div>
+    <div class="checkin-card">
+      
+      <div class="checkin-header">
+        <div class="checkin-header-left">
+          <div class="checkin-header-icon"><i class="mdi mdi-fire"></i></div>
+          <div>
+            <h3>Check-In Aktivitas Belajar Hari Ini</h3>
+            <p>Catat kehadiran belajar harian Anda dan amankan rantai konsistensi (*streak*).</p>
+          </div>
+        </div>
+        <button class="btn-checkin gold-btn" id="btnCheckinMain" onclick="doCheckin()">
+          <i class="mdi mdi-calendar-check"></i> <span>Check-In Hari Ini</span>
+        </button>
+      </div>
+
+      <div class="streak-bar">
+        <div class="streak-bar-left">
+          <div class="streak-count">
+            <strong id="streakNum">0</strong>
+            <span>Hari Beruntun</span>
+          </div>
+          <div class="streak-divider"></div>
+          <div class="streak-max">
+            <span>Rekor Tertinggi:</span>
+            <strong id="streakMax">0</strong>
+            <span>Hari</span>
+          </div>
+        </div>
+        <div class="streak-days" id="streakDays">
+          </div>
+      </div>
+
+      <div class="cal-nav">
+        <button class="cal-nav-btn" onclick="prevMonth()"><i class="mdi mdi-chevron-left"></i></button>
+        <div class="cal-month" id="calMonthTitle">Januari 2025</div>
+        <button class="cal-nav-btn" onclick="nextMonth()"><i class="mdi mdi-chevron-right"></i></button>
+      </div>
+
+      <div class="cal-wrap">
+        <div class="cal-header">
+          <div class="cal-header-day">Min</div>
+          <div class="cal-header-day">Sen</div>
+          <div class="cal-header-day">Sel</div>
+          <div class="cal-header-day">Rab</div>
+          <div class="cal-header-day">Kam</div>
+          <div class="cal-header-day">Jum</div>
+          <div class="cal-header-day">Sab</div>
+        </div>
+        <div class="cal-grid" id="calendarGrid">
+          </div>
+      </div>
+
+      <div class="note-drawer" id="noteDrawer">
+        <div class="drawer-header">
+          <div class="drawer-date-label">Refleksi Belajar: <span id="drawerDateTxt">2025-01-01</span></div>
+          <button class="drawer-close" onclick="closeDrawer()"><i class="mdi mdi-close"></i></button>
+        </div>
+        
+        <textarea class="drawer-textarea" id="drawerInput" placeholder="Tulis progress belajar Anda hari ini, kesulitan yang dihadapi, atau rangkuman materi baru..."></textarea>
+        
+        <div class="drawer-actions">
+          <button class="btn-primary" onclick="saveNote()"><i class="mdi mdi-content-save-outline"></i> Simpan Jurnal</button>
+          <div class="drawer-hint">Catatan tersimpan otomatis di browser lokal Anda.</div>
+        </div>
+
+        <div class="drawer-notes-list" id="drawerNotesList">
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"><i class="mdi mdi-information-outline"></i><span id="toastMsg"></span></div>
 
 <script>
-// ── DATA ──
-const WEEKS = [
-  { num:1,  label:'Minggu', done:[true,true,true] },
-  { num:2,  label:'Minggu', done:[true,true,false] },
-  { num:3,  label:'Minggu', done:[true,false,false] },
-  { num:4,  label:'Minggu', done:[false,false,false] },
-  { num:5,  label:'Minggu', done:[false,false,false] },
-  { num:6,  label:'Minggu', done:[false,false,false] },
-  { num:7,  label:'Minggu', done:[false,false,false] },
-  { num:8,  label:'Minggu', done:[false,false,false] },
-];
+  // Mocking Profil Data Terintegrasi
+  const profileData = JSON.parse(localStorage.getItem('profileData')) || {
+    name: 'Pengguna',
+    role: 'Frontend Developer',
+    experience: 'fresh',
+    skills: []
+  };
 
-const TASKS_BY_WEEK = {
-  1: [
-    { id:'t1', title:'Python Basics', icon:'mdi-language-python', color:'teal', badge:'done', tasks:[
-      { label:'Instalasi Python & VS Code', done:true, dur:'30 mnt' },
-      { label:'Variabel, tipe data, operator', done:true, dur:'1 jam' },
-      { label:'Kondisi (if/else) & loop', done:true, dur:'1.5 jam' },
-      { label:'Fungsi & modular code', done:true, dur:'1 jam' },
-    ]},
-    { id:'t2', title:'SQL Dasar', icon:'mdi-database-outline', color:'gold', badge:'done', tasks:[
-      { label:'SELECT, WHERE, ORDER BY', done:true, dur:'45 mnt' },
-      { label:'JOIN dasar (INNER, LEFT)', done:true, dur:'1 jam' },
-      { label:'GROUP BY & agregasi', done:true, dur:'45 mnt' },
-      { label:'Latihan dengan dataset Northwind', done:true, dur:'2 jam' },
-    ]},
-  ],
-  4: [
-    { id:'t3', title:'Python Lanjutan', icon:'mdi-language-python', color:'teal', badge:'ongoing', tasks:[
-      { label:'List comprehension & lambda', done:true,  dur:'45 mnt' },
-      { label:'OOP: class & objek', done:false, dur:'1.5 jam' },
-      { label:'Error handling & exception', done:false, dur:'1 jam' },
-      { label:'Mini proyek: kalkulator BMI', done:false, dur:'2 jam' },
-    ]},
-    { id:'t4', title:'Pandas & NumPy', icon:'mdi-table-large', color:'purple', badge:'todo', tasks:[
-      { label:'Instalasi & import pandas', done:false, dur:'20 mnt' },
-      { label:'DataFrame: baca CSV & Excel', done:false, dur:'1 jam' },
-      { label:'Filtering & sorting data', done:false, dur:'1 jam' },
-      { label:'Handle missing values', done:false, dur:'1 jam' },
-    ]},
-    { id:'t5', title:'Data Visualization', icon:'mdi-chart-line', color:'coral', badge:'todo', tasks:[
-      { label:'Matplotlib basics: line, bar, scatter', done:false, dur:'1 jam' },
-      { label:'Seaborn untuk statistik visual', done:false, dur:'1 jam' },
-      { label:'Plotly untuk chart interaktif', done:false, dur:'1.5 jam' },
-    ]},
-    { id:'t6', title:'Proyek Praktis', icon:'mdi-folder-outline', color:'gold', badge:'todo', tasks:[
-      { label:'Analisis dataset penjualan toko', done:false, dur:'3 jam' },
-      { label:'Buat laporan visual dengan Matplotlib', done:false, dur:'2 jam' },
-      { label:'Upload ke GitHub & tulis README', done:false, dur:'1 jam' },
-    ]},
-  ],
-};
+  document.getElementById('targetProfTag').textContent = `Target Profesi: ${profileData.role} (${profileData.experience === 'fresh' ? 'Fresh Graduate' : 'Switch Career'})`;
 
-const COURSES = [
-  { title:'Python for Everybody', provider:'Coursera · University of Michigan', icon:'🐍', color:'teal',  tags:['free','cert'], progress:72,  enrolled:true },
-  { title:'Google Data Analytics Certificate', provider:'Google · Coursera', icon:'📊', color:'gold',  tags:['paid','cert'], progress:0,  enrolled:false },
-  { title:'SQL for Data Science', provider:'IBM · edX', icon:'🗃️', color:'purple', tags:['free'],      progress:100, enrolled:true  },
-  { title:'Data Visualization with Tableau', provider:'UC Davis · Coursera', icon:'📈', color:'coral',  tags:['paid'],      progress:0,  enrolled:false },
-  { title:'Statistics for Data Science', provider:'Stanford Online', icon:'📐', color:'navy',  tags:['free','cert'], progress:18,  enrolled:true  },
-];
+  // Data Kurikulum Sesuai Target Profesi (Bila kosong, berikan default Frontend)
+  const curriculumDatabase = {
+    'Frontend Developer': {
+      weeks: 12,
+      tasks: [
+        { id: 't1', week: 1, type: 'experiential', title: 'Membangun Landing Page Kloning UI Premium', desc: 'Gunakan HTML, CSS modern (Flexbox/Grid), pastikan responsif sempurna.', dur: '6 jam', done: false },
+        { id: 't2', week: 1, type: 'social', title: 'Minta Review Kode Proyek Pertama', desc: 'Bagikan tautan repositori ke forum komunitas atau mentor untuk masukan.', dur: '2 jam', done: false },
+        { id: 't3', week: 1, type: 'formal', title: 'Selesaikan Modul JavaScript Basics', desc: 'Kursus teoretis di platform edukasi pilihan (Variabel, Logika, Loop).', dur: '4 jam', done: false },
+        { id: 't4', week: 2, type: 'experiential', title: 'Refactoring Kode CSS Menggunakan SASS/SCSS', desc: 'Strukturkan layout proyek minggu lalu menggunakan preprosesor.', dur: '5 jam', done: false },
+        { id: 't5', week: 2, type: 'social', title: 'Hadir Sesi Tanya Jawab Komunitas Mentor', desc: 'Ikuti pertemuan rutin mingguan dan siapkan pertanyaan teknis.', dur: '1.5 jam', done: false }
+      ],
+      courses: [
+        { id: 'c1', title: 'Modern JavaScript From The Beginning', platform: 'Udemy / Coursera', type: 'paid', status: 'start', progress: 0 },
+        { id: 'c2', title: 'Algoritma dan Struktur Data Dasar JavaScript', platform: 'FreeCodeCamp', type: 'free', status: 'enrolled', progress: 35 }
+      ]
+    },
+    'default': {
+      weeks: 8,
+      tasks: [
+        { id: 'td1', week: 1, type: 'experiential', title: 'Eksplorasi Proyek Praktis Sederhana Mandiri', desc: 'Buat portofolio awal mini sesuai bidang keahlian.', dur: '4 jam', done: false },
+        { id: 'td2', week: 1, type: 'social', title: 'Diskusi Grup Mentor Jalur Karier', desc: 'Bertemu rekan sejawat daring untuk menyamakan visi belajar.', dur: '2 jam', done: false },
+        { id: 'td3', week: 1, type: 'formal', title: 'Pelajari Teori Fundamental Kompetensi', desc: 'Membaca dokumentasi resmi atau buku panduan utama.', dur: '3 jam', done: false }
+      ],
+      courses: [
+        { id: 'cd1', title: 'Panduan Dasar Menuju Karier Impian', platform: 'CareerPath Academy', type: 'free', status: 'start', progress: 0 }
+      ]
+    }
+  };
 
-let activeWeek = 4;
-let taskState = {};
+  // Ambil kurikulum berdasarkan profesi terpilih
+  let activeCurriculum = curriculumDatabase[profileData.role] || curriculumDatabase['default'];
+  
+  // Sinkronisasi data lokal state tugas
+  let userTasks = JSON.parse(localStorage.getItem('user_tasks_state')) || activeCurriculum.tasks;
+  let userCourses = JSON.parse(localStorage.getItem('user_courses_state')) || activeCurriculum.courses;
+  
+  let currentActiveWeek = 1;
 
-// ── INIT ──
-function init() {
-  const email = localStorage.getItem('user') || '';
-  document.getElementById('avatar').textContent = (email.split('@')[0] || 'CP').substring(0, 2).toUpperCase();
+  // State Kalender Catatan Jurnal
+  let currentYear = new Date().getFullYear();
+  let currentMonth = new Date().getMonth(); 
+  let selectedDateKey = ''; 
 
-  // Load saved tasks
-  const saved = localStorage.getItem('taskState');
-  if (saved) taskState = JSON.parse(saved);
+  let checkinDates = JSON.parse(localStorage.getItem('checkin_dates')) || []; 
+  let notes = JSON.parse(localStorage.getItem('study_notes')) || {}; 
+  let streak = parseInt(localStorage.getItem('study_streak')) || 0;
+  let maxStreak = parseInt(localStorage.getItem('study_max_streak')) || 0;
 
-  renderWeekTabs();
-  renderTasks();
-  renderCourses();
-  renderStreak();
-  loadNotes();
-  animateRing(25);
-  animateFwBars();
-}
+  // Pemicu Awal Saat Aplikasi Dimuat
+  window.addEventListener('DOMContentLoaded', () => {
+    // Inisialisasi pengisian avatar
+    const email = localStorage.getItem('user') || '';
+    document.getElementById('avatar').textContent = (email.split('@')[0] || 'CP').substring(0, 2).toUpperCase();
 
-// ── RING ──
-function animateRing(pct) {
-  const circle = document.getElementById('ringCircle');
-  const circumference = 2 * Math.PI * 36;
-  document.getElementById('ringPct').textContent = pct + '%';
-  setTimeout(() => {
-    circle.style.strokeDashoffset = circumference - (pct / 100) * circumference;
-  }, 300);
-}
-
-// ── FW BARS ──
-function animateFwBars() {
-  requestAnimationFrame(() => {
-    document.querySelectorAll('.fw-fill[data-w]').forEach(el => {
-      setTimeout(() => { el.style.width = el.dataset.w + '%'; }, 400);
+    // Animasi bar persentase 70-20-10
+    document.querySelectorAll('.fw-fill').forEach(fill => {
+      setTimeout(() => { fill.style.width = fill.getAttribute('data-w') + '%'; }, 300);
     });
+
+    renderWeekTabs();
+    renderTasks();
+    renderCourses();
+    
+    updateOverallProgress();
+    initCalendar();
+    updateStreakDisplay();
   });
-}
 
-// ── WEEK TABS ──
-function renderWeekTabs() {
-  document.getElementById('weekTabs').innerHTML = WEEKS.map(w => `
-    <div class="week-tab ${w.num === activeWeek ? 'active' : ''}" onclick="switchWeek(${w.num})">
-      <span class="wt-label">${w.label}</span>
-      <span class="wt-num">${w.num}</span>
-      <div class="wt-dots">
-        ${w.done.map(d => `<div class="wt-dot ${d ? 'done' : ''}"></div>`).join('')}
-      </div>
-    </div>`).join('');
-}
+  // ═══════════════════════ TABEL LINIMASA MINGGUAN ═══════════════════════
+  function renderWeekTabs() {
+    const wrap = document.getElementById('weekTabsWrap');
+    let html = '';
+    
+    document.getElementById('timelineRangeLabel').textContent = `Estimasi Durasi: ${activeCurriculum.weeks} Minggu`;
 
-function switchWeek(num) {
-  activeWeek = num;
-  renderWeekTabs();
-  renderTasks();
-}
+    for (let w = 1; w <= activeCurriculum.weeks; w++) {
+      const weekTasks = userTasks.filter(t => t.week === w);
+      const total = weekTasks.length;
+      const done = weekTasks.filter(t => t.done).length;
+      const activeClass = w === currentActiveWeek ? 'active' : '';
+      
+      let dotsHtml = '';
+      if(total > 0) {
+        for(let i=0; i<Math.min(total, 4); i++) {
+          const isDone = i < done ? 'done' : '';
+          dotsHtml += `<div class="wt-dot ${isDone}"></div>`;
+        }
+      }
 
-// ── TASKS ──
-function renderTasks() {
-  const grid = document.getElementById('taskGrid');
-  const tasks = TASKS_BY_WEEK[activeWeek] || [];
-
-  if (!tasks.length) {
-    grid.innerHTML = `
-      <div style="grid-column:1/-1;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center;color:var(--text-muted);">
-        <i class="mdi mdi-calendar-check-outline" style="font-size:36px;display:block;margin-bottom:10px;color:var(--border);"></i>
-        <p>Belum ada tugas untuk minggu ini.<br>Rencana belajar Anda akan muncul di sini.</p>
-      </div>`;
-    return;
-  }
-
-  grid.innerHTML = tasks.map(card => {
-    const stateKey = `w${activeWeek}_${card.id}`;
-    if (!taskState[stateKey]) taskState[stateKey] = card.tasks.map(t => t.done);
-
-    const items = card.tasks.map((t, i) => {
-      const isDone = taskState[stateKey][i];
-      return `
-        <div class="task-item ${isDone ? 'checked' : ''}" onclick="toggleTask('${stateKey}',${i})">
-          <div class="task-check"></div>
-          <span class="task-label">${t.label}</span>
-          <span class="task-dur">${t.dur}</span>
+      html += `
+        <div class="week-tab ${activeClass}" onclick="switchWeek(${w})">
+          <div class="wt-label">Minggu</div>
+          <div class="wt-num">${w < 10 ? '0'+w : w}</div>
+          <div class="wt-dots">${dotsHtml}</div>
         </div>`;
-    }).join('');
-
-    const badgeMap = {
-      ongoing: ['ongoing','Sedang berjalan'],
-      todo:    ['todo',   'Belum dimulai'],
-      done:    ['done',   'Selesai'],
-      overdue: ['overdue','Terlambat'],
-    };
-    const [bClass, bText] = badgeMap[card.badge] || ['todo','—'];
-
-    return `
-      <div class="task-card">
-        <div class="tc-header">
-          <div class="tc-icon ${card.color}"><i class="mdi ${card.icon}"></i></div>
-          <div class="tc-meta"><strong>${card.title}</strong><span>${card.tasks.length} tugas</span></div>
-          <div class="tc-badge ${bClass}">${bText}</div>
-        </div>
-        <div class="task-items">${items}</div>
-      </div>`;
-  }).join('');
-}
-
-function toggleTask(stateKey, idx) {
-  if (!taskState[stateKey]) return;
-  taskState[stateKey][idx] = !taskState[stateKey][idx];
-  localStorage.setItem('taskState', JSON.stringify(taskState));
-  renderTasks();
-
-  const doneCount = Object.values(taskState).flat().filter(Boolean).length;
-  const totalCount = Object.values(taskState).flat().length;
-  const pct = totalCount ? Math.round((doneCount / totalCount) * 100) : 0;
-  animateRing(pct);
-}
-
-// ── COURSES ──
-function renderCourses() {
-  document.getElementById('courseList').innerHTML = COURSES.map((c, i) => {
-    const tags = c.tags.map(t => {
-      const map = { free:'Gratis', paid:'Berbayar', cert:'Sertifikat' };
-      const cls = { free:'free', paid:'paid', cert:'cert' };
-      const ico = { free:'mdi-check-circle-outline', paid:'mdi-credit-card-outline', cert:'mdi-certificate-outline' };
-      return `<span class="ctag ${cls[t]}"><i class="mdi ${ico[t]}"></i>${map[t]}</span>`;
-    }).join('');
-
-    const progHtml = c.enrolled ? `
-      <div class="course-progress-wrap">
-        <div class="course-prog-bar"><div class="course-prog-fill" style="width:${c.progress}%"></div></div>
-        <div class="course-prog-label">${c.progress}% selesai</div>
-      </div>` : '';
-
-    const btnLabel = c.enrolled
-      ? (c.progress === 100 ? '<i class="mdi mdi-check"></i> Selesai' : '<i class="mdi mdi-play-circle-outline"></i> Lanjutkan')
-      : '<i class="mdi mdi-plus"></i> Daftar';
-    const btnClass = c.enrolled ? 'enrolled' : 'active';
-
-    return `
-      <div class="course-item">
-        <div class="course-thumb ${c.color}">${c.icon}</div>
-        <div class="course-info">
-          <strong>${c.title}</strong>
-          <span>${c.provider}</span>
-          <div class="course-tags" style="margin-top:6px;">${tags}</div>
-        </div>
-        <div class="course-meta">
-          ${progHtml}
-          <button class="btn-enroll ${btnClass}" onclick="showToast('${c.enrolled ? 'Membuka kursus: ' + c.title : 'Mendaftar ke: ' + c.title}...')">${btnLabel}</button>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-// ── STREAK CALENDAR ──
-function renderStreak() {
-  const grid = document.getElementById('streakGrid');
-  const days = ['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
-
-  grid.innerHTML = days.map(d => `<div class="streak-day-label">${d}</div>`).join('');
-
-  // Simulate 28 days
-  const pattern = [1,1,1,1,0,1,1, 1,1,0,1,1,1,0, 1,1,1,2,2,1,1, 1,1,1,1,0,0,3];
-  pattern.forEach((v, i) => {
-    const cls = v === 1 ? 'done' : v === 2 ? 'light' : v === 3 ? 'today done' : '';
-    grid.innerHTML += `<div class="streak-day ${cls}" title="Hari ${i+1}"></div>`;
-  });
-}
-
-// ── NOTES ──
-function loadNotes() {
-  const saved = localStorage.getItem('learningNotes');
-  if (saved) document.getElementById('notesArea').value = saved;
-}
-function saveNotes() {
-  localStorage.setItem('learningNotes', document.getElementById('notesArea').value);
-  showToast('Catatan berhasil disimpan!');
-}
-function clearNotes() {
-  if (confirm('Hapus semua catatan?')) {
-    document.getElementById('notesArea').value = '';
-    localStorage.removeItem('learningNotes');
-    showToast('Catatan dihapus.');
+    }
+    wrap.innerHTML = html;
   }
-}
 
-// ── UTILS ──
-let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  document.getElementById('toastMsg').textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
-}
-function logout() {
-  if (confirm('Yakin ingin keluar?')) { localStorage.removeItem('user'); window.location.href = 'index.html'; }
-}
+  function switchWeek(w) {
+    currentActiveWeek = w;
+    renderWeekTabs();
+    renderTasks();
+  }
 
-init();
+  // ═══════════════════════ RENDER TUGAS DAN AKSI ═══════════════════════
+  function renderTasks() {
+    const container = document.getElementById('tasksContainer');
+    const weekTasks = userTasks.filter(t => t.week === currentActiveWeek);
+
+    if (weekTasks.length === 0) {
+      container.innerHTML = `<div style="grid-column: span 2; text-align:center; padding:40px; color:var(--text-muted);">Tidak ada agenda khusus di minggu ini. Tetap jaga konsistensi!</div>`;
+      return;
+    }
+
+    let html = '';
+    weekTasks.forEach(t => {
+      let iconType = 'gold', iconName = 'mdi-checkbox-blank-circle-outline';
+      if (t.type === 'social') { iconType = 'navy'; iconName = 'mdi-account-group-outline'; }
+      if (t.type === 'formal') { iconType = 'coral'; iconName = 'mdi-school-outline'; }
+
+      const isChecked = t.done ? 'checked' : '';
+      const badgeClass = t.done ? 'done' : 'ongoing';
+      const badgeText = t.done ? 'Selesai' : 'Sedang Jalan';
+
+      html += `
+        <div class="task-card">
+          <div class="tc-header">
+            <div class="tc-icon ${iconType}"><i class="mdi ${iconName}"></i></div>
+            <div class="tc-meta">
+              <strong>${t.type.toUpperCase()} LEARNING</strong>
+              <span>Estimasi: ${t.dur}</span>
+            </div>
+            <div class="tc-badge ${badgeClass}">${badgeText}</div>
+          </div>
+          <div class="task-items">
+            <div class="task-item ${isChecked}" onclick="toggleTask('${t.id}')">
+              <div class="task-check"></div>
+              <div class="task-label">${t.title}</div>
+            </div>
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 10px; padding-left: 4px;">
+            ${t.desc}
+          </div>
+        </div>`;
+    });
+    container.innerHTML = html;
+  }
+
+  function toggleTask(id) {
+    userTasks = userTasks.map(t => {
+      if (t.id === id) t.done = !t.done;
+      return t;
+    });
+    localStorage.setItem('user_tasks_state', JSON.stringify(userTasks));
+    renderTasks();
+    renderWeekTabs();
+    updateOverallProgress();
+    showToast('Status aktivitas berhasil diperbarui!');
+  }
+
+  // ═══════════════════════ REKOMENDASI KURSUS ═══════════════════════
+  function renderCourses() {
+    const container = document.getElementById('coursesContainer');
+    let html = '';
+
+    userCourses.forEach(c => {
+      let badgeHtml = `<span class="ctag free"><i class="mdi mdi-tag-outline"></i> Gratis</span>`;
+      if(c.type === 'paid') badgeHtml = `<span class="ctag paid"><i class="mdi mdi-credit-card-outline"></i> Berbayar</span>`;
+
+      let actionBtn = `<button class="btn-enroll start" onclick="changeCourseStatus('${c.id}', 'enrolled')"><i class="mdi mdi-play-circle-outline"></i> Ambil Kursus</button>`;
+      if(c.status === 'enrolled') {
+        actionBtn = `<button class="btn-enroll enrolled" onclick="changeCourseStatus('${c.id}', 'completed')"><i class="mdi mdi-progress-clock"></i> Tandai Selesai (35%)</button>`;
+      } else if (c.status === 'completed') {
+        actionBtn = `<button class="btn-enroll completed" disabled><i class="mdi mdi-check-all"></i> Sudah Lulus</button>`;
+      }
+
+      html += `
+        <div class="course-item">
+          <div class="course-thumb cream"><i class="mdi mdi-layers-outline"></i></div>
+          <div class="course-info">
+            <strong>${c.title}</strong>
+            <span>Platform: ${c.platform}</span>
+            <div class="course-tags">
+              ${badgeHtml}
+              <span class="ctag cert"><i class="mdi mdi-certificate-outline"></i> Sertifikat</span>
+            </div>
+          </div>
+          <div class="course-meta">
+            ${actionBtn}
+            <div class="course-progress-wrap">
+              <div class="course-prog-bar"><div class="course-prog-fill" style="width: ${c.status==='completed'?100:c.progress}%"></div></div>
+              <div class="course-prog-label">${c.status==='completed'?100:c.progress}% Terpenuhi</div>
+            </div>
+          </div>
+        </div>`;
+    });
+    container.innerHTML = html;
+  }
+
+  function changeCourseStatus(id, nextStatus) {
+    userCourses = userCourses.map(c => {
+      if(c.id === id) {
+        c.status = nextStatus;
+        if(nextStatus === 'completed') c.progress = 100;
+        if(nextStatus === 'enrolled' && c.progress === 0) c.progress = 10;
+      }
+      return c;
+    });
+    localStorage.setItem('user_courses_state', JSON.stringify(userCourses));
+    renderCourses();
+    showToast('Status kemajuan kursus berhasil diupdate!');
+  }
+
+  // ═══════════════════════ BAGAN KEMAJUAN (OVERALL METRICS) ═══════════════════════
+  function updateOverallProgress() {
+    const total = userTasks.length;
+    const done = userTasks.filter(t => t.done).length;
+    const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+    document.getElementById('statTotalTasks').textContent = total;
+    document.getElementById('statDoneTasks').textContent = done;
+    document.getElementById('overallProgTxt').textContent = pct + '%';
+
+    // Update Stroke SVG Ring
+    const circle = document.getElementById('overallProgCircle');
+    const perimeter = 2 * Math.PI * 36; // 226
+    const offset = perimeter - (pct / 100) * perimeter;
+    circle.style.strokeDashoffset = offset;
+
+    updateNotesStat();
+  }
+
+  // ═══════════════════════ SISTEM DAILY CHECK-IN & STREAK ═══════════════════════
+  function dateKey(y, m, d) {
+    return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+
+  function doCheckin() {
+    const today = new Date();
+    const k = dateKey(today.getFullYear(), today.getMonth(), today.getDate());
+
+    if (checkinDates.includes(k)) {
+      showToast('Anda sudah melakukan check-in hari ini!');
+      return;
+    }
+
+    checkinDates.push(k);
+    localStorage.setItem('checkin_dates', JSON.stringify(checkinDates));
+
+    // Kalkulasi Rantai Konsistensi (Streak)
+    calculateStreak();
+    initCalendar();
+    updateStreakDisplay();
+    showToast('Check-In Sukses! 🔥 Semangat belajar Anda terjaga.');
+  }
+
+  function calculateStreak() {
+    let currentStreak = 0;
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    let checkDate = new Date(today);
+
+    // Jika hari ini belum check-in, lihat apakah kemarin check-in untuk mencegah rantai langsung putus di pagi hari
+    let kToday = dateKey(checkDate.getFullYear(), checkDate.getMonth(), checkDate.getDate());
+    if (!checkinDates.includes(kToday)) {
+      checkDate.setDate(checkDate.getDate() - 1);
+    }
+
+    while (true) {
+      let k = dateKey(checkDate.getFullYear(), checkDate.getMonth(), checkDate.getDate());
+      if (checkinDates.includes(k)) {
+        currentStreak++;
+        checkDate.setDate(checkDate.getDate() - 1);
+      } else {
+        break;
+      }
+    }
+
+    streak = currentStreak;
+    if (streak > maxStreak) maxStreak = streak;
+
+    localStorage.setItem('study_streak', streak);
+    localStorage.setItem('study_max_streak', maxStreak);
+  }
+
+  // ═══════════════════════ KALENDER JURNAL REFLEKSI ═══════════════════════
+  const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+  function initCalendar() {
+    document.getElementById('calMonthTitle').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+    const grid = document.getElementById('calendarGrid');
+    grid.innerHTML = '';
+
+    const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+    const lastDate = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const prevLastDate = new Date(currentYear, currentMonth, 0).getDate();
+
+    const todayObj = new Date();
+    const todayKey = dateKey(todayObj.getFullYear(), todayObj.getMonth(), todayObj.getDate());
+
+    // Hari dari bulan sebelumnya (Blended/Other)
+    for (let x = firstDayIndex; x > 0; x--) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell other-month';
+      const d = prevLastDate - x + 1;
+      cell.innerHTML = `<div class="cal-date">${d}</div>`;
+      grid.appendChild(cell);
+    }
+
+    // Hari dari bulan aktif berjalan
+    for (let i = 1; i <= lastDate; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell';
+      
+      const k = dateKey(currentYear, currentMonth, i);
+      if (k === todayKey) cell.classList.add('today');
+      if (checkinDates.includes(k)) cell.classList.add('has-note'); // Dianggap aktif belajar
+      if (k === selectedDateKey) cell.classList.add('selected');
+
+      let html = `<div class="cal-date">${i}</div><div class="cal-note-preview">`;
+      
+      // Ambil list ringkasan catatan teks di kalender
+      if (notes[k] && notes[k].length > 0) {
+        notes[k].forEach(n => {
+          html += `<div class="cal-note-chip"><i class="mdi mdi-notebook-outline"></i> ${n.text}</div>`;
+        });
+      }
+      
+      // Tambahkan ikon petir jika ada check-in kehadiran tanpa catatan tertulis
+      if (checkinDates.includes(k) && (!notes[k] || notes[k].length === 0)) {
+        html += `<div class="cal-note-chip" style="background:rgba(0,240,255,0.08); color:var(--gold); border-color:rgba(0,240,255,0.2);"><i class="mdi mdi-flash"></i> Belajar</div>`;
+      }
+
+      html += `</div>`;
+      cell.innerHTML = html;
+      
+      cell.onclick = () => openDrawer(k);
+      grid.appendChild(cell);
+    }
+  }
+
+  function prevMonth() { currentMonth--; if(currentMonth < 0) { currentMonth = 11; currentYear--; } initCalendar(); }
+  function nextMonth() { currentMonth++; if(currentMonth > 11) { currentMonth = 0; currentYear++; } initCalendar(); }
+
+  // ═══════════════════════ MANAGEMENT NOTE DRAWER ═══════════════════════
+  function openDrawer(k) {
+    selectedDateKey = k;
+    initCalendar(); // rerender biar ketahuan yang terpilih
+
+    document.getElementById('drawerDateTxt').textContent = k;
+    document.getElementById('noteDrawer').classList.add('open');
+    document.getElementById('drawerInput').value = '';
+    
+    renderDrawerNotes();
+    
+    // Auto scroll halus ke arah area drawer utama
+    document.getElementById('noteDrawer').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function closeDrawer() {
+    selectedDateKey = '';
+    document.getElementById('noteDrawer').classList.remove('open');
+    initCalendar();
+  }
+
+  function renderDrawerNotes() {
+    const listWrap = document.getElementById('drawerNotesList');
+    const dayNotes = notes[selectedDateKey] || [];
+
+    if (dayNotes.length === 0) {
+      listWrap.innerHTML = `
+        <div class="drawer-empty">
+          <i class="mdi mdi-text-box-remove-outline"></i>
+          <p>Belum ada catatan jurnal pada tanggal ini.</p>
+        </div>`;
+      return;
+    }
+
+    let html = '';
+    dayNotes.forEach((n, index) => {
+      html += `
+        <div class="drawer-note-item">
+          <div class="dni-icon"><i class="mdi mdi-text-quote"></i></div>
+          <div class="dni-content">
+            <div class="dni-text">${n.text}</div>
+            <div class="dni-time"><i class="mdi mdi-clock-outline"></i> ${n.time}</div>
+          </div>
+          <button class="dni-del" onclick="deleteNote(${index})"><i class="mdi mdi-trash-can-outline"></i></button>
+        </div>`;
+    });
+    listWrap.innerHTML = html;
+  }
+
+  function saveNote() {
+    const txt = document.getElementById('drawerInput').value.trim();
+    if (!txt) { alert('Silakan isi teks catatan terlebih dahulu!'); return; }
+
+    if (!notes[selectedDateKey]) notes[selectedDateKey] = [];
+    
+    const now = new Date();
+    const timeStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+    notes[selectedDateKey].push({ text: txt, time: timeStr });
+    localStorage.setItem('study_notes', JSON.stringify(notes));
+
+    // Otomatis masukkan ke check-in tanggal juga jika menulis jurnal hari ini
+    if (!checkinDates.includes(selectedDateKey)) {
+      checkinDates.push(selectedDateKey);
+      localStorage.setItem('checkin_dates', JSON.stringify(checkinDates));
+      calculateStreak();
+      updateStreakDisplay();
+    }
+
+    document.getElementById('drawerInput').value = '';
+    renderDrawerNotes();
+    initCalendar();
+    updateOverallProgress();
+    showToast('Catatan jurnal belajar berhasil disimpan!');
+  }
+
+  function deleteNote(index) {
+    if(!confirm('Hapus catatan refleksi ini?')) return;
+    notes[selectedDateKey].splice(index, 1);
+    
+    if(notes[selectedDateKey].length === 0) {
+      delete notes[selectedDateKey];
+    }
+    
+    localStorage.setItem('study_notes', JSON.stringify(notes));
+    renderDrawerNotes();
+    initCalendar();
+    updateOverallProgress();
+    showToast('Catatan berhasil dihapus.');
+  }
+
+  // ═══════════════════════ UPDATE STREAK BOTTOM BAR ═══════════════════════
+  function updateStreakDisplay() {
+    const todayD = new Date();
+    document.getElementById('streakNum').textContent = streak;
+    document.getElementById('streakMax').textContent = maxStreak;
+
+    // Isian baris 7 bulatan hari terakhir
+    const days = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+    let html = '';
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(todayD); d.setDate(d.getDate() - i);
+      const k = dateKey(d.getFullYear(), d.getMonth(), d.getDate());
+      
+      const hasChecked = checkinDates.includes(k);
+      const isToday = i === 0;
+      
+      html += `
+        <div class="streak-day-btn" onclick="openDrawer('${k}')">
+          <div class="streak-day-circle ${hasChecked?'active':'empty'}" title="${k}">
+            ${hasChecked ? '⚡' : (isToday ? '📝' : '')}
+          </div>
+          <div class="streak-day-label">${days[d.getDay()]}</div>
+        </div>`;
+    }
+    document.getElementById('streakDays').innerHTML = html;
+  }
+
+  function updateNotesStat() {
+    const total = Object.values(notes).reduce((sum, arr) => sum + arr.length, 0);
+    document.getElementById('statNotes').textContent = total;
+  }
+
+  // ═══════════════════════ UTILS NOTIFIKASI TOAST ═══════════════════════
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastMsg').textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  function logout() {
+    if (confirm('Yakin ingin keluar?')) { 
+      localStorage.removeItem('user'); 
+      window.location.href = 'index.html'; 
+    }
+  }
 </script>
 </body>
 </html>
