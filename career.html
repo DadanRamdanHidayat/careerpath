@@ -13,270 +13,505 @@
   --navy:       #0d1b2e;
   --navy-mid:   #162844;
   --navy-light: #1e3a5f;
-  --teal:       #0fbcad;
-  --teal-dim:   #0d9e91;
-  --teal-pale:  #e6faf8;
-  --gold:       #f5c842;
-  --gold-pale:  #fef9e7;
-  --coral:      #f05a3a;
-  --coral-pale: #fef0ec;
   --cream:      #faf8f3;
   --white:      #ffffff;
   --text-muted: #8a9ab0;
-  --border:     #eaecf0;
+  --border:     rgba(0, 243, 255, 0.15);
   --sidebar-w:  260px;
+  
+  /* Palet Arctic & AI Neon Baru */
+  --neon-cyan:  #00f3ff;
+  --ice-blue:   #a3e5ff;
+  --glass-bg:   rgba(10, 25, 41, 0.55);
+  --glass-blur: blur(16px);
+  --glow-glow:  0 0 15px rgba(0, 243, 255, 0.4);
+  --coral:      #f05a3a;
+  --coral-pale: rgba(240, 90, 58, 0.15);
 }
 
-html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--navy); }
+html, body { 
+  font-family: 'DM Sans', sans-serif; 
+  background: url('bg-arctic.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #e2e8f0; 
+  min-height: 100vh;
+}
 
-/* SIDEBAR */
-.sidebar { position: fixed; left: 0; top: 0; width: var(--sidebar-w); height: 100vh; background: var(--navy); display: flex; flex-direction: column; overflow: hidden; z-index: 100; }
-.sidebar::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(15,188,173,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,188,173,0.04) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; }
-.sidebar-inner { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; padding: 0 0 20px; }
-.sb-brand { padding: 28px 24px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 10px; }
-.sb-brand-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--teal), var(--teal-dim)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; flex-shrink: 0; }
-.sb-brand-name { font-family: 'DM Serif Display', serif; font-size: 19px; color: white; white-space: nowrap; }
-.sb-section { padding: 14px 16px 4px; }
-.sb-label { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 0 8px; margin-bottom: 6px; }
-.sb-nav { display: flex; flex-direction: column; gap: 2px; }
-.sb-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; text-decoration: none; color: rgba(255,255,255,0.55); font-size: 14px; transition: all 0.2s; white-space: nowrap; }
-.sb-link i { font-size: 18px; flex-shrink: 0; }
-.sb-link:hover { background: rgba(255,255,255,0.07); color: white; }
-.sb-link.active { background: rgba(15,188,173,0.15); color: var(--teal); font-weight: 500; border: 1px solid rgba(15,188,173,0.2); }
-.sb-footer { margin-top: auto; padding: 0 16px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; }
-.sb-logout { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; color: rgba(255,255,255,0.4); font-size: 14px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-.sb-logout:hover { background: rgba(255,80,80,0.1); color: #ff6b6b; }
-.sb-logout i { font-size: 18px; }
+/* ==========================================================================
+   SIDEBAR STYLE — SAMAKAN DENGAN DASHBOARD PERTAMA
+   ========================================================================== */
 
-/* MAIN */
+.sidebar { 
+  position: fixed; 
+  left: 0; 
+  top: 0; 
+  width: var(--sidebar-w); 
+  height: 100vh; 
+  
+  background: rgba(5, 12, 26, 0.85); 
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+
+  display: flex; 
+  flex-direction: column; 
+  overflow: hidden; 
+  z-index: 100; 
+
+  border-right: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+.sidebar-inner { 
+  position: relative; 
+  z-index: 1; 
+  display: flex; 
+  flex-direction: column; 
+  height: 100%; 
+  padding: 0 0 20px; 
+}
+
+/* BRAND */
+.sb-brand { 
+  padding: 28px 24px 24px; 
+  display: flex; 
+  align-items: center; 
+  gap: 14px; 
+  border-bottom: 1px solid rgba(0, 243, 255, 0.15); 
+  margin-bottom: 10px; 
+}
+
+.sb-brand-icon { 
+  width: 40px; 
+  height: 40px; 
+  background: linear-gradient(135deg, #00f0ff, #007bb8); 
+  border-radius: 12px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: #050c1a; 
+  font-size: 20px; 
+  flex-shrink: 0; 
+  box-shadow: 0 0 15px rgba(0,240,255,0.4);
+}
+
+.sb-brand-name { 
+  font-family: 'DM Serif Display', serif; 
+  font-size: 19px; 
+  color: white; 
+  white-space: nowrap; 
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.3); 
+}
+
+/* SECTION */
+.sb-section { 
+  padding: 14px 16px 4px; 
+}
+
+.sb-label { 
+  font-size: 10px; 
+  font-weight: 600; 
+  letter-spacing: 1.2px; 
+  text-transform: uppercase; 
+  color: rgba(0, 240, 255, 0.4); 
+  padding: 0 8px; 
+  margin-bottom: 6px; 
+}
+
+/* NAVIGATION */
+.sb-nav { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 2px; 
+}
+
+.sb-link { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  padding: 11px 14px; 
+  border-radius: 10px; 
+  text-decoration: none; 
+  color: rgba(255,255,255,0.45); 
+  font-size: 14px; 
+  transition: all 0.2s; 
+  white-space: nowrap; 
+}
+
+.sb-link i { 
+  font-size: 18px; 
+  flex-shrink: 0; 
+}
+
+.sb-link:hover { 
+  background: rgba(0, 240, 255, 0.08); 
+  color: white; 
+}
+
+.sb-link.active { 
+  background: rgba(0, 240, 255, 0.15); 
+  color: #00f0ff; 
+  font-weight: 500; 
+  border: 1px solid rgba(0,240,255,0.25); 
+  box-shadow: none;
+  text-shadow: 0 0 8px rgba(0,240,255,0.5);
+}
+
+/* FOOTER */
+.sb-footer { 
+  margin-top: auto; 
+  padding: 0 16px; 
+  border-top: 1px solid rgba(0, 243, 255, 0.15); 
+  padding-top: 16px; 
+}
+
+.sb-logout { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  padding: 11px 14px; 
+  border-radius: 10px; 
+  color: rgba(255,255,255,0.4); 
+  font-size: 14px; 
+  cursor: pointer; 
+  transition: all 0.2s; 
+  white-space: nowrap; 
+}
+
+.sb-logout i { 
+  font-size: 18px; 
+}
+
+.sb-logout:hover { 
+  background: rgba(255, 74, 115, 0.15); 
+  color: #ff4a73; 
+}
+
+/* Main Area */
 .main { margin-left: var(--sidebar-w); min-height: 100vh; padding: 36px 40px 60px; }
 
-/* TOPBAR */
-.topbar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; animation: fadeDown 0.6s ease both; }
-.topbar-left h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--navy); line-height: 1.1; margin-bottom: 6px; }
-.topbar-left h1 em { font-style: italic; color: var(--teal-dim); }
+/* Topbar Pill Mesh */
+.topbar { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: flex-start; 
+  margin-bottom: 32px; 
+  animation: fadeDown 0.6s ease both; 
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 243, 255, 0.15);
+}
+.topbar-left h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: white; line-height: 1.1; margin-bottom: 6px; }
+.topbar-left h1 em { font-style: italic; color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0, 243, 255, 0.3); }
 .topbar-left p { font-size: 14px; color: var(--text-muted); }
-.avatar-wrap { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--navy-light)); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 600; border: 2px solid white; box-shadow: 0 2px 12px rgba(13,27,46,0.12); }
+.avatar-wrap { 
+  width: 46px; 
+  height: 46px; 
+  border-radius: 50%; 
+  background: linear-gradient(135deg, var(--neon-cyan), var(--navy-light)); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: var(--navy); 
+  font-size: 16px; 
+  font-weight: 600; 
+  border: 2px solid var(--neon-cyan); 
+  box-shadow: var(--glow-glow); 
+}
 
-/* BUTTONS */
-.btn-primary { display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; background: var(--navy); color: white; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-.btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); }
+/* Buttons */
+.btn-primary { display: inline-flex; align-items: center; gap: 7px; padding: 10px 18px; background: var(--neon-cyan); color: var(--navy); border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: var(--glow-glow); }
+.btn-primary:hover { background: var(--ice-blue); transform: translateY(-1px); }
 .btn-primary i { font-size: 15px; }
-.btn-outline { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; background: white; color: var(--navy); border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-.btn-outline:hover { border-color: var(--teal); color: var(--teal-dim); }
-.btn-save { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; background: var(--teal-pale); color: var(--teal-dim); border: 1px solid rgba(15,188,173,0.25); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-.btn-save:hover, .btn-save.saved { background: var(--teal); color: white; border-color: var(--teal); }
+.btn-outline { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; background: rgba(255,255,255,0.05); color: white; border: 1.5px solid rgba(0, 243, 255, 0.25); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; backdrop-filter: var(--glass-blur); }
+.btn-outline:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.2); }
+.btn-save { display: inline-flex; align-items: center; gap: 7px; padding: 9px 16px; background: rgba(0, 243, 255, 0.08); color: var(--ice-blue); border: 1px solid rgba(0, 243, 255, 0.25); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.btn-save:hover, .btn-save.saved { background: var(--neon-cyan); color: var(--navy); border-color: var(--neon-cyan); font-weight: 600; box-shadow: var(--glow-glow); }
 
-/* AI INSIGHT BANNER */
-.insight-banner { background: var(--navy); border-radius: 18px; padding: 24px 28px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 18px; animation: fadeUp 0.6s 0.1s ease both; position: relative; overflow: hidden; }
-.insight-banner::before { content: ''; position: absolute; right: -40px; top: -40px; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(15,188,173,0.12); }
-.insight-banner::after { content: ''; position: absolute; right: 20px; top: 20px; width: 120px; height: 120px; border-radius: 50%; border: 1px solid rgba(15,188,173,0.08); }
-.insight-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(15,188,173,0.15); border: 1px solid rgba(15,188,173,0.25); display: flex; align-items: center; justify-content: center; color: var(--teal); font-size: 20px; flex-shrink: 0; position: relative; z-index: 1; }
+/* Bento Insight Banner */
+.insight-banner { 
+  background: var(--glass-bg); 
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 18px; 
+  padding: 24px 28px; 
+  margin-bottom: 24px; 
+  display: flex; 
+  align-items: flex-start; 
+  gap: 18px; 
+  animation: fadeUp 0.6s 0.1s ease both; 
+  position: relative; 
+  overflow: hidden; 
+  border: 1px solid rgba(0, 243, 255, 0.2);
+}
+.insight-banner::before { content: ''; position: absolute; right: -40px; top: -40px; width: 200px; height: 200px; border-radius: 50%; border: 1px solid rgba(0, 243, 255, 0.1); }
+.insight-banner::after { content: ''; position: absolute; right: 20px; top: 20px; width: 120px; height: 120px; border-radius: 50%; border: 1px solid rgba(0, 243, 255, 0.05); }
+.insight-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(0, 243, 255, 0.1); border: 1px solid rgba(0, 243, 255, 0.3); display: flex; align-items: center; justify-content: center; color: var(--neon-cyan); font-size: 20px; flex-shrink: 0; position: relative; z-index: 1; filter: drop-shadow(0 0 5px rgba(0,243,255,0.4)); }
 .insight-content { flex: 1; position: relative; z-index: 1; }
-.insight-tag { font-size: 10px; font-weight: 600; color: var(--teal); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.insight-tag { font-size: 10px; font-weight: 600; color: var(--neon-cyan); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
 .insight-content h3 { font-family: 'DM Serif Display', serif; font-size: 18px; color: white; margin-bottom: 6px; }
-.insight-content p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 580px; }
+.insight-content p { font-size: 13px; color: #cbd5e1; line-height: 1.6; max-width: 580px; }
 .insight-meta { position: relative; z-index: 1; flex-shrink: 0; text-align: right; }
-.insight-score { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--teal); line-height: 1; }
-.insight-score-label { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+.insight-score { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--neon-cyan); line-height: 1; filter: drop-shadow(0 0 8px rgba(0,243,255,0.5)); }
+.insight-score-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
 
-/* FILTER BAR */
-.filter-bar { display: flex; align-items: center; gap: 8px; background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 10px 14px; margin-bottom: 20px; flex-wrap: wrap; animation: fadeUp 0.6s 0.15s ease both; }
+/* Bento Filtering & Comparing UI */
+.filter-bar { 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+  background: var(--glass-bg); 
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(0, 243, 255, 0.15); 
+  border-radius: 14px; 
+  padding: 10px 14px; 
+  margin-bottom: 20px; 
+  flex-wrap: wrap; 
+  animation: fadeUp 0.6s 0.15s ease both; 
+}
 .filter-label { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-right: 2px; }
-.filter-chip { display: inline-flex; align-items: center; gap: 5px; padding: 6px 13px; border-radius: 20px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; border: 1.5px solid var(--border); background: var(--cream); color: var(--text-muted); transition: all 0.2s; }
-.filter-chip:hover { border-color: var(--teal); color: var(--teal-dim); }
-.filter-chip.active { background: var(--navy); color: white; border-color: var(--navy); }
+.filter-chip { display: inline-flex; align-items: center; gap: 5px; padding: 6px 13px; border-radius: 20px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; border: 1.5px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: #94a3b8; transition: all 0.2s; }
+.filter-chip:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+.filter-chip.active { background: var(--neon-cyan); color: var(--navy); border-color: var(--neon-cyan); font-weight: 600; box-shadow: var(--glow-glow); }
 .filter-chip i { font-size: 13px; }
-.filter-sep { width: 1px; height: 22px; background: var(--border); margin: 0 2px; }
-.sort-select { margin-left: auto; padding: 7px 12px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--navy); background: var(--cream); outline: none; cursor: pointer; }
+.filter-sep { width: 1px; height: 22px; background: rgba(0, 243, 255, 0.15); margin: 0 2px; }
+.sort-select { margin-left: auto; padding: 7px 12px; border: 1.5px solid rgba(0, 243, 255, 0.2); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 12px; color: white; background: var(--navy-mid); outline: none; cursor: pointer; }
 
-/* COMPARE TOGGLE */
-.compare-toggle { display: flex; align-items: center; justify-content: space-between; background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 14px 20px; cursor: pointer; margin-bottom: 18px; transition: border-color 0.2s; animation: fadeUp 0.6s 0.2s ease both; }
-.compare-toggle:hover { border-color: var(--teal); }
+.compare-toggle { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  background: var(--glass-bg); 
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(0, 243, 255, 0.15); 
+  border-radius: 14px; 
+  padding: 14px 20px; 
+  cursor: pointer; 
+  margin-bottom: 18px; 
+  transition: border-color 0.2s; 
+  animation: fadeUp 0.6s 0.2s ease both; 
+}
+.compare-toggle:hover { border-color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0, 243, 255, 0.1); }
 .ct-left { display: flex; align-items: center; gap: 12px; }
-.ct-icon { width: 32px; height: 32px; background: var(--teal-pale); border-radius: 9px; display: flex; align-items: center; justify-content: center; color: var(--teal-dim); font-size: 15px; }
-.compare-toggle h4 { font-size: 14px; font-weight: 600; color: var(--navy); }
+.ct-icon { width: 32px; height: 32px; background: rgba(0, 243, 255, 0.1); border-radius: 9px; display: flex; align-items: center; justify-content: center; color: var(--neon-cyan); font-size: 15px; }
+.compare-toggle h4 { font-size: 14px; font-weight: 600; color: white; }
 .compare-toggle p { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
 .compare-toggle .ct-arrow { font-size: 20px; color: var(--text-muted); transition: transform 0.25s; }
-.compare-toggle.open .ct-arrow { transform: rotate(180deg); }
+.compare-toggle.open .ct-arrow { transform: rotate(180deg); color: var(--neon-cyan); }
 
-.compare-panel { display: none; background: var(--white); border: 1px solid var(--border); border-radius: 14px; overflow-x: auto; margin-bottom: 20px; }
+.compare-panel { 
+  display: none; 
+  background: var(--glass-bg); 
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(0, 243, 255, 0.2); 
+  border-radius: 14px; 
+  overflow-x: auto; 
+  margin-bottom: 20px; 
+}
 .compare-panel.open { display: block; }
-.compare-table { width: 100%; border-collapse: collapse; min-width: 580px; }
-.compare-table th, .compare-table td { padding: 12px 16px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
-.compare-table th { font-weight: 600; color: var(--navy); background: var(--cream); }
-.compare-table td:first-child { color: var(--text-muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.compare-table { width: 100%; border-collapse: collapse; min-width: 480px; }
+.compare-table th, .compare-table td { padding: 12px 16px; text-align: left; font-size: 13px; border-bottom: 1px solid rgba(0, 243, 255, 0.1); color: #cbd5e1; }
+.compare-table th { font-weight: 600; color: white; background: rgba(16, 40, 68, 0.7); border-bottom: 1px solid rgba(0, 243, 255, 0.2); }
+.compare-table td:first-child { color: var(--ice-blue); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 .compare-table tr:last-child td { border-bottom: none; }
-.match-pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-weight: 600; font-size: 12px; }
-.match-pill.high { background: var(--teal-pale); color: var(--teal-dim); }
-.match-pill.mid  { background: var(--gold-pale); color: #9a7600; }
-.match-pill.low  { background: #f3f0ff; color: #7c3aed; }
+.match-pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-weight: 600; font-size: 12px; text-shadow: none; }
+.match-pill.high { background: rgba(0, 243, 255, 0.15); color: var(--neon-cyan); border: 1px solid rgba(0,243,255,0.3); }
+.match-pill.mid  { background: rgba(245, 200, 66, 0.15); color: #f5c842; border: 1px solid rgba(245,200,66,0.3); }
+.match-pill.low  { background: rgba(167, 139, 250, 0.15); color: #c0a5ff; border: 1px solid rgba(167,139,250,0.3); }
 
-/* CAREER CARDS */
+/* Career Bento Grid Cards */
 .career-grid { display: flex; flex-direction: column; gap: 16px; animation: fadeUp 0.6s 0.25s ease both; }
-.career-card { background: var(--white); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; transition: all 0.3s ease; }
-.career-card:hover { box-shadow: 0 10px 32px rgba(13,27,46,0.08); transform: translateY(-2px); border-color: transparent; }
-.career-card.rank-1 { border-left: 4px solid var(--teal); }
-.career-card.rank-2 { border-left: 4px solid var(--gold); }
+.career-card { 
+  background: var(--glass-bg); 
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(0, 243, 255, 0.15); 
+  border-radius: 18px; 
+  overflow: hidden; 
+  transition: all 0.3s ease; 
+}
+.career-card:hover { box-shadow: 0 10px 32px rgba(0, 243, 255, 0.15); transform: translateY(-2px); border-color: rgba(0, 243, 255, 0.4); }
+.career-card.rank-1 { border-left: 4px solid var(--neon-cyan); }
+.career-card.rank-2 { border-left: 4px solid var(--ice-blue); }
 .career-card.rank-3 { border-left: 4px solid #a78bfa; }
-.career-card.rank-other { border-left: 4px solid var(--border); }
+.career-card.rank-other { border-left: 4px solid rgba(255,255,255,0.15); }
 
 .cc-header { display: flex; align-items: center; gap: 16px; padding: 22px 26px; cursor: pointer; user-select: none; }
 .cc-rank { font-family: 'DM Serif Display', serif; font-size: 26px; line-height: 1; width: 32px; text-align: center; flex-shrink: 0; }
-.rank-1 .cc-rank { color: var(--teal); }
-.rank-2 .cc-rank { color: var(--gold); }
-.rank-3 .cc-rank { color: #a78bfa; }
+.rank-1 .cc-rank { color: var(--neon-cyan); text-shadow: 0 0 6px rgba(0,243,255,0.4); }
+.rank-2 .cc-rank { color: var(--ice-blue); }
+.rank-3 .cc-rank { color: #c0a5ff; }
 .rank-other .cc-rank { color: var(--text-muted); }
 
 .cc-icon { width: 46px; height: 46px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-.rank-1 .cc-icon { background: var(--teal-pale); color: var(--teal-dim); }
-.rank-2 .cc-icon { background: var(--gold-pale); color: #9a7600; }
-.rank-3 .cc-icon { background: #f3f0ff; color: #7c3aed; }
-.rank-other .cc-icon { background: var(--cream); color: var(--text-muted); }
+.rank-1 .cc-icon { background: rgba(0, 243, 255, 0.1); color: var(--neon-cyan); border: 1px solid rgba(0,243,255,0.25); }
+.rank-2 .cc-icon { background: rgba(163, 229, 255, 0.1); color: var(--ice-blue); border: 1px solid rgba(163,229,255,0.25); }
+.rank-3 .cc-icon { background: rgba(167, 139, 250, 0.1); color: #c0a5ff; border: 1px solid rgba(167,139,250,0.25); }
+.rank-other .cc-icon { background: rgba(255,255,255,0.05); color: var(--text-muted); }
 
 .cc-info { flex: 1; min-width: 0; }
-.cc-info h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+.cc-info h3 { font-size: 16px; font-weight: 600; color: white; margin-bottom: 3px; }
 .cc-info p { font-size: 13px; color: var(--text-muted); }
 
-.cc-match { flex-shrink: 0; text-align: right; }
-.cc-pct { font-family: 'DM Serif Display', serif; font-size: 24px; line-height: 1; margin-bottom: 2px; }
-.rank-1 .cc-pct { color: var(--teal); }
-.rank-2 .cc-pct { color: var(--gold); }
-.rank-3 .cc-pct { color: #a78bfa; }
-.rank-other .cc-pct { color: var(--text-muted); }
-.cc-pct-label { font-size: 10px; color: var(--text-muted); }
+  .cc-match { flex-shrink: 0; text-align: right; }
+  .cc-pct { font-family: 'DM Serif Display', serif; font-size: 24px; line-height: 1; margin-bottom: 2px; }
+  .rank-1 .cc-pct { color: var(--neon-cyan); filter: drop-shadow(0 0 5px rgba(0,243,255,0.4)); }
+  .rank-2 .cc-pct { color: var(--ice-blue); }
+  .rank-3 .cc-pct { color: #c0a5ff; }
+  .rank-other .cc-pct { color: var(--text-muted); }
+  .cc-pct-label { font-size: 10px; color: var(--text-muted); }
 
-.cc-toggle { width: 30px; height: 30px; border-radius: 8px; background: var(--cream); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 18px; flex-shrink: 0; transition: all 0.2s; }
-.cc-header:hover .cc-toggle { border-color: var(--teal); color: var(--teal); }
-.cc-toggle.open { background: var(--navy); color: white; border-color: var(--navy); transform: rotate(180deg); }
+  .cc-toggle { width: 30px; height: 30px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 18px; flex-shrink: 0; transition: all 0.2s; }
+  .cc-header:hover .cc-toggle { border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 5px rgba(0,243,255,0.3); }
+  .cc-toggle.open { background: var(--neon-cyan); color: var(--navy); border-color: var(--neon-cyan); transform: rotate(180deg); }
 
-.cc-bar-wrap { padding: 0 26px 0 78px; }
-.cc-bar { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 0; }
-.cc-fill { height: 100%; border-radius: 3px; transition: width 1s cubic-bezier(0.4,0,0.2,1); width: 0%; }
-.rank-1 .cc-fill { background: linear-gradient(90deg, var(--teal), var(--teal-dim)); }
-.rank-2 .cc-fill { background: linear-gradient(90deg, var(--gold), #d4a000); }
-.rank-3 .cc-fill { background: linear-gradient(90deg, #a78bfa, #7c3aed); }
-.rank-other .cc-fill { background: var(--text-muted); }
+  .cc-bar-wrap { padding: 0 26px 0 78px; }
+  .cc-bar { height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-bottom: 0; }
+  .cc-fill { height: 100%; border-radius: 3px; transition: width 1s cubic-bezier(0.4,0,0.2,1); width: 0%; filter: drop-shadow(0 0 4px rgba(0,243,255,0.3)); }
+  .rank-1 .cc-fill { background: linear-gradient(90deg, var(--neon-cyan), #0099ff); }
+  .rank-2 .cc-fill { background: linear-gradient(90deg, var(--ice-blue), #5bc0be); }
+  .rank-3 .cc-fill { background: linear-gradient(90deg, #a78bfa, #7c3aed); }
+  .rank-other .cc-fill { background: var(--text-muted); }
 
-.cc-body { display: none; padding: 0 26px 24px 78px; border-top: 1px solid var(--border); margin-top: 14px; }
-.cc-body.open { display: block; }
+  .cc-body { display: none; padding: 0 26px 24px 78px; border-top: 1px solid rgba(0, 243, 255, 0.15); margin-top: 14px; }
+  .cc-body.open { display: block; }
 
-.cc-insight { font-size: 13px; color: #5a6a7a; line-height: 1.65; margin: 18px 0 20px; padding: 14px 16px; background: var(--cream); border-radius: 10px; border-left: 3px solid var(--teal); }
+  .cc-insight { font-size: 13px; color: #cbd5e1; line-height: 1.65; margin: 18px 0 20px; padding: 14px 16px; background: rgba(255,255,255,0.03); border-radius: 10px; border-left: 3px solid var(--neon-cyan); box-shadow: inset 2px 0 8px rgba(0,243,255,0.05); }
 
-.cc-body-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .cc-body-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .cc-section-label { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px; }
 
-.cc-section-label { font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { display: inline-flex; align-items: center; gap: 5px; border-radius: 20px; padding: 5px 10px; font-size: 12px; font-weight: 500; }
+  .tag.strength { background: rgba(0, 243, 255, 0.1); color: var(--neon-cyan); border: 1px solid rgba(0, 243, 255, 0.25); }
+  .tag.gap      { background: var(--coral-pale); color: #ff8b71; border: 1px solid rgba(240,90,58,0.3); }
+  .tag.tool     { background: rgba(167, 139, 250, 0.1); color: #c0a5ff; border: 1px solid rgba(167,139,250,0.25); }
+  .tag i { font-size: 12px; }
 
-.tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
-.tag { display: inline-flex; align-items: center; gap: 5px; border-radius: 20px; padding: 5px 10px; font-size: 12px; font-weight: 500; }
-.tag.strength { background: var(--teal-pale); color: var(--teal-dim); border: 1px solid rgba(15,188,173,0.2); }
-.tag.gap      { background: var(--coral-pale); color: #c0391a; border: 1px solid rgba(240,90,58,0.2); }
-.tag.tool     { background: #f0f0ff; color: #5b4fcf; border: 1px solid rgba(167,139,250,0.2); }
-.tag.salary   { background: var(--gold-pale); color: #9a7600; border: 1px solid rgba(245,200,66,0.25); }
-.tag i { font-size: 12px; }
+  /* Progress & Analytics Inside Card */
+  .skill-match-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .skill-match-name { font-size: 12px; color: #cbd5e1; width: 100px; flex-shrink: 0; }
+  .skill-match-bar { flex: 1; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+  .skill-match-fill { height: 100%; border-radius: 2px; filter: drop-shadow(0 0 3px rgba(0,243,255,0.2)); }
+  .skill-match-fill.high   { background: var(--neon-cyan); }
+  .skill-match-fill.medium { background: var(--ice-blue); }
+  .skill-match-fill.low    { background: var(--coral); }
+  .skill-match-pct { font-size: 11px; color: var(--text-muted); width: 28px; text-align: right; }
 
-.skill-match-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.skill-match-name { font-size: 12px; color: var(--navy); width: 100px; flex-shrink: 0; }
-.skill-match-bar { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-.skill-match-fill { height: 100%; border-radius: 2px; }
-.skill-match-fill.high   { background: var(--teal); }
-.skill-match-fill.medium { background: var(--gold); }
-.skill-match-fill.low    { background: var(--coral); }
-.skill-match-pct { font-size: 11px; color: var(--text-muted); width: 28px; text-align: right; }
+  .roadmap { margin-top: 4px; }
+  .roadmap-step { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #cbd5e1; line-height: 1.5; padding-bottom: 12px; position: relative; }
+  .roadmap-step:not(:last-child)::before { content: ''; position: absolute; left: 8px; top: 20px; bottom: 0; width: 1px; background: rgba(0, 243, 255, 0.15); }
+  .step-dot { width: 17px; height: 17px; border-radius: 50%; background: var(--navy-mid); border: 2px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-dot.done { background: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: var(--glow-glow); }
+  .step-dot.done::after { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--navy); }
+  .step-dot.active { border-color: var(--neon-cyan); background: rgba(0, 243, 255, 0.15); box-shadow: var(--glow-glow); }
+  .step-dot.active::after { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--neon-cyan); }
+  .step-text strong { display: block; font-weight: 500; font-size: 13px; color: white; }
+  .step-text span { font-size: 11px; color: var(--text-muted); }
 
-.roadmap { margin-top: 4px; }
-.roadmap-step { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--navy); line-height: 1.5; padding-bottom: 12px; position: relative; }
-.roadmap-step:not(:last-child)::before { content: ''; position: absolute; left: 8px; top: 20px; bottom: 0; width: 1px; background: var(--border); }
-.step-dot { width: 17px; height: 17px; border-radius: 50%; background: var(--cream); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-.step-dot.done { background: var(--teal); border-color: var(--teal); }
-.step-dot.done::after { content: ''; width: 5px; height: 5px; border-radius: 50%; background: white; }
-.step-dot.active { border-color: var(--teal); background: var(--teal-pale); }
-.step-dot.active::after { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
-.step-text strong { display: block; font-weight: 500; font-size: 13px; }
-.step-text span { font-size: 11px; color: var(--text-muted); }
+  .cc-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
 
-.cc-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+  /* Modal Quiz Glassmorphic */
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(5, 12, 22, 0.7); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(8px); }
+  .modal-backdrop.open { display: flex; }
+  .modal { 
+    background: rgba(10, 25, 41, 0.85); 
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid rgba(0, 243, 255, 0.25);
+    border-radius: 20px; 
+    padding: 32px; 
+    max-width: 500px; 
+    width: 100%; 
+    box-shadow: 0 24px 64px rgba(0, 243, 255, 0.15); 
+    animation: fadeUp 0.4s ease both; 
+    color: #e2e8f0;
+  }
+  .modal h3 { font-family: 'DM Serif Display', serif; font-size: 21px; margin-bottom: 6px; color: white; }
+  .modal p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
+  .quiz-bar { height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 22px; }
+  .quiz-fill { height: 100%; background: var(--neon-cyan); border-radius: 2px; transition: width 0.4s ease; box-shadow: var(--glow-glow); }
+  .quiz-options { display: flex; flex-direction: column; gap: 9px; margin-bottom: 22px; }
+  .quiz-option { display: flex; align-items: center; gap: 12px; padding: 13px 15px; border: 1.5px solid rgba(255,255,255,0.1); border-radius: 12px; cursor: pointer; transition: all 0.2s; font-size: 14px; color: #cbd5e1; font-family: 'DM Sans', sans-serif; background: rgba(255,255,255,0.02); text-align: left; }
+  .quiz-option:hover { border-color: var(--neon-cyan); background: rgba(0, 243, 255, 0.05); color: white; }
+  .quiz-option.selected { border-color: var(--neon-cyan); background: rgba(0, 243, 255, 0.12); color: var(--neon-cyan); font-weight: 500; box-shadow: inset 0 0 8px rgba(0,243,255,0.1); }
+  .quiz-option i { font-size: 18px; }
+  .quiz-nav { display: flex; align-items: center; justify-content: space-between; }
+  .quiz-progress { font-size: 12px; color: var(--text-muted); }
 
-/* QUIZ MODAL */
-.modal-backdrop { position: fixed; inset: 0; background: rgba(13,27,46,0.55); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
-.modal-backdrop.open { display: flex; }
-.modal { background: var(--white); border-radius: 20px; padding: 32px; max-width: 500px; width: 100%; box-shadow: 0 24px 64px rgba(13,27,46,0.2); animation: fadeUp 0.4s ease both; }
-.modal h3 { font-family: 'DM Serif Display', serif; font-size: 21px; margin-bottom: 6px; }
-.modal p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
-.quiz-bar { height: 3px; background: var(--border); border-radius: 2px; margin-bottom: 22px; }
-.quiz-fill { height: 100%; background: var(--teal); border-radius: 2px; transition: width 0.4s ease; }
-.quiz-options { display: flex; flex-direction: column; gap: 9px; margin-bottom: 22px; }
-.quiz-option { display: flex; align-items: center; gap: 12px; padding: 13px 15px; border: 1.5px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.2s; font-size: 14px; color: var(--navy); font-family: 'DM Sans', sans-serif; background: none; text-align: left; }
-.quiz-option:hover { border-color: var(--teal); background: var(--teal-pale); }
-.quiz-option.selected { border-color: var(--teal); background: var(--teal-pale); color: var(--teal-dim); font-weight: 500; }
-.quiz-option i { font-size: 18px; }
-.quiz-nav { display: flex; align-items: center; justify-content: space-between; }
-.quiz-progress { font-size: 12px; color: var(--text-muted); }
+  /* Toast Notification */
+  .toast { position: fixed; bottom: 28px; right: 28px; background: rgba(10, 25, 41, 0.9); border: 1px solid var(--neon-cyan); color: white; padding: 13px 18px; border-radius: 12px; font-size: 14px; display: flex; align-items: center; gap: 10px; box-shadow: var(--glow-glow); transform: translateY(80px); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 300; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast i { color: var(--neon-cyan); font-size: 18px; }
 
-/* Toast */
-.toast { position: fixed; bottom: 28px; right: 28px; background: var(--navy); color: white; padding: 13px 18px; border-radius: 12px; font-size: 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 8px 28px rgba(13,27,46,0.25); transform: translateY(80px); opacity: 0; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 999; }
-.toast.show { transform: translateY(0); opacity: 1; }
-.toast i { color: var(--teal); }
+  /* Animations */
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes fadeUp   { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-@keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+  /* Responsive Media Queries */
+  @media (max-width: 1024px) {
+    .main { padding: 28px 24px; }
+  }
+  @media (max-width: 768px) {
+    .sidebar { width: 70px; }
+    .sidebar .sb-brand-name, .sidebar .sb-label, .sidebar .sb-link span, .sidebar .sb-logout span { display: none; }
+    .sidebar .sb-brand { padding: 20px 15px; justify-content: center; }
+    .sidebar .sb-link, .sidebar .sb-logout { justify-content: center; padding: 12px; }
+    .main { margin-left: 70px; }
+    .cc-body { padding-left: 26px; }
+    .cc-bar-wrap { padding-left: 26px; }
+    .cc-body-grid { grid-template-columns: 1fr; }
+    .insight-banner { flex-direction: column; gap: 12px; }
+    .insight-meta { text-align: left; }
+  }
+  @media (max-width: 640px) {
+    .topbar { flex-direction: column; gap: 12px; align-items: stretch; }
+    .filter-bar { gap: 5px; }
+    .sort-select { margin-left: 0; width: 100%; }
+  }
+  </style>
+  </head>
+  <body>
 
-@media (max-width: 900px) {
-  :root { --sidebar-w: 70px; }
-  .sb-brand-name, .sb-label, .sb-link span, .sb-logout span { display: none; }
-  .sb-brand { padding: 24px 15px; justify-content: center; gap: 0; }
-  .sb-section { padding: 10px 8px 4px; }
-  .sb-link { justify-content: center; padding: 12px; gap: 0; }
-  .sb-logout { justify-content: center; padding: 12px; gap: 0; }
-  .main { padding: 28px 20px 60px; }
-  .cc-body { padding-left: 26px; }
-  .cc-bar-wrap { padding-left: 26px; }
-  .cc-body-grid { grid-template-columns: 1fr; }
-  .insight-banner { flex-direction: column; gap: 12px; }
-  .insight-meta { text-align: left; }
-}
-@media (max-width: 640px) {
-  .topbar { flex-direction: column; gap: 12px; }
-  .filter-bar { gap: 5px; }
-}
-</style>
-</head>
-<body>
 <div style="display:flex;">
-
-  <!-- SIDEBAR -->
+  
   <div class="sidebar">
     <div class="sidebar-inner">
       <div class="sb-brand">
         <div class="sb-brand-icon"><i class="mdi mdi-compass-outline"></i></div>
         <div class="sb-brand-name">CareerPath</div>
       </div>
+      
       <div class="sb-section">
         <div class="sb-label">Menu Utama</div>
         <nav class="sb-nav">
-          <a href="dashboard.html" class="sb-link"><i class="mdi mdi-view-dashboard-outline"></i><span>Dashboard</span></a>
-          <a href="profile.html"   class="sb-link"><i class="mdi mdi-account-outline"></i><span>Profil Saya</span></a>
-          <a href="career.html"    class="sb-link active"><i class="mdi mdi-target"></i><span>Rekomendasi Karier</span></a>
-          <a href="learning.html"  class="sb-link"><i class="mdi mdi-book-open-outline"></i><span>Rencana Belajar</span></a>
+          <a href="dashboard.html" class="sb-link"><i class="mdi mdi-home-variant-outline"></i><span>Dashboard</span></a>
+          <a href="profile.html" class="sb-link"><i class="mdi mdi-account-box-outline"></i><span>Profil Saya</span></a>
+          <a href="career.html" class="sb-link active"><i class="mdi mdi-briefcase-search-outline"></i><span>Rekomendasi Karier</span></a>
+          <a href="learning.html" class="sb-link"><i class="mdi mdi-notebook-edit-outline"></i><span>Rencana Belajar</span></a>
         </nav>
       </div>
+      
       <div class="sb-section" style="margin-top:8px;">
         <div class="sb-label">Lainnya</div>
         <nav class="sb-nav">
-          <a href="about.html"   class="sb-link"><i class="mdi mdi-information-outline"></i><span>Tentang</span></a>
-          <a href="contact.html" class="sb-link"><i class="mdi mdi-email-outline"></i><span>Kontak</span></a>
+          <a href="about.html" class="sb-link"><i class="mdi mdi-information-outline"></i><span>Tentang</span></a>
+          <a href="contact.html" class="sb-link"><i class="mdi mdi-message-text-outline"></i><span>Hubungi</span></a>
         </nav>
       </div>
+      
       <div class="sb-footer">
         <div class="sb-logout" onclick="logout()"><i class="mdi mdi-logout"></i><span>Keluar</span></div>
       </div>
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
-
-    <!-- TOPBAR -->
+    
     <div class="topbar">
       <div class="topbar-left">
         <h1>Rekomendasi <em>Karier</em></h1>
@@ -288,7 +523,6 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
       </div>
     </div>
 
-    <!-- AI INSIGHT BANNER -->
     <div class="insight-banner">
       <div class="insight-icon"><i class="mdi mdi-brain"></i></div>
       <div class="insight-content">
@@ -302,28 +536,28 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
       </div>
     </div>
 
-    <!-- FILTER BAR -->
     <div class="filter-bar">
       <span class="filter-label">Filter:</span>
       <button class="filter-chip active" onclick="setFilter(this,'all')"><i class="mdi mdi-view-grid-outline"></i> Semua</button>
       <button class="filter-chip" onclick="setFilter(this,'tech')"><i class="mdi mdi-code-braces"></i> Teknologi</button>
       <button class="filter-chip" onclick="setFilter(this,'business')"><i class="mdi mdi-chart-bar"></i> Bisnis</button>
       <button class="filter-chip" onclick="setFilter(this,'creative')"><i class="mdi mdi-palette-outline"></i> Kreatif</button>
+      
       <div class="filter-sep"></div>
+      
+      <span class="filter-label">Urutkan:</span>
       <select class="sort-select" onchange="sortCards(this.value)">
-        <option value="match">Urutkan: Kecocokan Tertinggi</option>
-        <option value="salary">Urutkan: Gaji Tertinggi</option>
-        <option value="growth">Urutkan: Pertumbuhan Karier</option>
+        <option value="match">Kecocokan Tertinggi</option>
+        <option value="growth">Pertumbuhan Pasar</option>
       </select>
     </div>
 
-    <!-- COMPARE TOGGLE -->
     <div class="compare-toggle" id="compareToggle" onclick="toggleCompare()">
       <div class="ct-left">
-        <div class="ct-icon"><i class="mdi mdi-table-compare"></i></div>
+        <div class="ct-icon"><i class="mdi mdi-compare"></i></div>
         <div>
-          <h4>Bandingkan Karier</h4>
-          <p>Lihat perbandingan detail semua rekomendasi dalam satu tabel</p>
+          <h4>Buka Tabel Komparasi Karier</h4>
+          <p>Bandingkan metrik kesiapan waktu, pertumbuhan, dan rasio kekuatan alternatif secara komprehensif</p>
         </div>
       </div>
       <i class="mdi mdi-chevron-down ct-arrow"></i>
@@ -333,41 +567,78 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
       <table class="compare-table">
         <thead>
           <tr>
-            <th>Aspek</th>
-            <th>🥇 Data Analyst</th>
-            <th>🥈 Business Analyst</th>
-            <th>🥉 Data Scientist</th>
-            <th>ML Engineer</th>
+            <th>Kriteria</th>
+            <th>Data Analyst</th>
+            <th>Business Analyst</th>
+            <th>Data Scientist</th>
             <th>BI Developer</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>Kecocokan</td><td><span class="match-pill high">92%</span></td><td><span class="match-pill high">85%</span></td><td><span class="match-pill mid">79%</span></td><td><span class="match-pill mid">71%</span></td><td><span class="match-pill low">65%</span></td></tr>
-          <tr><td>Gaji (jt/bln)</td><td>8 – 20</td><td>10 – 25</td><td>15 – 40</td><td>18 – 45</td><td>7 – 18</td></tr>
-          <tr><td>Pertumbuhan</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐</td></tr>
-          <tr><td>Skill Gap</td><td>Rendah</td><td>Sedang</td><td>Tinggi</td><td>Sangat Tinggi</td><td>Rendah</td></tr>
-          <tr><td>Remote</td><td>✅ Ya</td><td>✅ Ya</td><td>✅ Ya</td><td>✅ Ya</td><td>⚠️ Hybrid</td></tr>
-          <tr><td>Waktu Siap</td><td>3–6 bln</td><td>4–8 bln</td><td>8–14 bln</td><td>12–18 bln</td><td>2–4 bln</td></tr>
+          <tr>
+            <td>Skor Kecocokan</td>
+            <td><span class="match-pill high">92% Tinggi</span></td>
+            <td><span class="match-pill high">85% Tinggi</span></td>
+            <td><span class="match-pill mid">79% Sedang</span></td>
+            <td><span class="match-pill low">64% Cukup</span></td>
+          </tr>
+          <tr>
+            <td>Prospek Pasar</td>
+            <td>🔥 Sangat Tinggi (5/5)</td>
+            <td>📈 Tinggi (4/5)</td>
+            <td>🔥 Sangat Tinggi (5/5)</td>
+            <td>📊 Stabil (3/5)</td>
+          </tr>
+          <tr>
+            <td>Estimasi Kesiapan</td>
+            <td>3 – 6 bulan</td>
+            <td>4 – 8 bulan</td>
+            <td>8 – 14 bulan</td>
+            <td>3 – 4 bulan</td>
+          </tr>
+          <tr>
+            <td>Kekuatan Utama</td>
+            <td>SQL, Excel, Ops Data</td>
+            <td>Komunikasi, Excel</td>
+            <td>Python, Statistik</td>
+            <td>SQL, Pelaporan</td>
+          </tr>
+          <tr>
+            <td>Celah Terbesar</td>
+            <td>Visualisasi Lanjut</td>
+            <td>BPMN, Agile Framework</td>
+            <td>Machine Learning</td>
+            <td>DAX, Power BI</td>
+          </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- CAREER CARDS -->
-    <div class="career-grid" id="careerGrid"></div>
+    <div class="career-grid" id="careerGrid">
+      </div>
 
   </div>
 </div>
 
-<!-- QUIZ MODAL -->
-<div class="modal-backdrop" id="modalBackdrop">
+<div class="modal-backdrop" id="quizModal">
   <div class="modal">
-    <div class="quiz-bar"><div class="quiz-fill" id="quizBar" style="width:0%"></div></div>
-    <h3 id="quizTitle"></h3>
-    <p id="quizDesc"></p>
-    <div class="quiz-options" id="quizOptions"></div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
+      <div>
+        <h3>Kuesioner Minat AI</h3>
+        <p>Sesuaikan arah generator rekomendasi dengan memetakan fokus harian Anda</p>
+      </div>
+      <button class="cc-toggle" onclick="closeQuiz()"><i class="mdi mdi-close"></i></button>
+    </div>
+    
+    <div class="quiz-bar"><div class="quiz-fill" id="quizProgressFill" style="width: 25%"></div></div>
+    
+    <h4 id="quizQuestion" style="font-size:15px; font-weight:600; margin-bottom:16px; color:white;">Loading Pertanyaan...</h4>
+    <div class="quiz-options" id="quizOptions">
+      </div>
+    
     <div class="quiz-nav">
-      <span class="quiz-progress" id="quizProgress"></span>
-      <div style="display:flex;gap:10px;">
+      <span class="quiz-progress" id="quizStepText">Pertanyaan 1 dari 4</span>
+      <div style="display:flex; gap:10px;">
         <button class="btn-outline" onclick="closeQuiz()">Batal</button>
         <button class="btn-primary" id="quizNextBtn" onclick="nextQuiz()">Lanjut <i class="mdi mdi-arrow-right"></i></button>
       </div>
@@ -375,16 +646,21 @@ html, body { font-family: 'DM Sans', sans-serif; background: var(--cream); color
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"><i class="mdi mdi-check-circle-outline"></i><span id="toastMsg"></span></div>
 
 <script>
 const CAREERS = [
   {
-    id:'data-analyst', rank:1, rankClass:'rank-1', icon:'mdi-chart-bar',
-    title:'Data Analyst', category:['tech','business'],
-    subtitle:'Teknologi & Analitik Data', match:92,
-    salary:'Rp 8 – 20 jt/bulan', growth:5, remote:'Remote-friendly', readyIn:'3 – 6 bulan',
+    id:'data-analyst',
+    rank:1,
+    rankClass:'rank-1',
+    icon:'mdi-chart-bar',
+    title:'Data Analyst',
+    category:['tech','business'],
+    subtitle:'Teknologi & Analitik Data',
+    match:92,
+    growth:5,
+    readyIn:'3 – 6 bulan',
     insight:'Keterampilan SQL dan Excel Anda sudah di atas rata-rata. Tinggal perkuat Python dan kemampuan visualisasi data untuk membuka lebih banyak pintu.',
     strengths:['SQL','Excel','Data Cleaning','Statistik Dasar'],
     gaps:['Python Lanjutan','Tableau / Power BI','Data Storytelling'],
@@ -393,10 +669,16 @@ const CAREERS = [
     roadmap:[{text:'Kuasai SQL Query Lanjutan',sub:'Minggu 1–3',s:'done'},{text:'Belajar Python untuk Analisis',sub:'Bulan 1–2',s:'active'},{text:'Latihan Tableau / Power BI',sub:'Bulan 2–3',s:''},{text:'Buat Portofolio Proyek Analisis',sub:'Bulan 3–5',s:''},{text:'Apply Junior Data Analyst',sub:'Bulan 5–6',s:''}]
   },
   {
-    id:'business-analyst', rank:2, rankClass:'rank-2', icon:'mdi-briefcase-outline',
-    title:'Business Analyst', category:['business'],
-    subtitle:'Bisnis & Strategi Digital', match:85,
-    salary:'Rp 10 – 25 jt/bulan', growth:4, remote:'Hybrid / Remote', readyIn:'4 – 8 bulan',
+    id:'business-analyst',
+    rank:2,
+    rankClass:'rank-2',
+    icon:'mdi-briefcase-outline',
+    title:'Business Analyst',
+    category:['business'],
+    subtitle:'Bisnis & Strategi Digital',
+    match:85,
+    growth:4,
+    readyIn:'4 – 8 bulan',
     insight:'Kemampuan komunikasi dan analisis Anda solid. Tingkatkan pemahaman proses bisnis dan kuasai tools seperti JIRA dan Confluence.',
     strengths:['Komunikasi','Analisis Kebutuhan','Excel','Presentasi'],
     gaps:['BPMN / Flowchart','Agile / Scrum','SQL Dasar'],
@@ -405,35 +687,35 @@ const CAREERS = [
     roadmap:[{text:'Pelajari Proses Bisnis & BPMN',sub:'Minggu 1–2',s:'done'},{text:'Kuasai JIRA & Agile',sub:'Bulan 1',s:'active'},{text:'Belajar SQL Dasar untuk BA',sub:'Bulan 1–2',s:''},{text:'Simulasi Requirement Gathering',sub:'Bulan 2–4',s:''},{text:'Apply & Interview Practice',sub:'Bulan 5–8',s:''}]
   },
   {
-    id:'data-scientist', rank:3, rankClass:'rank-3', icon:'mdi-brain',
-    title:'Data Scientist', category:['tech'],
-    subtitle:'AI, ML & Riset Data', match:79,
-    salary:'Rp 15 – 40 jt/bulan', growth:5, remote:'Fully Remote', readyIn:'8 – 14 bulan',
+    id:'data-scientist',
+    rank:3,
+    rankClass:'rank-3',
+    icon:'mdi-brain',
+    title:'Data Scientist',
+    category:['tech'],
+    subtitle:'AI, ML & Riset Data',
+    match:79,
+    growth:5,
+    readyIn:'8 – 14 bulan',
     insight:'Potensi besar di sini, namun butuh penguatan signifikan pada Machine Learning dan statistik lanjutan. Investasi waktu yang tepat akan menghasilkan lompatan karier yang luar biasa.',
     strengths:['Python Dasar','SQL','Statistik Dasar','Curiosity'],
     gaps:['Machine Learning','Deep Learning','Feature Engineering','Model Deployment'],
-    tools:['Python','TensorFlow','Scikit-learn','Pandas','Jupyter'],
-    skillMatches:[{name:'Python',pct:55,level:'medium'},{name:'Statistik',pct:60,level:'medium'},{name:'ML Framework',pct:25,level:'low'},{name:'Model Deploy',pct:15,level:'low'}],
-    roadmap:[{text:'Kuasai Python & Pandas Mendalam',sub:'Bulan 1–2',s:'done'},{text:'Matematika & Statistik untuk ML',sub:'Bulan 2–3',s:'active'},{text:'Machine Learning dengan Scikit-learn',sub:'Bulan 3–5',s:''},{text:'Proyek Kaggle & Portofolio ML',sub:'Bulan 5–9',s:''},{text:'Deep Learning & Spesialisasi',sub:'Bulan 9–14',s:''}]
+    tools:['Python','TensorFlow','SQL','Scikit-Learn','Tableau'],
+    skillMatches:[{name:'Python',pct:60,level:'medium'},{name:'SQL',pct:75,level:'high'},{name:'Statistik',pct:50,level:'medium'},{name:'ML Fund.',pct:20,level:'low'}],
+    roadmap:[{text:'Perdalam Probabilitas & Statistik',sub:'Bulan 1–2',s:'done'},{text:'Algoritma Machine Learning Scikit-Learn',sub:'Bulan 3–5',s:'active'},{text:'Feature Engineering & SQL Lanjut',sub:'Bulan 6–8',s:''},{text:'Studi Kasus Deep Learning & Deployment',sub:'Bulan 9–11',s:''},{text:'Penyusunan Capstone & Lamaran Kerja',sub:'Bulan 12–14',s:''}]
   },
   {
-    id:'ml-engineer', rank:4, rankClass:'rank-other', icon:'mdi-cog-outline',
-    title:'ML Engineer', category:['tech'],
-    subtitle:'Machine Learning & Infrastructure', match:71,
-    salary:'Rp 18 – 45 jt/bulan', growth:5, remote:'Remote-friendly', readyIn:'12 – 18 bulan',
-    insight:'Jalur menjanjikan dengan gaji tertinggi, namun membutuhkan fondasi programming dan ML yang sangat kuat. Cocok jika Anda tertarik pada sisi engineering dari AI.',
-    strengths:['Logika Pemrograman','Python Dasar','Problem Solving'],
-    gaps:['MLOps','Docker / Kubernetes','Cloud (AWS/GCP)','Model Optimization'],
-    tools:['Python','Docker','Kubernetes','MLflow','TensorFlow'],
-    skillMatches:[{name:'Python',pct:55,level:'medium'},{name:'ML Ops',pct:15,level:'low'},{name:'Cloud',pct:20,level:'low'},{name:'DevOps',pct:10,level:'low'}],
-    roadmap:[{text:'Perkuat Python & Software Eng.',sub:'Bulan 1–3',s:'done'},{text:'Machine Learning Mendalam',sub:'Bulan 3–6',s:''},{text:'Docker & Cloud Dasar',sub:'Bulan 6–9',s:''},{text:'MLOps & Model Deployment',sub:'Bulan 9–12',s:''},{text:'Build ML Pipeline Project',sub:'Bulan 12–18',s:''}]
-  },
-  {
-    id:'bi-developer', rank:5, rankClass:'rank-other', icon:'mdi-monitor-dashboard',
-    title:'BI Developer', category:['tech','business'],
-    subtitle:'Business Intelligence & Reporting', match:65,
-    salary:'Rp 7 – 18 jt/bulan', growth:3, remote:'Hybrid', readyIn:'2 – 4 bulan',
-    insight:'Jalur tercepat untuk mulai bekerja. SQL dan Excel Anda sudah cukup sebagai modal awal — tinggal kuasai Power BI dan Anda siap apply.',
+    id:'bi-developer',
+    rank:4,
+    rankClass:'rank-other',
+    icon:'mdi-monitor-dashboard',
+    title:'Business Intelligence Developer',
+    category:['tech','business'],
+    subtitle:'Arsitektur Data & Visualisasi Perusahaan',
+    match:64,
+    growth:3,
+    readyIn:'3 – 4 bulan',
+    insight:'Anda memiliki fondasi pelaporan yang baik. Mempelajari pemodelan data perusahaan (data modeling) dan formula DAX tingkat lanjut akan membuat Anda siap apply.',
     strengths:['SQL','Excel','Logika Reporting','Presentasi Data'],
     gaps:['Power BI Advanced','DAX / M Query','Data Modeling'],
     tools:['Power BI','Tableau','SQL Server','Excel','DAX'],
@@ -443,27 +725,60 @@ const CAREERS = [
 ];
 
 let activeFilter = 'all';
-let openCards   = new Set(['data-analyst']);
-let savedCards  = new Set();
+let openCards = new Set(['data-analyst']);
+let savedCards = new Set();
+
+function loadSaved() {
+  try {
+    const sc = localStorage.getItem('savedCareers');
+    if (sc) savedCards = new Set(JSON.parse(sc));
+  } catch(e) {}
+}
+
+function persistSaved() {
+  localStorage.setItem('savedCareers', JSON.stringify([...savedCards]));
+}
+
+function saveLearningPlan(career) {
+  try {
+    const plans = JSON.parse(localStorage.getItem('learningPlans') || '[]');
+    const exists = plans.find(p => p.id === career.id);
+    if (!exists) {
+      plans.push({
+        id: career.id,
+        title: career.title,
+        subtitle: career.subtitle,
+        readyIn: career.readyIn,
+        roadmap: career.roadmap,
+        tools: career.tools,
+        gaps: career.gaps,
+        savedAt: new Date().toISOString()
+      });
+      localStorage.setItem('learningPlans', JSON.stringify(plans));
+    }
+  } catch(e) {}
+}
 
 function renderCards(data) {
   const grid = document.getElementById('careerGrid');
   grid.innerHTML = data.map(c => {
-    const isOpen  = openCards.has(c.id);
+    const isOpen = openCards.has(c.id);
     const isSaved = savedCards.has(c.id);
-
-    const skillBars = c.skillMatches.map(s =>
-      `<div class="skill-match-item">
+    
+    const skillBars = c.skillMatches.map(s => `
+      <div class="skill-match-item">
         <span class="skill-match-name">${s.name}</span>
         <div class="skill-match-bar"><div class="skill-match-fill ${s.level}" style="width:${s.pct}%"></div></div>
         <span class="skill-match-pct">${s.pct}%</span>
-      </div>`).join('');
+      </div>
+    `).join('');
 
-    const steps = c.roadmap.map(r =>
-      `<div class="roadmap-step">
+    const steps = c.roadmap.map(r => `
+      <div class="roadmap-step">
         <div class="step-dot ${r.s}"></div>
         <div class="step-text"><strong>${r.text}</strong><span>${r.sub}</span></div>
-      </div>`).join('');
+      </div>
+    `).join('');
 
     return `
       <div class="career-card ${c.rankClass}" id="card-${c.id}" data-cat="${c.category.join(' ')}">
@@ -477,63 +792,72 @@ function renderCards(data) {
           </div>
           <div class="cc-toggle ${isOpen ? 'open' : ''}"><i class="mdi mdi-chevron-down"></i></div>
         </div>
-
-        <div class="cc-bar-wrap" style="padding-bottom:${isOpen ? '0' : '16px'};">
+        
+        <div class="cc-bar-wrap">
           <div class="cc-bar"><div class="cc-fill" data-target="${c.match}"></div></div>
         </div>
-
+        
         <div class="cc-body ${isOpen ? 'open' : ''}">
-          <div class="cc-insight">💡 ${c.insight}</div>
+          <div class="cc-insight">
+            <strong>Analisis AI:</strong> ${c.insight}
+          </div>
+          
           <div class="cc-body-grid">
             <div>
-              <div class="cc-section-label">Kekuatan yang cocok</div>
-              <div class="tag-list">${c.strengths.map(s => `<span class="tag strength"><i class="mdi mdi-check-circle-outline"></i>${s}</span>`).join('')}</div>
+              <div class="cc-section-label">Pemetaan Kekuatan &amp; Celah</div>
+              <div style="margin-bottom:14px;">
+                <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:5px;">Kekuatan Terdeteksi:</div>
+                <div class="tag-list">
+                  ${c.strengths.map(s => `<span class="tag strength"><i class="mdi mdi-check-circle-outline"></i> ${s}</span>`).join('')}
+                </div>
+              </div>
+              <div>
+                <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:5px;">Celah Kompetensi (Butuh Belajar):</div>
+                <div class="tag-list">
+                  ${c.gaps.map(g => `<span class="tag gap"><i class="mdi mdi-alert-circle-outline"></i> ${g}</span>`).join('')}
+                </div>
+              </div>
+              
+              <div class="cc-section-label" style="margin-top:20px;">Tingkat Kecocokan Skill Utama</div>
+              <div style="margin-top:8px;">${skillBars}</div>
             </div>
+            
             <div>
-              <div class="cc-section-label">Skill yang perlu dikembangkan</div>
-              <div class="tag-list">${c.gaps.map(g => `<span class="tag gap"><i class="mdi mdi-arrow-up-circle-outline"></i>${g}</span>`).join('')}</div>
-            </div>
-            <div>
-              <div class="cc-section-label">Tingkat kecocokan skill</div>
-              ${skillBars}
-            </div>
-            <div>
-              <div class="cc-section-label">Tools yang digunakan</div>
-              <div class="tag-list" style="margin-bottom:14px;">${c.tools.map(t => `<span class="tag tool"><i class="mdi mdi-wrench-outline"></i>${t}</span>`).join('')}</div>
-              <div class="cc-section-label">Info karier</div>
-              <div class="tag-list">
-                <span class="tag salary"><i class="mdi mdi-cash"></i>${c.salary}</span>
-                <span class="tag tool"><i class="mdi mdi-wifi"></i>${c.remote}</span>
-                <span class="tag strength"><i class="mdi mdi-clock-outline"></i>Siap: ${c.readyIn}</span>
+              <div class="cc-section-label">Rencana Jalur Belajar (Roadmap)</div>
+              <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;"><i class="mdi mdi-clock-outline"></i> Estimasi Siap Kerja: <strong>${c.readyIn}</strong></div>
+              <div class="roadmap">${steps}</div>
+              
+              <div class="cc-section-label" style="margin-top:14px;">Perangkat Utama (Tools)</div>
+              <div class="tag-list" style="margin-top:6px;">
+                ${c.tools.map(t => `<span class="tag tool"><i class="mdi mdi-wrench-outline"></i> ${t}</span>`).join('')}
               </div>
             </div>
-            <div style="grid-column:1/-1;">
-              <div class="cc-section-label">Roadmap menuju karier ini</div>
-              <div class="roadmap">${steps}</div>
-            </div>
           </div>
+          
           <div class="cc-actions">
-            <button class="btn-primary" onclick="showToast('Membuka Rencana Belajar untuk ${c.title}...')">
-              <i class="mdi mdi-book-open-outline"></i> Buat Rencana Belajar
-            </button>
-            <button class="btn-save ${isSaved ? 'saved' : ''}" id="save-${c.id}" onclick="toggleSave('${c.id}')">
-              <i class="mdi mdi-bookmark-${isSaved ? 'check' : 'outline'}"></i>
-              ${isSaved ? 'Tersimpan' : 'Simpan Karier'}
-            </button>
-            <button class="btn-outline" onclick="showToast('Fitur pencarian lowongan segera hadir!')">
-              <i class="mdi mdi-briefcase-search-outline"></i> Cari Lowongan
+            <button class="btn-primary" onclick="createLearningPlan('${c.id}')"><i class="mdi mdi-clipboard-text-play-outline"></i> Mulai Rencana Belajar</button>
+            <button class="btn-save ${isSaved ? 'saved' : ''}" onclick="toggleSave('${c.id}')">
+              <i class="mdi ${isSaved ? 'mdi-bookmark' : 'mdi-bookmark-outline'}"></i> ${isSaved ? 'Tersimpan' : 'Simpan Karier'}
             </button>
           </div>
         </div>
-      </div>`;
+      </div>
+    `;
   }).join('');
 
-  // Animate progress bars
   requestAnimationFrame(() => {
     document.querySelectorAll('.cc-fill[data-target]').forEach(el => {
       setTimeout(() => { el.style.width = el.dataset.target + '%'; }, 150);
     });
   });
+}
+
+function createLearningPlan(id) {
+  const career = CAREERS.find(c => c.id === id);
+  if (!career) return;
+  saveLearningPlan(career);
+  showToast('Rencana belajar ' + career.title + ' disimpan! Membuka halaman...');
+  setTimeout(() => { window.location.href = 'learning.html'; }, 1800);
 }
 
 function toggleCard(id) {
@@ -542,8 +866,16 @@ function toggleCard(id) {
 }
 
 function toggleSave(id) {
-  if (savedCards.has(id)) { savedCards.delete(id); showToast('Dihapus dari daftar simpan.'); }
-  else { savedCards.add(id); showToast('Karier berhasil disimpan!'); }
+  if (savedCards.has(id)) {
+    savedCards.delete(id);
+    showToast('Dihapus dari daftar simpan.');
+  } else {
+    savedCards.add(id);
+    const career = CAREERS.find(c => c.id === id);
+    if (career) saveLearningPlan(career);
+    showToast('Karier berhasil disimpan & rencana belajar ditambahkan!');
+  }
+  persistSaved();
   applyFilter();
 }
 
@@ -561,12 +893,8 @@ function applyFilter() {
 
 function sortCards(by) {
   const sorted = [...CAREERS].sort((a, b) => {
-    if (by === 'match')  return b.match - a.match;
+    if (by === 'match') return b.match - a.match;
     if (by === 'growth') return b.growth - a.growth;
-    if (by === 'salary') {
-      const n = c => parseInt(c.salary.match(/(\d+)\s*–\s*(\d+)/)?.[2] || 0);
-      return n(b) - n(a);
-    }
     return 0;
   });
   const data = activeFilter === 'all' ? sorted : sorted.filter(c => c.category.includes(activeFilter));
@@ -578,32 +906,31 @@ function toggleCompare() {
   document.getElementById('comparePanel').classList.toggle('open');
 }
 
-// QUIZ
+// ═══════════════════════ INTERACTIVE QUIZ METRICS LOGIC ═══════════════════════
 const QUIZ = [
-  { title:'Apa prioritas karier Anda saat ini?', desc:'Ini membantu AI menyesuaikan rekomendasi dengan tujuan Anda.',
-    options:[{icon:'mdi-cash',text:'Gaji tinggi secepat mungkin'},{icon:'mdi-trending-up',text:'Pertumbuhan karier jangka panjang'},{icon:'mdi-laptop',text:'Fleksibilitas kerja remote'},{icon:'mdi-heart-outline',text:'Pekerjaan yang bermakna'}] },
-  { title:'Seberapa nyaman Anda dengan koding?', desc:'Jujur di sini akan menghasilkan rekomendasi yang lebih akurat.',
-    options:[{icon:'mdi-emoticon-sad-outline',text:'Belum bisa coding sama sekali'},{icon:'mdi-code-brackets',text:'Bisa sedikit (formula, HTML)'},{icon:'mdi-code-braces',text:'Cukup nyaman (Python/SQL dasar)'},{icon:'mdi-laptop-code',text:'Sangat nyaman dan berpengalaman'}] },
-  { title:'Berapa jam yang bisa Anda dedikasikan per minggu?', desc:'Ini menentukan estimasi waktu kesiapan karier Anda.',
-    options:[{icon:'mdi-clock-outline',text:'Kurang dari 5 jam'},{icon:'mdi-clock-time-four-outline',text:'5 – 10 jam'},{icon:'mdi-clock-time-eight-outline',text:'10 – 20 jam'},{icon:'mdi-fire',text:'Lebih dari 20 jam (full commitment)'}] },
-  { title:'Industri yang Anda minati?', desc:'Rekomendasi akan disesuaikan dengan ekosistem industri pilihan Anda.',
-    options:[{icon:'mdi-bank-outline',text:'Keuangan & Perbankan'},{icon:'mdi-shopping-outline',text:'E-commerce & Retail'},{icon:'mdi-hospital-box-outline',text:'Kesehatan & Medis'},{icon:'mdi-rocket-launch-outline',text:'Startup & Teknologi'}] }
+  { q: "Apa tipe lingkungan kerja harian yang paling memotivasi Anda?", options: [{text:"Menulis skrip kode otomatis & analisis model",icon:"mdi-code-braces"},{text:"Rapat koordinasi strategi & presentasi tim",icon:"mdi-presentation"}] },
+  { q: "Bagaimana cara Anda memandang data mentah?", options: [{text:"Tantangan teka-teki logika untuk dibersihkan & diolah",icon:"mdi-database-search"},{text:"Aset berharga untuk diterjemahkan jadi laba bisnis",icon:"mdi-trending-up"}] },
+  { q: "Perangkat lunak mana yang ingin Anda kuasai secara mendalam?", options: [{text:"Python, TensorFlow, Scikit-Learn",icon:"mdi-brain"},{text:"Power BI, Tableau, Advanced SQL",icon:"mdi-chart-box-outline"}] },
+  { q: "Apa goals akhir dari visualisasi data yang Anda rancang?", options: [{text:"Laporan performa berkala direksi bisnis",icon:"mdi-file-chart-outline"},{text:"Sistem cerdas penilai prediksi tren masa depan",icon:"mdi-robot-outline"}] }
 ];
 
 let quizStep = 0;
 
-function openQuiz()  { quizStep = 0; renderQuiz(); document.getElementById('modalBackdrop').classList.add('open'); }
-function closeQuiz() { document.getElementById('modalBackdrop').classList.remove('open'); }
+function openQuiz() {
+  quizStep = 0;
+  document.getElementById('quizModal').classList.add('open');
+  renderQuiz();
+}
+function closeQuiz() { document.getElementById('quizModal').classList.remove('open'); }
 
 function renderQuiz() {
   const q = QUIZ[quizStep];
-  document.getElementById('quizBar').style.width = (quizStep / QUIZ.length * 100) + '%';
-  document.getElementById('quizTitle').textContent    = q.title;
-  document.getElementById('quizDesc').textContent     = q.desc;
-  document.getElementById('quizProgress').textContent = `${quizStep + 1} dari ${QUIZ.length}`;
-  document.getElementById('quizNextBtn').innerHTML    = quizStep === QUIZ.length - 1
-    ? 'Perbarui <i class="mdi mdi-check"></i>' : 'Lanjut <i class="mdi mdi-arrow-right"></i>';
-  document.getElementById('quizOptions').innerHTML    = q.options.map(o =>
+  document.getElementById('quizProgressFill').style.width = ((quizStep+1)/QUIZ.length)*100 + '%';
+  document.getElementById('quizStepText').textContent = `Pertanyaan ${quizStep+1} dari ${QUIZ.length}`;
+  document.getElementById('quizQuestion').textContent = q.q;
+  document.getElementById('quizNextBtn').innerHTML = quizStep === QUIZ.length - 1
+    ? 'Perbarui <i class=\"mdi mdi-check\"></i>' : 'Lanjut <i class=\"mdi mdi-arrow-right\"></i>';
+  document.getElementById('quizOptions').innerHTML = q.options.map(o =>
     `<button class="quiz-option" onclick="selectOption(this)"><i class="mdi ${o.icon}"></i> ${o.text}</button>`
   ).join('');
 }
@@ -620,7 +947,7 @@ function nextQuiz() {
   renderQuiz();
 }
 
-// Utilities
+// ═══════════════════════ UTILS ═══════════════════════
 let toastTimer;
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -634,10 +961,13 @@ function logout() {
   if (confirm('Yakin ingin keluar?')) { localStorage.removeItem('user'); window.location.href = 'index.html'; }
 }
 
-// Init
-const email = localStorage.getItem('user') || '';
-document.getElementById('avatar').textContent = (email.split('@')[0] || 'CP').substring(0, 2).toUpperCase();
-applyFilter();
+// Initial Booting Runtime Loader
+window.addEventListener('DOMContentLoaded', () => {
+  const email = localStorage.getItem('user') || '';
+  document.getElementById('avatar').textContent = (email.split('@')[0] || 'CP').substring(0, 2).toUpperCase();
+  loadSaved();
+  renderCards(CAREERS);
+});
 </script>
 </body>
 </html>
