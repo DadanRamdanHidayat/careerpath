@@ -138,15 +138,26 @@ html, body {
   width: 46px; 
   height: 46px; 
   border-radius: 50%; 
-  background: linear-gradient(135deg, var(--neon-cyan), var(--navy-light)); 
+
+  background: linear-gradient(
+    135deg,
+    var(--cyan-neon),
+    var(--cyan-dim)
+  );
+
   display: flex; 
   align-items: center; 
   justify-content: center; 
-  color: var(--navy); 
+
+  color: #f7f8fa; 
   font-size: 16px; 
-  font-weight: 600; 
-  border: 2px solid var(--neon-cyan); 
-  box-shadow: var(--glow-glow); 
+  font-weight: 700; 
+
+  border: 2px solid var(--cyan-neon);
+
+  box-shadow:
+    0 0 12px rgba(0,240,255,0.5),
+    0 0 28px rgba(0,240,255,0.25);
 }
 
 /* Bento Layout Grid */
