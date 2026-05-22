@@ -1,373 +1,755 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard — CareerPath</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — CareerPath</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-:root {
-  --arctic-dark:  #0a141d;
-  --cyan-neon:     #00f0ff;
-  --cyan-dim:      #00b4cc;
-  --glass-bg:      rgba(16, 29, 41, 0.95);
-  --glass-border:  rgba(0, 240, 255, 0.15);
-  --glass-hover:   rgba(0, 240, 255, 0.08);
-  --text-main:     #e2f1f5;
-  --text-muted:    #8ba4b5;
-  --sidebar-w:     260px;
+    :root {
+      --arctic-dark: #0a141d;
+      --cyan-neon: #00f0ff;
+      --cyan-dim: #00b4cc;
+      --glass-bg: rgba(16, 29, 41, 0.95);
+      --glass-border: rgba(0, 240, 255, 0.15);
+      --glass-hover: rgba(0, 240, 255, 0.08);
+      --text-main: #e2f1f5;
+      --text-muted: #8ba4b5;
+      --sidebar-w: 260px;
 
-  /* TAMBAHAN */
-  --glass-blur: blur(14px);
-}
+      /* TAMBAHAN */
+      --glass-blur: blur(14px);
+    }
 
-html, body { 
-  font-family: 'DM Sans', sans-serif; 
-  background: url('bg-arctic.png') no-repeat center center fixed;
-  background-size: cover;
-  color: #e2e8f0; 
-  min-height: 100vh;
-}
+    html,
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: url('foto12.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
 
-/* ==========================================================================
+    /* ==========================================================================
    SIDEBAR REVISION (MATCHING DETAILED SPECIFICATIONS)
    ========================================================================== */
-.sidebar { 
-  position: fixed; 
-  left: 0; 
-  top: 0; 
-  width: var(--sidebar-w); 
-  height: 100vh; 
-  /* 1. Latar Belakang & Efek Kaca (Glassmorphism) */
-  background: rgba(5, 12, 26, 0.85); 
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  display: flex; 
-  flex-direction: column; 
-  overflow: hidden; 
-  z-index: 100; 
-  /* 1. Garis Tepi (Border) */
-  border-right: 1px solid rgba(0, 240, 255, 0.15);
-}
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      /* 1. Latar Belakang & Efek Kaca (Glassmorphism) */
+      background: rgba(5, 12, 26, 0.85);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 100;
+      /* 1. Garis Tepi (Border) */
+      border-right: 1px solid rgba(0, 240, 255, 0.15);
+    }
 
+    .sidebar-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 0 0 20px;
+    }
 
+    .sb-brand {
+      padding: 28px 24px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid rgba(0, 243, 255, 0.15);
+      margin-bottom: 10px;
+    }
 
-.sidebar-inner { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; padding: 0 0 20px; }
+    /* 2. Desain Identitas (Brand Header) - Warna & Glow Ikon */
+    .sb-brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #00f0ff, #007bb8);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* 2. Warna Teks Kontras */
+      color: #050c1a;
+      font-size: 20px;
+      flex-shrink: 0;
+      /* 2. Bayangan Pendaran (Neon Glow) */
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
 
-.sb-brand { padding: 28px 24px 24px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid rgba(0, 243, 255, 0.15); margin-bottom: 10px; }
+    .sb-brand-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      color: white;
+      white-space: nowrap;
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    }
 
-/* 2. Desain Identitas (Brand Header) - Warna & Glow Ikon */
-.sb-brand-icon { 
-  width: 40px; 
-  height: 40px; 
-  background: linear-gradient(135deg, #00f0ff, #007bb8); 
-  border-radius: 12px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  /* 2. Warna Teks Kontras */
-  color: #050c1a; 
-  font-size: 20px; 
-  flex-shrink: 0; 
-  /* 2. Bayangan Pendaran (Neon Glow) */
-  box-shadow: 0 0 15px rgba(0,240,255,0.4);
-}
-.sb-brand-name { font-family: 'DM Serif Display', serif; font-size: 19px; color: white; white-space: nowrap; text-shadow: 0 0 10px rgba(0, 243, 255, 0.3); }
+    .sb-section {
+      padding: 14px 16px 4px;
+    }
 
-.sb-section { padding: 14px 16px 4px; }
+    /* 3. Pengaturan Navigasi & Teks Pembuka (Labels) */
+    .sb-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(0, 240, 255, 0.4);
+      padding: 0 8px;
+      margin-bottom: 6px;
+    }
 
-/* 3. Pengaturan Navigasi & Teks Pembuka (Labels) */
-.sb-label { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(0, 240, 255, 0.4); padding: 0 8px; margin-bottom: 6px; }
+    .sb-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
 
-.sb-nav { display: flex; flex-direction: column; gap: 2px; }
+    /* 3. Teks Tautan Standar & Hover Effect */
+    .sb-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 14px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
 
-/* 3. Teks Tautan Standar & Hover Effect */
-.sb-link { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; text-decoration: none; color: rgba(255,255,255,0.45); font-size: 14px; transition: all 0.2s; white-space: nowrap; }
-.sb-link i { font-size: 18px; flex-shrink: 0; }
-.sb-link:hover { background: rgba(0, 240, 255, 0.08); color: white; }
+    .sb-link i {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
 
-/* 4. Penanda Menu Aktif (Active State) */
-.sb-link.active { 
-  background: rgba(0, 240, 255, 0.15); 
-  color: #00f0ff; 
-  font-weight: 500; 
-  border: 1px solid rgba(0,240,255,0.25); 
-  box-shadow: none;
-  text-shadow: 0 0 8px rgba(0,240,255,0.5);
-}
+    .sb-link:hover {
+      background: rgba(0, 240, 255, 0.08);
+      color: white;
+    }
 
-/* 5. Tombol Keluar Akun (Logout Footer) */
-/* FOOTER */
-.sb-footer { 
-  margin-top: auto; 
-  padding: 0 16px; 
-  border-top: 1px solid rgba(0, 243, 255, 0.15); 
-  padding-top: 16px; 
-}
-.sb-logout { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; color: rgba(255,255,255,0.4); font-size: 14px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-/* 5. Aksen Efek Hover Kemerahan (Warm Coral) */
-.sb-logout:hover { background: rgba(255, 74, 115, 0.15); color: #ff4a73; }
-.sb-logout i { font-size: 18px; }
+    /* 4. Penanda Menu Aktif (Active State) */
+    .sb-link.active {
+      background: rgba(0, 240, 255, 0.15);
+      color: #00f0ff;
+      font-weight: 500;
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      box-shadow: none;
+      text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+    }
 
-/* ==========================================================================
+    /* 5. Tombol Keluar Akun (Logout Footer) */
+    /* FOOTER */
+    .sb-footer {
+      margin-top: auto;
+      padding: 0 16px;
+      border-top: 1px solid rgba(0, 243, 255, 0.15);
+      padding-top: 16px;
+    }
+
+    .sb-logout {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    /* 5. Aksen Efek Hover Kemerahan (Warm Coral) */
+    .sb-logout:hover {
+      background: rgba(255, 74, 115, 0.15);
+      color: #ff4a73;
+    }
+
+    .sb-logout i {
+      font-size: 18px;
+    }
+
+    /* ==========================================================================
    MAIN CONTENT STYLES (UNTOUCHED)
    ========================================================================== */
-.main { margin-left: var(--sidebar-w); min-height: 100vh; padding: 36px 40px 60px; }
+    .main {
+      margin-left: var(--sidebar-w);
+      min-height: 100vh;
+      padding: 36px 40px 60px;
+    }
 
-/* Topbar Header Container */
-.topbar { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: flex-start; 
-  margin-bottom: 32px; 
-  animation: fadeDown 0.6s ease both; 
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  padding: 16px 24px;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 243, 255, 0.15);
-}
-.topbar-left h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: white; line-height: 1.1; margin-bottom: 6px; }
-.topbar-left h1 em { font-style: italic; color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0, 243, 255, 0.3); }
-.topbar-left p { font-size: 14px; color: var(--text-muted); }
-.avatar-wrap { 
-  width: 46px; 
-  height: 46px; 
-  border-radius: 50%; 
+    /* Topbar Header Container */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px;
+      animation: fadeDown 0.6s ease both;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      padding: 16px 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 243, 255, 0.15);
+    }
 
-  background: linear-gradient(
-    135deg,
-    var(--cyan-neon),
-    var(--cyan-dim)
-  );
+    .topbar-left h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+    .topbar-left h1 em {
+      font-style: italic;
+      color: var(--cyan-neon);
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.3);
+    }
 
-  color: #f7f8fa; 
-  font-size: 16px; 
-  font-weight: 700; 
+    .topbar-left p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
 
-  border: 2px solid var(--cyan-neon);
+    .avatar-wrap {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
 
-  box-shadow:
-    0 0 12px rgba(0,240,255,0.5),
-    0 0 28px rgba(0,240,255,0.25);
-}
+      background: linear-gradient(135deg,
+          var(--cyan-neon),
+          var(--cyan-dim));
 
-/* Bento Layout Grid */
-.bento-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start; animation: fadeUp 0.6s 0.1s ease both; }
-.bento-column { display: flex; flex-direction: column; gap: 24px; }
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-.bento-card { 
-  background: var(--glass-bg); 
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid rgba(0, 243, 255, 0.15); 
-  border-radius: 18px; 
-  padding: 24px; 
-  position: relative;
-}
-.bc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-.bc-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: white; display: flex; align-items: center; gap: 8px; }
-.bc-title i { color: var(--neon-cyan); filter: drop-shadow(0 0 5px rgba(0,243,255,0.4)); }
+      color: #f7f8fa;
+      font-size: 16px;
+      font-weight: 700;
 
-/* Progress Widget */
-.progress-box { display: flex; align-items: center; gap: 24px; }
-.progress-ring-wrapper { position: relative; width: 100px; height: 100px; flex-shrink: 0; }
-.progress-ring-svg { transform: rotate(-90deg); width: 100px; height: 100px; filter: drop-shadow(0 0 6px rgba(0,243,255,0.4)); }
-.pr-bg { fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 8; }
-.pr-fill { fill: none; stroke: var(--neon-cyan); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 270.17; stroke-dashoffset: 270.17; transition: stroke-dashoffset 1s ease-out; }
-.pr-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 22px; color: white; font-weight: bold; }
+      border: 2px solid var(--cyan-neon);
 
-.progress-info { flex: 1; }
-.progress-info h3 { font-family: 'DM Serif Display', serif; font-size: 20px; color: white; margin-bottom: 4px; }
-.progress-info p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+      box-shadow:
+        0 0 12px rgba(0, 240, 255, 0.5),
+        0 0 28px rgba(0, 240, 255, 0.25);
+    }
 
-/* Grid Cards Items */
-.metric-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.metric-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 16px; border-radius: 12px; transition: border-color 0.2s; }
-.metric-item:hover { border-color: rgba(0, 243, 255, 0.25); }
-.metric-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-.metric-value { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0, 243, 255, 0.3); }
+    /* Bento Layout Grid */
+    .bento-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      align-items: start;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
 
-/* Skill Bar Table Rows */
-.skill-list { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; }
-.skill-row { display: grid; grid-template-columns: 140px 1fr 45px 80px; align-items: center; gap: 16px; padding: 12px; background: rgba(255,255,255,0.01); border-radius: 10px; border: 1px solid rgba(255,255,255,0.03); }
-.skill-row-name { font-size: 13px; font-weight: 500; color: white; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.skill-row-bar { height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; position: relative; }
-.skill-row-fill { height: 100%; border-radius: 3px; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
-.skill-row-fill.srf-cyan { background: var(--neon-cyan); box-shadow: 0 0 8px rgba(0,243,255,0.6); }
-.skill-row-fill.srf-ice { background: var(--ice-blue); box-shadow: 0 0 8px rgba(163,229,255,0.4); }
-.skill-row-fill.srf-purple { background: #a78bfa; }
-.skill-row-pct { font-size: 12px; font-weight: 600; color: #cbd5e1; text-align: right; }
-.skill-row-level { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 6px; text-align: center; }
-.lvl-high { background: rgba(0, 243, 255, 0.1); color: var(--neon-cyan); border: 1px solid rgba(0, 243, 255, 0.2); }
-.lvl-mid { background: rgba(163, 229, 255, 0.1); color: var(--ice-blue); border: 1px solid rgba(163, 229, 255, 0.2); }
-.lvl-basic { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid rgba(255,255,255,0.08); }
+    .bento-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
 
-/* Quick Action Buttons */
-.action-list { display: flex; flex-direction: column; gap: 10px; }
-.btn-action { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(0, 243, 255, 0.15); border-radius: 10px; color: white; text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.2s; }
-.btn-action i { font-size: 16px; color: var(--neon-cyan); transition: transform 0.2s; }
-.btn-action:hover { background: rgba(0, 243, 255, 0.08); border-color: var(--neon-cyan); box-shadow: 0 0 10px rgba(0,243,255,0.1); }
-.btn-action:hover i { transform: translateX(3px); }
+    .bento-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid rgba(0, 243, 255, 0.15);
+      border-radius: 18px;
+      padding: 24px;
+      position: relative;
+    }
 
-@keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .bc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
 
-@media (max-width: 1100px) {
-  .skill-row { grid-template-columns: 120px 1fr 40px; }
-  .skill-row-level { display: none; }
-}
-@media (max-width: 1024px) {
-  .main { padding: 28px 24px; }
-  .bento-layout { grid-template-columns: 1fr; }
-}
-@media (max-width: 768px) {
-  .sidebar { width: 70px; }
-  .sidebar .sb-brand-name, .sidebar .sb-label, .sidebar .sb-link span, .sidebar .sb-logout span { display: none; }
-  .sidebar .sb-brand { padding: 20px 15px; justify-content: center; }
-  .sidebar .sb-link, .sidebar .sb-logout { justify-content: center; padding: 12px; }
-  .main { margin-left: 70px; }
-  .skill-row { grid-template-columns: 1fr 50px; gap: 8px; }
-  .skill-row-bar { display: none; }
-}
-</style>
+    .bc-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bc-title i {
+      color: var(--cyan-neon);
+      filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.4));
+    }
+
+    /* Progress Widget */
+    .progress-box {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .progress-ring-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      flex-shrink: 0;
+    }
+
+    .progress-ring-svg {
+      transform: rotate(-90deg);
+      width: 100px;
+      height: 100px;
+      filter: drop-shadow(0 0 6px rgba(0, 243, 255, 0.4));
+    }
+
+    .pr-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.05);
+      stroke-width: 8;
+    }
+
+    .pr-fill {
+      fill: none;
+      stroke: var(--cyan-neon);
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 270.17;
+      stroke-dashoffset: 270.17;
+      transition: stroke-dashoffset 1s ease-out;
+    }
+
+    .pr-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .progress-info {
+      flex: 1;
+    }
+
+    .progress-info h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .progress-info p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Grid Cards Items */
+    .metric-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .metric-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 16px;
+      border-radius: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .metric-item:hover {
+      border-color: rgba(0, 243, 255, 0.25);
+    }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 24px;
+      color: var(--cyan-neon);
+      text-shadow: 0 0 8px rgba(0, 243, 255, 0.3);
+    }
+
+    /* Skill Bar Table Rows */
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .skill-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 45px 80px;
+      align-items: center;
+      gap: 16px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.01);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .skill-row-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: white;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .skill-row-bar {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skill-row-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .skill-row-fill.srf-cyan {
+      background: var(--cyan-neon);
+      box-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+    }
+
+    .skill-row-fill.srf-ice {
+      background: var(--ice-blue);
+      box-shadow: 0 0 8px rgba(163, 229, 255, 0.4);
+    }
+
+    .skill-row-fill.srf-purple {
+      background: #a78bfa;
+    }
+
+    .skill-row-pct {
+      font-size: 12px;
+      font-weight: 600;
+      color: #cbd5e1;
+      text-align: right;
+    }
+
+    .skill-row-level {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .lvl-high {
+      background: rgba(0, 243, 255, 0.1);
+      color: var(--cyan-neon);
+      border: 1px solid rgba(0, 243, 255, 0.2);
+    }
+
+    .lvl-mid {
+      background: rgba(163, 229, 255, 0.1);
+      color: var(--ice-blue);
+      border: 1px solid rgba(163, 229, 255, 0.2);
+    }
+
+    .lvl-basic {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Quick Action Buttons */
+    .action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(0, 243, 255, 0.15);
+      border-radius: 10px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-action i {
+      font-size: 16px;
+      color: var(--cyan-neon);
+      transition: transform 0.2s;
+    }
+
+    .btn-action:hover {
+      background: rgba(0, 243, 255, 0.08);
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+    }
+
+    .btn-action:hover i {
+      transform: translateX(3px);
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .skill-row {
+        grid-template-columns: 120px 1fr 40px;
+      }
+
+      .skill-row-level {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .main {
+        padding: 28px 24px;
+      }
+
+      .bento-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 70px;
+      }
+
+      .sidebar .sb-brand-name,
+      .sidebar .sb-label,
+      .sidebar .sb-link span,
+      .sidebar .sb-logout span {
+        display: none;
+      }
+
+      .sidebar .sb-brand {
+        padding: 20px 15px;
+        justify-content: center;
+      }
+
+      .sidebar .sb-link,
+      .sidebar .sb-logout {
+        justify-content: center;
+        padding: 12px;
+      }
+
+      .main {
+        margin-left: 70px;
+      }
+
+      .skill-row {
+        grid-template-columns: 1fr 50px;
+        gap: 8px;
+      }
+
+      .skill-row-bar {
+        display: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div style="display:flex;">
+  <div style="display:flex;">
 
-  <div class="sidebar">
-    <div class="sidebar-inner">
-      <div class="sb-brand">
-        <div class="sb-brand-icon"><i class="mdi mdi-compass-outline"></i></div>
-        <div class="sb-brand-name">CareerPath</div>
+    <div class="sidebar">
+      <div class="sidebar-inner">
+        <div class="sb-brand">
+          <div class="sb-brand-icon"><i class="mdi mdi-compass-outline"></i></div>
+          <div class="sb-brand-name">CareerPath</div>
+        </div>
+
+        <div class="sb-section">
+          <div class="sb-label">Menu Utama</div>
+          <nav class="sb-nav">
+            <a href="dashboard.html" class="sb-link active"><i
+                class="mdi mdi-home-variant-outline"></i><span>Dashboard</span></a>
+            <a href="profile.html" class="sb-link"><i class="mdi mdi-account-box-outline"></i><span>Profil
+                Saya</span></a>
+            <a href="career.html" class="sb-link"><i class="mdi mdi-briefcase-search-outline"></i><span>Rekomendasi
+                Karier</span></a>
+            <a href="learning.html" class="sb-link"><i class="mdi mdi-notebook-edit-outline"></i><span>Rencana
+                Belajar</span></a>
+          </nav>
+        </div>
+
+        <div class="sb-section" style="margin-top:8px;">
+          <div class="sb-label">Lainnya</div>
+          <nav class="sb-nav">
+            <a href="about.html" class="sb-link"><i class="mdi mdi-information-outline"></i><span>Tentang</span></a>
+            <a href="contact.html" class="sb-link"><i class="mdi mdi-message-text-outline"></i><span>Hubungi</span></a>
+          </nav>
+        </div>
+
+        <div class="sb-footer">
+          <div class="sb-logout" onclick="logout()"><i class="mdi mdi-logout"></i><span>Keluar</span></div>
+        </div>
       </div>
-      
-      <div class="sb-section">
-        <div class="sb-label">Menu Utama</div>
-        <nav class="sb-nav">
-          <a href="dashboard.html" class="sb-link active"><i class="mdi mdi-home-variant-outline"></i><span>Dashboard</span></a>
-          <a href="profile.html" class="sb-link"><i class="mdi mdi-account-box-outline"></i><span>Profil Saya</span></a>
-          <a href="career.html" class="sb-link"><i class="mdi mdi-briefcase-search-outline"></i><span>Rekomendasi Karier</span></a>
-          <a href="learning.html" class="sb-link"><i class="mdi mdi-notebook-edit-outline"></i><span>Rencana Belajar</span></a>
-        </nav>
+    </div>
+
+    <div class="main">
+
+      <div class="topbar">
+        <div class="topbar-left">
+          <h1>Selamat Datang di <em>CareerPath</em></h1>
+          <p>Ringkasan kemajuan persiapan dan kesiapan karier profesional Anda saat ini</p>
+        </div>
+        <div class="avatar-wrap" id="avatar">CP</div>
       </div>
-      
-      <div class="sb-section" style="margin-top:8px;">
-        <div class="sb-label">Lainnya</div>
-        <nav class="sb-nav">
-          <a href="about.html" class="sb-link"><i class="mdi mdi-information-outline"></i><span>Tentang</span></a>
-          <a href="contact.html" class="sb-link"><i class="mdi mdi-message-text-outline"></i><span>Hubungi</span></a>
-        </nav>
+
+      <div class="bento-layout">
+
+        <div class="bento-column">
+
+          <div class="bento-card">
+            <div class="progress-box">
+              <div class="progress-ring-wrapper">
+                <svg class="progress-ring-svg">
+                  <circle class="pr-bg" cx="50" cy="50" r="43"></circle>
+                  <circle class="pr-fill" id="prCircle" cx="50" cy="50" r="43"></circle>
+                </svg>
+                <div class="pr-text">25%</div>
+              </div>
+              <div class="progress-info">
+                <h3>Kesiapan Industri</h3>
+                <p>Berdasarkan profil keahlian dan target karier <strong>Data Analyst</strong>, kesiapan kompetensi Anda
+                  meningkat 5% dari minggu lalu. Pertahankan performa konsistensi Anda!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-card">
+            <div class="bc-header">
+              <div class="bc-title"><i class="mdi mdi-lightning-bolt"></i> Pemetaan Keahlian Utama</div>
+            </div>
+            <div class="skill-list" id="skillRows">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="bento-column">
+
+          <div class="bento-card">
+            <div class="bc-header">
+              <div class="bc-title"><i class="mdi mdi-chart-timeline-variant"></i> Statistik Aktivitas</div>
+            </div>
+            <div class="metric-row">
+              <div class="metric-item">
+                <div class="metric-label">Streak Hari</div>
+                <div class="metric-value" id="valStreak">0</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-label">Log Catatan</div>
+                <div class="metric-value" id="valNotes">0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-card">
+            <div class="bc-header">
+              <div class="bc-title"><i class="mdi mdi-star-face"></i> Navigasi Cepat</div>
+            </div>
+            <div class="action-list">
+              <a href="profile.html" class="btn-action">
+                <span>Lengkapi Profil Keahlian</span>
+                <i class="mdi mdi-arrow-right"></i>
+              </a>
+              <a href="career.html" class="btn-action">
+                <span>Konsultasi AI Rekomendasi</span>
+                <i class="mdi mdi-arrow-right"></i>
+              </a>
+              <a href="learning.html" class="btn-action">
+                <span>Lihat Target Rencana Belajar</span>
+                <i class="mdi mdi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
       </div>
-      
-      <div class="sb-footer">
-        <div class="sb-logout" onclick="logout()"><i class="mdi mdi-logout"></i><span>Keluar</span></div>
-      </div>
+
     </div>
   </div>
 
-  <div class="main">
-    
-    <div class="topbar">
-      <div class="topbar-left">
-        <h1>Selamat Datang di <em>CareerPath</em></h1>
-        <p>Ringkasan kemajuan persiapan dan kesiapan karier profesional Anda saat ini</p>
-      </div>
-      <div class="avatar-wrap" id="avatar">CP</div>
-    </div>
+  <script>
+    const SKILLS = [
+      { name: 'SQL Query Lang', pct: 85, color: 'srf-cyan', level: 'Mahir', lvlCls: 'lvl-high' },
+      { name: 'Python Analytics', pct: 60, color: 'srf-ice', level: 'Menengah', lvlCls: 'lvl-mid' },
+      { name: 'Power BI / Tableau', pct: 45, color: 'srf-ice', level: 'Menengah', lvlCls: 'lvl-mid' },
+      { name: 'Deep Learning Framework', pct: 30, color: 'srf-purple', level: 'Dasar', lvlCls: 'lvl-basic' },
+    ];
 
-    <div class="bento-layout">
-      
-      <div class="bento-column">
-        
-        <div class="bento-card">
-          <div class="progress-box">
-            <div class="progress-ring-wrapper">
-              <svg class="progress-ring-svg">
-                <circle class="pr-bg" cx="50" cy="50" r="43"></circle>
-                <circle class="pr-fill" id="prCircle" cx="50" cy="50" r="43"></circle>
-              </svg>
-              <div class="pr-text">25%</div>
-            </div>
-            <div class="progress-info">
-              <h3>Kesiapan Industri</h3>
-              <p>Berdasarkan profil keahlian dan target karier <strong>Data Analyst</strong>, kesiapan kompetensi Anda meningkat 5% dari minggu lalu. Pertahankan performa konsistensi Anda!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="bento-card">
-          <div class="bc-header">
-            <div class="bc-title"><i class="mdi mdi-lightning-bolt"></i> Pemetaan Keahlian Utama</div>
-          </div>
-          <div class="skill-list" id="skillRows">
-          </div>
-        </div>
-
-      </div>
-
-      <div class="bento-column">
-        
-        <div class="bento-card">
-          <div class="bc-header">
-            <div class="bc-title"><i class="mdi mdi-chart-timeline-variant"></i> Statistik Aktivitas</div>
-          </div>
-          <div class="metric-row">
-            <div class="metric-item">
-              <div class="metric-label">Streak Hari</div>
-              <div class="metric-value" id="valStreak">0</div>
-            </div>
-            <div class="metric-item">
-              <div class="metric-label">Log Catatan</div>
-              <div class="metric-value" id="valNotes">0</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bento-card">
-          <div class="bc-header">
-            <div class="bc-title"><i class="mdi mdi-star-face"></i> Navigasi Cepat</div>
-          </div>
-          <div class="action-list">
-            <a href="profile.html" class="btn-action">
-              <span>Lengkapi Profil Keahlian</span>
-              <i class="mdi mdi-arrow-right"></i>
-            </a>
-            <a href="career.html" class="btn-action">
-              <span>Konsultasi AI Rekomendasi</span>
-              <i class="mdi mdi-arrow-right"></i>
-            </a>
-            <a href="learning.html" class="btn-action">
-              <span>Lihat Target Rencana Belajar</span>
-              <i class="mdi mdi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<script>
-const SKILLS = [
-  { name: 'SQL Query Lang', pct: 85, color: 'srf-cyan',   level: 'Mahir',    lvlCls: 'lvl-high'  },
-  { name: 'Python Analytics', pct: 60, color: 'srf-ice',    level: 'Menengah', lvlCls: 'lvl-mid'   },
-  { name: 'Power BI / Tableau', pct: 45, color: 'srf-ice',    level: 'Menengah', lvlCls: 'lvl-mid'   },
-  { name: 'Deep Learning Framework', pct: 30, color: 'srf-purple', level: 'Dasar',    lvlCls: 'lvl-basic'  },
-];
-
-document.getElementById('skillRows').innerHTML = SKILLS.map(s => `
+    document.getElementById('skillRows').innerHTML = SKILLS.map(s => `
   <div class="skill-row">
     <div class="skill-row-name">${s.name}</div>
     <div class="skill-row-bar"><div class="skill-row-fill ${s.color}" data-w="${s.pct}" style="width:0%"></div></div>
@@ -375,52 +757,53 @@ document.getElementById('skillRows').innerHTML = SKILLS.map(s => `
     <div class="skill-row-level ${s.lvlCls}">${s.level}</div>
   </div>`).join('');
 
-requestAnimationFrame(() => {
-  document.querySelectorAll('.skill-row-fill[data-w]').forEach(el => {
-    setTimeout(() => { el.style.width = el.dataset.w + '%'; }, 400);
-  });
-});
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.skill-row-fill[data-w]').forEach(el => {
+        setTimeout(() => { el.style.width = el.dataset.w + '%'; }, 400);
+      });
+    });
 
-(function() {
-  const pct = 25;
-  const r = 43; const circ = 2 * Math.PI * r;
-  const el = document.getElementById('prCircle');
-  setTimeout(() => {
-    if(el) el.style.strokeDashoffset = circ - (pct / 100) * circ;
-  }, 500);
-})();
+    (function () {
+      const pct = 25;
+      const r = 43; const circ = 2 * Math.PI * r;
+      const el = document.getElementById('prCircle');
+      setTimeout(() => {
+        if (el) el.style.strokeDashoffset = circ - (pct / 100) * circ;
+      }, 500);
+    })();
 
-function loadStats() {
-  try {
-    const notes = JSON.parse(localStorage.getItem('studyNotes') || '{}');
-    const totalNotes = Object.values(notes).reduce((sum, arr) => sum + arr.length, 0);
-    document.getElementById('valNotes').textContent = totalNotes;
-    
-    let streak = 0;
-    let todayD = new Date();
-    while (true) {
-      const k = `${todayD.getFullYear()}-${String(todayD.getMonth()+1).padStart(2,'0')}-${String(todayD.getDate()).padStart(2,'0')}`;
-      if (notes[k] && notes[k].length > 0) {
-        streak++;
-        todayD.setDate(todayD.getDate() - 1);
-      } else { break; }
+    function loadStats() {
+      try {
+        const notes = JSON.parse(localStorage.getItem('studyNotes') || '{}');
+        const totalNotes = Object.values(notes).reduce((sum, arr) => sum + arr.length, 0);
+        document.getElementById('valNotes').textContent = totalNotes;
+
+        let streak = 0;
+        let todayD = new Date();
+        while (true) {
+          const k = `${todayD.getFullYear()}-${String(todayD.getMonth() + 1).padStart(2, '0')}-${String(todayD.getDate()).padStart(2, '0')}`;
+          if (notes[k] && notes[k].length > 0) {
+            streak++;
+            todayD.setDate(todayD.getDate() - 1);
+          } else { break; }
+        }
+        document.getElementById('valStreak').textContent = streak;
+      } catch (e) {
+        document.getElementById('valNotes').textContent = '0';
+        document.getElementById('valStreak').textContent = '0';
+      }
     }
-    document.getElementById('valStreak').textContent = streak;
-  } catch(e) {
-    document.getElementById('valNotes').textContent = '0';
-    document.getElementById('valStreak').textContent = '0';
-  }
-}
 
-function logout() {
-  if (confirm('Yakin ingin keluar?')) { localStorage.removeItem('user'); window.location.href = 'index.html'; }
-}
+    function logout() {
+      if (confirm('Yakin ingin keluar?')) { localStorage.removeItem('user'); window.location.href = 'index.html'; }
+    }
 
-window.addEventListener('DOMContentLoaded', () => {
-  const email = localStorage.getItem('user') || '';
-  document.getElementById('avatar').textContent = (email.split('@')[0] || 'CP').substring(0, 2).toUpperCase();
-  loadStats();
-});
-</script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const email = localStorage.getItem('user') || '';
+      document.getElementById('avatar').textContent = (email.split('@')[0] || 'CP').substring(0, 2).toUpperCase();
+      loadStats();
+    });
+  </script>
 </body>
+
 </html>
