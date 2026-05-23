@@ -24,16 +24,19 @@
   --text-muted: #8fa3bf;
   --border:     rgba(0, 240, 255, 0.15); /* Batas pendaran neon es halus */
   --sidebar-w:  260px;
-  --glass-bg:   rgba(8, 20, 44, 0.95);
+  --glass-bg:   rgba(8, 20, 44, 0.90);
   --glass-blur: blur(14px);
 }
 
 html, body { 
   font-family: 'DM Sans', sans-serif; 
-  background: #040a14 url('bg-arctic.png') no-repeat center center fixed; 
+  /* Mengganti gambar dengan gradasi linear Navy gelap yang kaya dimensi */
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #030712 100%) no-repeat center center fixed;
   background-size: cover;
-  color: #e2ecf8; 
+  /* Mengembalikan warna teks ke abu-abu muda/putih agar kontras di atas latar gelap */
+  color: #e2e8f0; 
   min-height: 100vh;
+  margin: 0; /* Memastikan tidak ada margin bawaan browser */
 }
 
 /* ── SIDEBAR ── */
