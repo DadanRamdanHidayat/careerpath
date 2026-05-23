@@ -31,10 +31,13 @@
 
 html, body { 
   font-family: 'DM Sans', sans-serif; 
-  background: url('bg-arctic.png') no-repeat center center fixed;
+  /* Mengganti gambar dengan gradasi linear skyblue futuristik */
+  background: linear-gradient(135deg, #e0f2fe 0%, #7dd3fc 50%, #0284c7 100%) no-repeat center center fixed;
   background-size: cover;
-  color: #e2e8f0; 
+  /* Mengubah warna teks menjadi gelap agar kontras dan mudah dibaca di atas latar belakang terang */
+  color: #1e293b; 
   min-height: 100vh;
+  margin: 0; /* Memastikan tidak ada margin bawaan browser */
 }
 
 /* ==========================================================================
