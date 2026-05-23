@@ -5,11 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard — CareerPath</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
+
   <style>
+    /* ==========================================================================
+       1. CORE RESET & BASE STYLES
+       ========================================================================== */
     *,
     *::before,
     *::after {
@@ -18,6 +21,7 @@
       padding: 0;
     }
 
+    /* Global Variables untuk Tema Cyber-Frost (Arctic Glassmorphism) */
     :root {
       --arctic-dark: #0a141d;
       --cyan-neon: #00f0ff;
@@ -28,41 +32,41 @@
       --text-main: #e2f1f5;
       --text-muted: #8ba4b5;
       --sidebar-w: 260px;
-
-      /* TAMBAHAN */
+      
+      /* Tambahan Efek Kaca Buram */
       --glass-blur: blur(14px);
     }
 
     html,
     body {
       font-family: 'DM Sans', sans-serif;
-      background: url('bg-arctic.png') no-repeat center center fixed;
+      background: url('foto13.png') no-repeat center center fixed;
       background-size: cover;
-      color: #e2e8f0;
+      color: #e2e9f0;
       min-height: 100vh;
     }
 
     /* ==========================================================================
-   SIDEBAR REVISION (MATCHING DETAILED SPECIFICATIONS)
-   ========================================================================== */
+       2. SIDEBAR NAVIGATION STYLES
+       ========================================================================== */
+    /* Container Utama Sidebar dengan Efek Glassmorphism */
     .sidebar {
       position: fixed;
       left: 0;
       top: 0;
       width: var(--sidebar-w);
       height: 100vh;
-      /* 1. Latar Belakang & Efek Kaca (Glassmorphism) */
-      background: rgba(5, 12, 26, 0.85);
-      backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       display: flex;
       flex-direction: column;
       overflow: hidden;
       z-index: 100;
-      /* 1. Garis Tepi (Border) */
       border-right: 1px solid rgba(0, 240, 255, 0.15);
+      background: rgba(5, 12, 26, 0.85);
+      backdrop-filter: var(--glass-blur);
     }
 
+    /* Pembungkus Konten di Dalam Sidebar */
     .sidebar-inner {
       position: relative;
       z-index: 1;
@@ -72,6 +76,7 @@
       padding: 0 0 20px;
     }
 
+    /* Brand Header Area (Logo & Nama Aplikasi) */
     .sb-brand {
       padding: 28px 24px 24px;
       display: flex;
@@ -81,7 +86,7 @@
       margin-bottom: 10px;
     }
 
-    /* 2. Desain Identitas (Brand Header) - Warna & Glow Ikon */
+    /* Ikon Identitas dengan Efek Gradasi & Neon Glow */
     .sb-brand-icon {
       width: 40px;
       height: 40px;
@@ -90,14 +95,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* 2. Warna Teks Kontras */
       color: #050c1a;
       font-size: 20px;
       flex-shrink: 0;
-      /* 2. Bayangan Pendaran (Neon Glow) */
       box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
     }
 
+    /* Teks Nama Brand Utama */
     .sb-brand-name {
       font-family: 'DM Serif Display', serif;
       font-size: 19px;
@@ -106,11 +110,12 @@
       text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
     }
 
+    /* Pengelompokan Menu Navigasi */
     .sb-section {
       padding: 14px 16px 4px;
     }
 
-    /* 3. Pengaturan Navigasi & Teks Pembuka (Labels) */
+    /* Label Judul Sub-Menu Navigasi (Sirkuit/Kategori) */
     .sb-label {
       font-size: 10px;
       font-weight: 600;
@@ -127,7 +132,7 @@
       gap: 2px;
     }
 
-    /* 3. Teks Tautan Standar & Hover Effect */
+    /* Desain Tautan Menu Standar & Efek Transisi Hover */
     .sb-link {
       display: flex;
       align-items: center;
@@ -151,7 +156,7 @@
       color: white;
     }
 
-    /* 4. Penanda Menu Aktif (Active State) */
+    /* Penanda Halaman/Menu yang Sedang Aktif */
     .sb-link.active {
       background: rgba(0, 240, 255, 0.15);
       color: #00f0ff;
@@ -161,8 +166,7 @@
       text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
     }
 
-    /* 5. Tombol Keluar Akun (Logout Footer) */
-    /* FOOTER */
+    /* Area Footer Navigasi (Tempat Tombol Keluar) */
     .sb-footer {
       margin-top: auto;
       padding: 0 16px;
@@ -170,6 +174,7 @@
       padding-top: 16px;
     }
 
+    /* Desain Khusus Tombol Keluar Akun */
     .sb-logout {
       display: flex;
       align-items: center;
@@ -183,7 +188,7 @@
       white-space: nowrap;
     }
 
-    /* 5. Aksen Efek Hover Kemerahan (Warm Coral) */
+    /* Aksen Efek Hover Kemerahan pada Logout (Warm Coral) */
     .sb-logout:hover {
       background: rgba(255, 74, 115, 0.15);
       color: #ff4a73;
@@ -194,15 +199,16 @@
     }
 
     /* ==========================================================================
-   MAIN CONTENT STYLES (UNTOUCHED)
-   ========================================================================== */
+       3. MAIN CONTENT LAYER STYLES
+       ========================================================================== */
+    /* Container Utama di Sebelah Kanan Sidebar */
     .main {
       margin-left: var(--sidebar-w);
       min-height: 100vh;
       padding: 36px 40px 60px;
     }
 
-    /* Topbar Header Container */
+    /* Topbar Header Dashboard Area */
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -236,31 +242,26 @@
       color: var(--text-muted);
     }
 
+    /* Pembungkus Foto Profil Pengguna */
     .avatar-wrap {
       width: 46px;
       height: 46px;
       border-radius: 50%;
-
-      background: linear-gradient(135deg,
-          var(--cyan-neon),
-          var(--cyan-dim));
-
+      background: linear-gradient(135deg, var(--cyan-neon), var(--cyan-dim));
       display: flex;
       align-items: center;
       justify-content: center;
-
       color: #f7f8fa;
       font-size: 16px;
       font-weight: 700;
-
       border: 2px solid var(--cyan-neon);
-
-      box-shadow:
-        0 0 12px rgba(0, 240, 255, 0.5),
-        0 0 28px rgba(0, 240, 255, 0.25);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.5), 0 0 28px rgba(0, 240, 255, 0.25);
     }
 
-    /* Bento Layout Grid */
+    /* ==========================================================================
+       4. BENTO GRID SYSTEM & MODULE CARDS
+       ========================================================================== */
+    /* Tata Letak Modular Struktur Grid Bento */
     .bento-layout {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -275,6 +276,7 @@
       gap: 24px;
     }
 
+    /* Modul Kartu Standar dengan Lapisan Semi-Transparan Es */
     .bento-card {
       background: var(--glass-bg);
       backdrop-filter: var(--glass-blur);
@@ -285,6 +287,7 @@
       position: relative;
     }
 
+    /* Kepala Kartu Komponen */
     .bc-header {
       display: flex;
       justify-content: space-between;
@@ -306,7 +309,10 @@
       filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.4));
     }
 
-    /* Progress Widget */
+    /* ==========================================================================
+       5. COMPONENTS & WIDGET STYLES (PROGRESS BAR & SKILLS)
+       ========================================================================== */
+    /* Widget Progress Ring Lingkaran */
     .progress-box {
       display: flex;
       align-items: center;
@@ -372,7 +378,7 @@
       line-height: 1.5;
     }
 
-    /* Grid Cards Items */
+    /* Grid Metrik Angka Ringkas */
     .metric-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -407,7 +413,7 @@
       text-shadow: 0 0 8px rgba(0, 243, 255, 0.3);
     }
 
-    /* Skill Bar Table Rows */
+    /* Tabel & Batang Pengukur Keterampilan (Skill Bars) */
     .skill-list {
       display: flex;
       flex-direction: column;
@@ -449,6 +455,7 @@
       transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* Pilihan Warna Batang Indikator */
     .skill-row-fill.srf-cyan {
       background: var(--cyan-neon);
       box-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
@@ -470,6 +477,7 @@
       text-align: right;
     }
 
+    /* Label Level Badge Keterampilan */
     .skill-row-level {
       font-size: 11px;
       font-weight: 600;
@@ -496,7 +504,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Quick Action Buttons */
+    /* Tombol Navigasi Aksi Cepat (Quick Actions) */
     .action-list {
       display: flex;
       flex-direction: column;
@@ -534,12 +542,14 @@
       transform: translateX(3px);
     }
 
+    /* ==========================================================================
+       6. ENTRANCE ANIMATIONS
+       ========================================================================== */
     @keyframes fadeDown {
       from {
         opacity: 0;
         transform: translateY(-16px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
@@ -551,71 +561,73 @@
         opacity: 0;
         transform: translateY(20px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
+    /* ==========================================================================
+       7. RESPONSIVE MEDIA QUERIES
+       ========================================================================== */
+    /* Resolusi Layar Sedang (Tablet Lanskap / Laptop Kecil) */
     @media (max-width: 1100px) {
       .skill-row {
         grid-template-columns: 120px 1fr 40px;
       }
-
       .skill-row-level {
         display: none;
       }
     }
 
+    /* Merubah Grid Bento Menjadi Kolom Tunggal */
     @media (max-width: 1024px) {
       .main {
         padding: 28px 24px;
       }
-
       .bento-layout {
         grid-template-columns: 1fr;
       }
     }
 
+    /* Resolusi Layar Kecil (Mobile / Smartphone) */
     @media (max-width: 768px) {
+      /* Transformasi Mini Sidebar Icon-Only */
       .sidebar {
         width: 70px;
       }
-
       .sidebar .sb-brand-name,
       .sidebar .sb-label,
       .sidebar .sb-link span,
       .sidebar .sb-logout span {
         display: none;
       }
-
       .sidebar .sb-brand {
         padding: 20px 15px;
         justify-content: center;
       }
-
       .sidebar .sb-link,
       .sidebar .sb-logout {
         justify-content: center;
         padding: 12px;
       }
-
       .main {
         margin-left: 70px;
       }
-
+      /* Penyesuaian Ruang Kolom Skill pada Mobile */
       .skill-row {
         grid-template-columns: 1fr 50px;
         gap: 8px;
       }
-
       .skill-row-bar {
         display: none;
       }
     }
   </style>
 </head>
+<body>
+  </body>
+</html>
 
 <body>
 
