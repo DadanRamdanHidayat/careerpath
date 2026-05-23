@@ -11,7 +11,7 @@
 
 :root {
   --navy:       #0a1929;
-  --glass-bg:   rgba(10, 25, 41, 0.95);
+  --glass-bg:   rgba(10, 25, 41, 0.90);
   --glass-glow: rgba(0, 243, 255, 0.4);
   --neon-cyan:  #00f3ff;
   --ice-blue:   #a3e5ff;
@@ -25,7 +25,7 @@
 
 html, body { 
   font-family: 'DM Sans', sans-serif; 
-  background: url('bg-arctic.png') no-repeat center center fixed;
+  background: url('Foto12.png') no-repeat center center fixed;
   background-size: cover;
   color: #e2e8f0; 
   min-height: 100vh;
@@ -193,8 +193,8 @@ html, body {
   margin-bottom: 28px; 
   padding: 16px 24px;
   background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border);
   border-radius: 16px;
   animation: fadeDown 0.6s ease both; 
@@ -220,8 +220,8 @@ html, body {
 /* ── PROFILE HERO (BENTO) ── */
 .profile-hero {
   background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 28px 32px;
@@ -310,8 +310,8 @@ html, body {
 /* ── PANEL (BENTO) ── */
 .panel { 
   background: var(--glass-bg); 
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-bg);
   border: 1px solid var(--border); 
   border-radius: 20px; padding: 32px; min-height: 420px; 
   animation: fadeUp 0.5s ease both; 
@@ -479,8 +479,8 @@ html, body {
 /* ── SAVE BAR ── */
 .save-bar {
   position: fixed; bottom: 0; left: var(--sidebar-w); right: 0;
-  background: rgba(10, 25, 41, 0.7); backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(10, 25, 41, 0.7); backdrop-filter: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-bg);
   border-top: 1px solid var(--border);
   padding: 14px 40px;
   display: flex; align-items: center; justify-content: flex-end; gap: 12px;
