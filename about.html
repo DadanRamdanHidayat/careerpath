@@ -26,10 +26,13 @@
 
 html, body { 
   font-family: 'DM Sans', sans-serif; 
-  background: var(--arctic-dark) url('bg-arctic.png') no-repeat center center fixed; 
+  /* Perpaduan gradasi dari Deep Navy, Mid Blue, hingga Sky Blue di pojok bawah */
+  background: linear-gradient(135deg, #020617 0%, #0f172a 40%, #0284c7 85%, #38bdf8 100%) no-repeat center center fixed;
   background-size: cover;
-  color: var(--text-main); 
+  /* Warna teks abu-abu terang sangat cocok karena dominasi latar belakang tetap gelap */
+  color: #e2e8f0; 
   min-height: 100vh;
+  margin: 0; /* Memastikan tidak ada margin bawaan browser */
 }
 
 
